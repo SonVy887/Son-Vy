@@ -47,7 +47,7 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
         sc.nextLine();
 
         dslk = new LuongKhenThuong[n];
-        for(int i = n; i < n;i++){
+        for(int i = 0; i < n;i++){
             dslk[i] = new LuongKhenThuong();
             dslk[i].nhapLuongKhenThuong();
         }

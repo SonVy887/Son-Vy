@@ -42,7 +42,7 @@ public class DanhSachNhanSu implements INhanSu {
             sc.nextLine();
 
             dsns = new NhanSu[n];
-            for(int i = n; i < n;i++){
+            for(int i = 0; i < n;i++){
                 if(choice == 1)
                     dsns[i] = new NhanSuChinhThuc();
                 else if ( choice == 2)

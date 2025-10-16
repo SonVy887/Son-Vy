@@ -57,7 +57,7 @@ public class DanhSachPhanCong implements IPhanCong {
         sc.nextLine();
 
         dspc = new PhanCong[n];
-        for (int i = n; i < n; i++) {
+        for (int i = 0; i < n; i++) {
             dspc[i] = new PhanCong();
             dspc[i].nhapPhanCong();
         }

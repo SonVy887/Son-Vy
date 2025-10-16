@@ -23,7 +23,7 @@ public class DanhSachPhongBan implements IPhongBan {
         sc.nextLine();
 
         dspb = new PhongBan[n];
-        for(int i = n; i < n; i++){
+        for(int i = 0; i < n; i++){
             dspb[i] = new PhongBan();
             dspb[i].nhapThongTinPhongBan();
         }
