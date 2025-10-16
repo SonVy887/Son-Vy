@@ -52,7 +52,7 @@ public class DanhSachDoAn implements IDoAn {
         sc.nextLine();
 
         dsda = new DoAn[n];
-        for(int  i = n; i < n + m;i++){
+        for(int  i = n; i < n;i++){
             dsda[i] = new DoAn();
             dsda[i].nhapDoAn();
         }

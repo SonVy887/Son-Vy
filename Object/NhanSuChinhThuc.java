@@ -30,7 +30,7 @@ public class NhanSuChinhThuc extends NhanSu {
         System.out.println("===========================================================================================================================================================");
     }
     @Override 
-    public void String loai(){
+    public String loai(){
         return "Nhân Sự Chính Thức";
     }
 

@@ -18,7 +18,7 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
 
     public boolean kiemTra(String maluongkhen){
         for(int i = 0; i < n;i++){
-            if(dslk[i].getMaLuongkhenThuong().equals(maluongkhen)){
+            if(dslk[i].getMaLuongKhenThuong().equals(maluongkhen)){
                 return true;
             }
         }
@@ -47,7 +47,7 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
         sc.nextLine();
 
         dslk = new LuongKhenThuong[n];
-        for(int i = n; i < n + m;i++){
+        for(int i = n; i < n;i++){
             dslk[i] = new LuongKhenThuong();
             dslk[i].nhapLuongKhenThuong();
         }

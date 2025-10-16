@@ -42,7 +42,7 @@ public class DanhSachNhanSu implements INhanSu {
             sc.nextLine();
 
             dsns = new NhanSu[n];
-            for(int i = n; i < n + m;i++){
+            for(int i = n; i < n;i++){
                 if(choice == 1)
                     dsns[i] = new NhanSuChinhThuc();
                 else if ( choice == 2)
@@ -107,7 +107,7 @@ public class DanhSachNhanSu implements INhanSu {
             if(dsns[i].getMaNhanSu().equals(manhansu)){
                 for(int j = i; j < n - 1;j++)
                     dsns[j] = dsns[j+1];
-                dsns = Arrays.copyOf(dsns, n)
+                dsns = Arrays.copyOf(dsns, n);
                 return;
             }
         }

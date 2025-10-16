@@ -54,7 +54,7 @@ public class NhanSuThucTap extends NhanSu {
     }
 
     @Override
-    public void String loai() {
+    public String loai() {
         return "Nhân Sự Thực Tập";
     }
 

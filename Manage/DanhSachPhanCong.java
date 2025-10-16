@@ -57,7 +57,7 @@ public class DanhSachPhanCong implements IPhanCong {
         sc.nextLine();
 
         dspc = new PhanCong[n];
-        for (int i = n; i < n + m; i++) {
+        for (int i = n; i < n; i++) {
             dspc[i] = new PhanCong();
             dspc[i].nhapPhanCong();
         }
@@ -98,7 +98,7 @@ public class DanhSachPhanCong implements IPhanCong {
 
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
-                System.out.print("Vui lòng nhập thời gian mới: ")
+                System.out.print("Vui lòng nhập thời gian mới: ");
                 dspc[i].setThoiGian(sc.nextLine());
                 System.out.println("Sửa thành công");
             }
@@ -108,7 +108,7 @@ public class DanhSachPhanCong implements IPhanCong {
     public void suaPhanCong(String maphancong){
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
-                System.out.print("Vui lòng nhập thời gian mới: ")
+                System.out.print("Vui lòng nhập thời gian mới: ");
                 dspc[i].setThoiGian(sc.nextLine());
                 System.out.println("Sửa thành công");            
             }
@@ -139,7 +139,7 @@ public class DanhSachPhanCong implements IPhanCong {
         String thoigian = sc.nextLine();
 
         System.out.print("Nhập mã phân công: ");
-        String maphancong = sc.nexLine();
+        String maphancong = sc.nextLine();
         PhanCong pc = timKiem(maphancong);
 
         pc.setDoAn(da);

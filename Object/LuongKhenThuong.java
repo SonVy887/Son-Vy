@@ -69,7 +69,7 @@ public class LuongKhenThuong {
     
 
     // Getters and Setters
-    public String getMaLuongkhenThuong() {
+    public String getMaLuongKhenThuong() {
         return maluongkhenthuong;
     }
     public void setMaLuongKhenThuong(String maluongkhenthuong) {

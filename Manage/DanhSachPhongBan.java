@@ -23,7 +23,7 @@ public class DanhSachPhongBan implements IPhongBan {
         sc.nextLine();
 
         dspb = new PhongBan[n];
-        for(int i = n; i < n + m; i++){
+        for(int i = n; i < n; i++){
             dspb[i] = new PhongBan();
             dspb[i].nhapThongTinPhongBan();
         }
@@ -102,7 +102,7 @@ public class DanhSachPhongBan implements IPhongBan {
                 }
                 for(int k = i; k < n - 1;k++)
                     dspb[k] = dspb[k + 1];
-                dspb = Arrays.copyOg(dspb, n);
+                dspb = Arrays.copyOf(dspb, n);
                 return;
             }
        }

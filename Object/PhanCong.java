@@ -26,20 +26,20 @@ public class PhanCong {
         System.out.println("=================================================================");
         System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
         System.out.println("-----------------------------------------------------------------");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n",maPhanCong,nhansu == null ? "Trống" : nhansu.getMaNhanSu(),
+        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n",maphancong,nhansu == null ? "Trống" : nhansu.getMaNhanSu(),
         doan == null ? "Trống" : doan.getMaDoAn(),thoigian);
         System.out.println("=================================================================");
     }
     //nhap
     public void nhapPhanCong(){
         System.out.print("Nhập mã phân công: ");
-        this.maPhanCong = sc.nextLine().toUpperCase();
+        this.maphancong = sc.nextLine().toUpperCase();
     }
     public String getMaPhanCong(){
-        return this.maPhanCong;
+        return this.maphancong;
     }
-    public void setMaPhanCong(String maPhanCong){
-        this.maPhanCong = maPhanCong;
+    public void setMaPhanCong(String maphancong){
+        this.maphancong = maphancong;
     }
     public NhanSu getNhanSu() {
         return nhansu;

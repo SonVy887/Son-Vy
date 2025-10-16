@@ -218,11 +218,7 @@ public class Runner {
                 case 3: phanCongService.xoaPhanCong();break;
                 case 4: phanCongService.suaPhanCong();break;
                 case 5: phanCongService.timKiem();break;
-                case 6: 
-                    System.out.print("Nhập mã phân công: ");
-                    String maPhanCong = sc.nextLine().toUpperCase();
-
-                    phanCongService.phanCongDoAn(maPhanCong);break;
+                case 6: phanCongService.phanCongDoAn();break;
                 case 7: phanCongService.in();break;
 
                 case 36: 
