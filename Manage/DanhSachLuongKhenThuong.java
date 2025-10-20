@@ -181,6 +181,15 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
                     System.out.println("Sửa thành công");break;
             }
         }
-    } 
+    }
+    @Override 
+    public double getLuong(String manhansu){
+        for (int i = 0; i < n; i++) {
+            if(dslk[i].getNhanSu().getMaNhanSu().equals(manhansu)){
+                return dslk[i].tongLuong();
+            }
+        }
+        return 0.0;
+    }
 
 }

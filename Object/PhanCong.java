@@ -32,7 +32,7 @@ public class PhanCong {
     }
     //nhap
     public void nhapPhanCong(){
-        System.out.print("Nhập mã phân công: ");
+        System.out.print("Nhập mã phân công (VD: PC001): ");
         this.maphancong = sc.nextLine().toUpperCase();
     }
     public String getMaPhanCong(){

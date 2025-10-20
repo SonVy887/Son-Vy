@@ -19,5 +19,6 @@ public interface ILuongKhenThuong {
     void ganNhanSu();//da test
     
     void in();// da test
+    double getLuong(String manhansu);
     
 } 
