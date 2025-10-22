@@ -5,6 +5,7 @@ import Object.LuongKhenThuong;
 public interface ILuongKhenThuong {
     void themLuongKhen();// da test
     void themNhieuLuongKhen();
+    void themLuongKhen(LuongKhenThuong lkt);
 
     void xoaLuongKhen();// da test
     void xoaLuongKhen(String maLuongKhen);

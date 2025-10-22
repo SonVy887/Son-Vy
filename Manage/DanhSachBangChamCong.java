@@ -71,6 +71,7 @@ public class DanhSachBangChamCong implements IBangChamCong {
             if(bcc[i].getMaChamCong().equals(machamcong)){
                 for(int j = i; j < n - 1;j++)
                     bcc[j] = bcc[j + 1];
+                this.n--;
                 bcc = Arrays.copyOf(bcc, n);
                 return;
             }
@@ -83,6 +84,7 @@ public class DanhSachBangChamCong implements IBangChamCong {
             if(bcc[i].getMaChamCong().equals(machamcong)){
                 for(int j = i; j < n - 1;j++)
                     bcc[j] = bcc[j + 1];
+                this.n--;
                 bcc = Arrays.copyOf(bcc, n);
                 return;
             }

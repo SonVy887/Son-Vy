@@ -72,6 +72,7 @@ public class DanhSachPhanCong implements IPhanCong {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
                 for (int j = i; j < n - 1; j++) 
                     dspc[j] = dspc[j + 1];
+                this.n--;
                 dspc = Arrays.copyOf(dspc, n);
                 return;
             }
@@ -84,6 +85,7 @@ public class DanhSachPhanCong implements IPhanCong {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
                 for (int j = i; j < n - 1; j++) 
                     dspc[j] = dspc[j + 1];
+                this.n--;
                 dspc = Arrays.copyOf(dspc, n);
                 return;
             }

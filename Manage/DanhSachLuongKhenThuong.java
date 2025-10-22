@@ -52,6 +52,12 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
             dslk[i].nhapLuongKhenThuong();
         }
     }
+    @Override
+    public void themLuongKhen(LuongKhenThuong lkt){
+        dslk = Arrays.copyOf(dslk, n + 1);
+        dslk[n] = lkt;
+        this.n++;
+    }
 
     // xoa luong khen 
     @Override
@@ -63,8 +69,8 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
             if(dslk[i].getMaLuongKhenThuong().equals(maluongkhen)){
                 for(int j = i; j < n - 1;j++)
                     dslk[j] = dslk[j + 1];
-                dslk[n - 1] = null;
                 this.n--;
+                dslk = Arrays.copyOf(dslk, n);
                 return;
             }
         }
@@ -76,8 +82,8 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
             if(dslk[i].getMaLuongKhenThuong().equals(maluongkhen)){
                 for(int j = i; j < n - 1;j++)
                     dslk[j] = dslk[j + 1];
-                dslk[n - 1] = null;
                 this.n--;
+                dslk = Arrays.copyOf(dslk, n);
                 return;
             }
         }

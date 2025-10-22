@@ -115,8 +115,8 @@ public class DanhSachDoAn implements IDoAn {
             if(dsda[i].getMaDoAn().equals(maDoAn)){
                 for(int j = i; j < n - 1;j++)
                     dsda[j] = dsda[j+1];
-                dsda[n - 1] = null;
                 n--;
+                dsda = Arrays.copyOf(dsda, n);
                 return;
             }
         }
@@ -128,8 +128,8 @@ public class DanhSachDoAn implements IDoAn {
             if(dsda[i].getMaDoAn().equals(maDoAn)){
                 for(int j = i; j < n - 1;j++)
                     dsda[j] = dsda[j+1];
-                dsda[n - 1] = null;
                 n--;
+                dsda = Arrays.copyOf(dsda, n);
                 return;
             }
         }

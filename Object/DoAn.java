@@ -49,9 +49,10 @@ public class DoAn {
     }
     // in thong tin do an
     public void inDoAn(){
-        System.out.printf("|%-15s|%-17s|%-15s|%-15s|%-20s|%-20s|\n","Ma Do An","Ten Do An","Phong Ban","Dia Diem","Ngay Bat Dau","Ngay Ket Thuc");
-        System.out.println("-------------------------------------------------------------------------------------------------------");
-        System.out.printf("|%-15s|%-17s|%-15s|%-15s|%-20s|%-20s|\n",madoan,tendoan,phongban == null ? "Trong" : phongban.getMaPhongBan(),diadiem,ngaybatdau,ngayketthuc);
+        System.out.println("==========================================================================================================================");
+        System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n","Mã Đồ Án","Tên Đồ Án","Phòng Ban","Địa Điểm","Ngày Bắt Đầu","Ngày Kết Thúc");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n",madoan,tendoan,phongban == null ? "Trong" : phongban.getMaPhongBan(),diadiem,ngaybatdau,ngayketthuc);
     }
     // Getter and Setter
     public String getMaDoAn() {

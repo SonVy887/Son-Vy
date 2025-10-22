@@ -27,8 +27,9 @@ public class Runner {
 
 
     public void run() {
+        dataBase();
         while(true){
-            System.out.println("=======Chọn Quản Lý=======");
+            System.out.println("\n======= Chọn Quản Lý =======");
             System.out.println("1.Quản Lý Nhân Sự");
             System.out.println("2.Quản Lý Phòng Ban");
             System.out.println("3.Quản Lý Đồ Án");
@@ -61,14 +62,26 @@ public class Runner {
     private void quanLyNhanSu(){
             //Chuc nang
         while(true){
-            System.out.println("========Menu Quản Lý Nhân Sự=========");
-            System.out.println("1. Them nhan su");
-            System.out.println("2. Them \"n\" nhan su");
-            System.out.println("3. Xoa nhan su bằng mã nhân sự");
-            System.out.println("4. Tim kiem nhan su bang ma");
-            System.out.println("6. In thong tin nhan su");
-            System.out.println("0. Quay lai");
-            System.out.print("Lua chon: ");
+            System.out.println("\n======== Menu Quản Lý Nhân Sự =========");
+            System.out.println("1. Thêm nhân sự");
+            System.out.println("2. Thêm n nhân sự đầu tiên");
+            System.out.println("3. Xóa nhân sự bằng mã");
+            System.out.println("4. Tìm kiếm nhân sự bằng mã");
+            System.out.println("5. Sửa nhân sự bằng mã");
+            System.out.println("6. Tìm kiếm nhân sự bằng họ");
+            System.out.println("7. Tìm kiếm nhân sự bằng tên");
+            System.out.println("8. Thống kê nhân sự theo giới tính");
+            System.out.println("9. Thống kê nhân sự theo tuổi");
+            System.out.println("10. Thống kê nhân sự theo năm kinh nghiệm");
+            System.out.println("11. Thống kê nhân sự thực tập theo GPA");
+            System.out.println("12. Xuất file thống kê giới tính");
+            System.out.println("13. Xuất file thống kê tuổi");
+            System.out.println("14. Xuất file thống kê năm kinh nghiệm");
+            System.out.println("15. Thêm nhân sự mẫu");
+            System.out.println("0. Để quay lại");
+            System.out.print("Lựa chọn: ");
+
+
 
 
             int choice = sc.nextInt();
@@ -79,23 +92,26 @@ public class Runner {
             switch (choice) {
                 case 1: danhsachnhansu.addNhanSu(); break;
                 case 2: danhsachnhansu.addSoLuongNhanSu(); break;
-                case 3:danhsachnhansu.xoaNhanSu();break;
+                case 3: danhsachnhansu.xoaNhanSu(); break;
                 case 4: danhsachnhansu.timKiem(); break;
-                case 6: danhsachnhansu.in(); break;
-                case 36: 
-                    danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS001", "Nguyen", "An", 28, "Hà Nội","0901234567", "Nam", "1997-05-10", "an.nguyen@example.com",null, 3));
-                    danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS002", "Tran", "Binh", 32, "TP.HCM", "0912345678", "Nam", "1993-09-21", "binh.tran@example.com", null, 7));
-                    danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS003", "Le", "Chi", 26, "Đà Nẵng", "0923456789", "Nữ", "1999-03-15", "chi.le@example.com", null, 2));
-                    danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS004", "Pham", "Dung", 30, "Hải Phòng", "0934567890", "Nữ", "1995-11-02", "dung.pham@example.com", null, 5));
-                    danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS005", "Do", "Khang", 35, "Cần Thơ", "0945678901", "Nam", "1990-07-19", "khang.do@example.com", null, 10));
-                    break;
+                case 5: danhsachnhansu.suaNhanSu(); break;
+                case 6: danhsachnhansu.timKiemTheoHo(); break;
+                case 7: danhsachnhansu.timKiemTheoTen(); break;
+                case 8: danhsachnhansu.thongKeGioiTinh(); break;
+                case 9: danhsachnhansu.thongKeTuoi(); break;
+                case 10: danhsachnhansu.thongKeNamKinhNghiem(); break;
+                case 11: danhsachnhansu.thongKeGPA(); break;
+                case 12: danhsachnhansu.xuatFileThongKeGioiTinh(); break;
+                case 13: danhsachnhansu.xuatFileThongKeTuoi(); break;
+                case 14: danhsachnhansu.xuatFileThongKeNamKinhNghiem(); break;
+                case 15: danhsachnhansu.xuatFileThongKeGPA(); break;
                 default: System.out.println("Lua chon khong hop le. Vui long thu lai!"); break;
 }
         }
     }
     private void quanLyPhongBan(){
         while(true){
-            System.out.println("=========Menu Quản Lý Phòng Ban========");
+            System.out.println("\n========= Menu Quản Lý Phòng Ban ========");
             System.out.println("1. Them phong ban");
             System.out.println("2. Them so luong phong ban");
             System.out.println("3. Xoa phong ban bang ma");
@@ -204,6 +220,7 @@ public class Runner {
     }
     private void quanLyPhanCong() {
         while(true){
+            System.out.println("\n========== MENU QUẢN LÝ PHÂN CÔNG ==========");
             System.out.println("1. Thêm phân công");
             System.out.println("2. Thêm nhiều phân công");
             System.out.println("3. Xóa phân công");
@@ -237,6 +254,7 @@ public class Runner {
     }
     private void quanLyChamCong(){
         while(true){
+            System.out.println("\n========== MENU QUẢN LÝ CHẤM CÔNG ==========");
             System.out.println("1. Thêm bảng chấm công");
             System.out.println("2. Thêm n bảng chấm công đầu tiên");
             System.out.println("3. Xóa bảng chấm công");
@@ -264,10 +282,13 @@ public class Runner {
     }
     private void quanLyBangLuong() {
         while(true){
-            System.out.println("\n");
+            System.out.println("\n========== MENU QUẢN LÝ BẢNG LƯƠNG ==========");
             System.out.println("1. Thêm bảng lương");
             System.out.println("2. Thêm n bảng lương đầu tiên");
-            System.out.println("8. Chấm công nhân sự");
+            System.out.println("3. Xóa bảng lương");
+            System.out.println("4. Sửa bảng lương");
+            System.out.println("5. Tìm kiếm bảng lương");
+            System.out.println("8. Tính bảng lương nhân sự");
             System.out.println("0. Quay Lại");
             System.out.println("10. In thông tin bảng lương");
             System.out.print("Lựa chọn: ");
@@ -280,10 +301,58 @@ public class Runner {
             switch(choice){
                 case 1: danhsachbangluong.themBangLuong();break;
                 case 2: danhsachbangluong.them();break;
-                case 8: danhsachbangluong.themNhanSu();break;
+                case 3: danhsachbangluong.xoaBangLuong();break;
+                case 4: danhsachbangluong.suaBangLuong();break;
+                case 5: danhsachbangluong.timKiem();break;
+                case 8: danhsachbangluong.tinhBangLuongNhanSu();break;
                 case 10: danhsachbangluong.inThongTin();break;
             }
         }
+    }
+    public void dataBase() {
+        // cơ sở dữ liệu nhân sự
+        danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS001", "Nguyen", "An", 28, "Hà Nội","0901234567", "Nam", "1997-05-10", "an.nguyen@example.com",null, 3));
+        danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS002", "Tran", "Binh", 32, "TP.HCM", "0912345678", "Nam", "1993-09-21", "binh.tran@example.com", null, 7));
+        danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS003", "Le", "Chi", 26, "Đà Nẵng", "0923456789", "Nữ", "1999-03-15", "chi.le@example.com", null, 2));
+        danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS004", "Pham", "Dung", 30, "Hải Phòng", "0934567890", "Nữ", "1995-11-02", "dung.pham@example.com", null, 5));
+        danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS005", "Do", "Khang", 35, "Cần Thơ", "0945678901", "Nam", "1990-07-19", "khang.do@example.com", null, 10));
+        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS006", "Hoang", "Linh", 22, "Nghệ An", "0956789012", "Nữ", "2003-01-25", "lingdg@gmail.com",null,3,3.5,"ABC University"));
+        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS007", "Vu", "Minh", 23, "Quảng Ninh", "0967890123", "Nam", "2001-12-30", "minhdc@gmail.com",null,4,3.8,"XYZ Institute"));
+        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS008", "Bui", "Trang", 21, "Thừa Thiên Huế", "0978901234", "Nữ", "2004-06-14", "tranglc@gmail.com",null,2,3.6,"DEF College"));
+
+        // cơ sở dữ liệu phòng ban
+        danhsachphongban.addPhongBan(new PhongBan("PB001", "Phòng Nhân Sự", null, "Trong"));
+        danhsachphongban.addPhongBan(new PhongBan("PB002", "Phòng Kỹ Thuật", null, "Trong"));
+        danhsachphongban.addPhongBan(new PhongBan("PB003", "Phòng Kinh Doanh", null, "Trong"));
+
+        // cơ sở dữ liệu đồ án
+        danhsachdoan.themDoAn(new DoAn("DA001", "Hệ thống quản lý nhân sự", "Hà Nội", null, "2023-01-01", "2023-06-30"));
+        danhsachdoan.themDoAn(new DoAn("DA002", "Ứng dụng bán hàng trực tuyến", "TP.HCM", null, "2023-02-15", "2023-08-15"));
+        danhsachdoan.themDoAn(new DoAn("DA003", "Phần mềm kế toán doanh nghiệp", "Đà Nẵng", null, "2023-03-10", "2023-09-10"));
+
+        // cơ sở dữ liệu phân công
+        danhsachphancong.addPhancong(new PhanCong("PC001", null, null, "30"));
+        danhsachphancong.addPhancong(new PhanCong("PC002", null, null, "25"));
+        danhsachphancong.addPhancong(new PhanCong("PC003", null, null, "21"));
+
+        // cơ sở dữ liệu bảng chấm công
+        danhsachchamcong.themBangChamCong(new BangChamCong("BCC001", null, 22, 2, 1, 0));
+        danhsachchamcong.themBangChamCong(new BangChamCong("BCC002", null, 20, 3, 0, 1));
+        danhsachchamcong.themBangChamCong(new BangChamCong("BCC003", null, 23, 1, 0, 0));
+
+        // cơ sở dữ liệu bảng lương
+        danhsachbangluong.themBangLuong(new BangLuong("BL002",null, 0.0));
+        danhsachbangluong.themBangLuong(new BangLuong("BL001",null, 0.0));
+        danhsachbangluong.themBangLuong(new BangLuong("BL003",null, 0.0));
+
+        // cơ sở dữ liệu lương khen thưởng
+        danhsachkhenthuong.themLuongKhen(new LuongKhenThuong("LKT001",0,"Xuất sắc",null));
+        danhsachkhenthuong.themLuongKhen(new LuongKhenThuong("LKT002",0,"Tốt",null));
+        danhsachkhenthuong.themLuongKhen(new LuongKhenThuong("LKT003",0,"Khá",null));
+
+        // liên kết dữ liệu
+
+
     }
 }
 

@@ -77,11 +77,11 @@ public class DanhSachPhongBan implements IPhongBan {
             if(dspb[i].getMaPhongBan().equals(maphongban)){
                 NhanSu[] nhansupb = dspb[i].getDsns();
                 for(int j = 0; j < dspb[i].getSoLuongNhanSu();j++){
-                    NhanSu ns = cnns.timKiem(nhansupb[j].getMaNhanSu());
-                    ns.setPhongBan(null);
+                    nhansupb[j].setPhongBan(null);
                 }
                 for(int k = i; k < n - 1;k++)
                     dspb[k] = dspb[k + 1];
+                this.n--;
                 dspb = Arrays.copyOf(dspb, n); 
                 return;
             }
@@ -97,11 +97,11 @@ public class DanhSachPhongBan implements IPhongBan {
             if(dspb[i].getMaPhongBan().equals(maphongban)){
                 NhanSu[] nhansupb = dspb[i].getDsns();
                 for(int j = 0; j < dspb[i].getSoLuongNhanSu();j++){
-                    NhanSu ns = cnns.timKiem(nhansupb[j].getMaNhanSu());
-                    ns.setPhongBan(null);
+                    nhansupb[j].setPhongBan(null);
                 }
                 for(int k = i; k < n - 1;k++)
                     dspb[k] = dspb[k + 1];
+                this.n--;
                 dspb = Arrays.copyOf(dspb, n);
                 return;
             }
@@ -222,18 +222,17 @@ public class DanhSachPhongBan implements IPhongBan {
         System.out.print("Nhập mã phòng ban muốn thêm nhân sự: ");
         String maphongban = sc.nextLine().toUpperCase();
 
-        boolean check = kiemTraPb(maphongban);
-        if(!check){
+        PhongBan pb = timKiem(maphongban);
+        if(pb == null){
             System.out.println("Phòng ban chưa được khởi tạo");
             return;
         }
         System.out.print("Thêm n nhân sự đầu tiên vào phòn ban: ");
         int m = sc.nextInt();sc.nextLine();
                 
-        NhanSu[] temp = new NhanSu[m];
 
         for(int i = 0; i < n;i++){
-            if(dspb[i].getMaPhongBan().equals(maphongban)){
+            if(dspb[i].getMaPhongBan().equals(pb.getMaPhongBan())){
                 for(int j = 0; j < m;j++){
                     System.out.println("1. Nhập nhân sự chính thức");
                     System.out.println("2. Nhập nhân sự thực tập");
@@ -249,6 +248,7 @@ public class DanhSachPhongBan implements IPhongBan {
                     }
                     dspb[i].themNhanSu(ns);
                 }
+                pb.setSoLuongNhanSu(m);
                 return;
             }
         }
@@ -257,6 +257,7 @@ public class DanhSachPhongBan implements IPhongBan {
     public void inNhanSuPb(){
         System.out.print("Nhập mã phòng ban muốn xem chi tiết nhân sự: ");
         String maphongban = sc.nextLine().toUpperCase();
+
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
                 dspb[i].inThongTinChiTiet();
@@ -265,6 +266,7 @@ public class DanhSachPhongBan implements IPhongBan {
         }
         System.out.println("Phòng ban chưa tồn tại");
     }
+    // kiem tra phong ban ton tai
     public boolean kiemTraPb(String maphongban){
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
@@ -282,6 +284,7 @@ public class DanhSachPhongBan implements IPhongBan {
         if(pb == null){
             System.out.println("Phòng ban chưa được tạo");
         }
+
         System.out.print("Nhập mã nhân sự: ");
         String manhansu = sc.nextLine().toUpperCase();
 
@@ -290,6 +293,7 @@ public class DanhSachPhongBan implements IPhongBan {
             System.out.println("Nhân sự chưa được khởi tạo");
             return;
         }
+
         pb.xoaNhanSu(ns.getMaNhanSu());
 
     }
