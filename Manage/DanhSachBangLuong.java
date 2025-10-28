@@ -138,7 +138,7 @@ public class DanhSachBangLuong implements IBangLuong {
     }
     // tinh luong nhan su
     public double tinhLuongNhanSu(String manhansu){
-        double tong = (cnpc.tienThuong(manhansu) + cnlkt.getLuong(manhansu) + cnns.timKiem(manhansu).getLuongCoban());//  20 * cnbcc.tongNgayCong(manhansu);
+        double tong = (cnpc.tienThuong(manhansu) + cnlkt.getLuong(manhansu) + cnns.timKiem(manhansu).getLuongCoBan());//  20 * cnbcc.tongNgayCong(manhansu);
         if(cnbcc.tongNgayCong(manhansu) == 0) return tong;
         return tong / 20 * cnbcc.tongNgayCong(manhansu);
     }

@@ -6,6 +6,7 @@ import Interface.*;
 import Object.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 
 public class DanhSachNhanSu implements INhanSu {
@@ -442,8 +443,48 @@ public class DanhSachNhanSu implements INhanSu {
     // hien thi danh sach
     @Override
     public void in(){
+        System.out.println("\n============================================================================================================================================================================");
+        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-24s|%-11s|%-13s|%22s\n",
+        "Mã NS","Họ", "Tên",
+        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Email", "Phòng Ban", "Loại NS"," Lương Cơ Bản");
+        System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         for(int i = 0; i < n;i++){
             dsns[i].inThongTin();
+        }
+    }
+    // in chi tiet nhan su chinh thuc
+    @Override
+    public void inChiTietNhanSuChinhThuc() {
+        System.out.println("\n=========================================================================================================================================================================");
+        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-24s|%-11s|%-10s|%22s\n",
+        "Mã NS","Họ", "Tên",
+        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Email", "Phòng Ban", "Năm K/N"," Lương Cơ Bản");
+        System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        for(int i = 0; i < n;i++){
+            if(dsns[i] instanceof NhanSuChinhThuc){
+                NhanSuChinhThuc nsct = (NhanSuChinhThuc) dsns[i];
+                nsct.inChiTietCT();
+            }
+        }
+    }
+    // in chi tiet nhan su thuc tap
+    @Override
+    public void inChiTietNhanSuThucTap() {
+        System.out.println("\n================================================================================================================================================================================");
+        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-20s|%-12s|%-14s|%-5s|%22s\n",
+        "Mã NS","Họ", "Tên",
+        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Email", "Phòng Ban", "Thời Gian T/T", "GPA", "Lương Cơ Bản");
+        System.out.printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
+        for(int i = 0; i < n;i++){
+            if(dsns[i] instanceof NhanSuThucTap){
+                NhanSuThucTap nstt = (NhanSuThucTap) dsns[i];
+                nstt.inChiTietTT();
+            }
         }
     }
     // kiem tra ma nhan su duy nhat
@@ -453,6 +494,37 @@ public class DanhSachNhanSu implements INhanSu {
                 return true;
         }
         return false;
+    }
+    // tra ve danh sach nhan su
+    @Override
+    public NhanSu[] getNhanSu() {
+        return this.dsns;
+    }
+    // xuat file danh sach nhan su
+    @Override
+    public void xuatFileDanhSachNhanSu() {
+        try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachNhanSu.txt"))) {
+            NhanSu[] danhSach = getNhanSu();
+            write.println("==================================================================================================================================================================");
+            write.printf("|%-16s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-24s|%-11s|%22s|\n",
+            "Mã Nhân Sự","Họ", "Tên",
+            "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+            "Ngày Sinh", "Email", "Phòng Ban", "Lương Cơ Bản");
+            write.printf("------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+            for(NhanSu ns : danhSach) {
+                if(ns instanceof NhanSuChinhThuc) {
+                    write.printf("|%-16s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-24s|%-11s|%,18.2f VNĐ|\n",
+                    ns.getMaNhanSu(), ns.getHoNhanSu(), ns.getTenNhanSu(),
+                    ns.getTuoi(), ns.getDiaChi(), ns.getSoDienThoai(), ns.getGioiTinh(), 
+                    ns.getNgaySinh(), ns.getEmail(),
+                    ns.getPhongBan()==null ? "Rong" : ns.getPhongBan().getMaPhongBan(),
+                    ns.getLuongCoBan());
+                }
+            }
+            write.println("==================================================================================================================================================================");
+        }catch (Exception e) {
+            System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
+        }
     }
     // sửa phụ
     public void sua(NhanSu ns){

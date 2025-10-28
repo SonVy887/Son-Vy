@@ -17,5 +17,7 @@ public interface IBangChamCong {
     void setNhanSuCc();
     void inBangChamCong();
 
+    BangChamCong[] getBangChamCong();
+
     int tongNgayCong(String manhansu);
 }

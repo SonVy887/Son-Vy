@@ -51,5 +51,11 @@ public interface INhanSu {
 
     // in danh sach nhan su
     void in();
-    
+    // in chi tiet nhan su chinh thuc
+    void inChiTietNhanSuChinhThuc();
+    // in chi tiet nhan su thuc tap
+    void inChiTietNhanSuThucTap();
+    // tra ve danh sach nhan su
+    NhanSu[] getNhanSu();
+    void xuatFileDanhSachNhanSu();
 }

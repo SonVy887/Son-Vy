@@ -104,7 +104,7 @@ public abstract class NhanSu {
     public void setNgaySinh(String ngaysinh){ this.ngaysinh = ngaysinh;}
     public String getEmail(){ return email;}
     public void setEmail(String email){ this.email = email;}
-    public double getLuongCoban(){ return luongcoban;}
+    public double getLuongCoBan(){ return luongcoban;}
     public PhongBan getPhongBan(){ return phongban;}
     public void setPhongBan(PhongBan phongban){ this.phongban = phongban;}//set pb
 

@@ -189,6 +189,10 @@ public class DanhSachPhongBan implements IPhongBan {
     // in
     @Override
     public void inThongTin(){
+        System.out.println("\n========================================================================================");
+        System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Ma Phong Ban", "Ten Phong Ban", "Truong Phong", "Ngay Nhan Chuc","So luong Nhan Su");
+        System.out.printf("----------------------------------------------------------------------------------------\n");
+
         for (int i = 0; i < n; i++) {
             dspb[i].inThongTinPhongBan();
         }

@@ -77,7 +77,11 @@ public class Runner {
             System.out.println("12. Xuất file thống kê giới tính");
             System.out.println("13. Xuất file thống kê tuổi");
             System.out.println("14. Xuất file thống kê năm kinh nghiệm");
-            System.out.println("15. Thêm nhân sự mẫu");
+            System.out.println("15. Xuất file thống kê GPA");
+            System.out.println("16. Xuất file danh sách nhân sự");
+            System.out.println("17. In chi tiết nhân sự chính thức");
+            System.out.println("18. In chi tiết nhân sự thực tập");
+            System.out.println("19. In danh sách nhân sự");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -105,6 +109,10 @@ public class Runner {
                 case 13: danhsachnhansu.xuatFileThongKeTuoi(); break;
                 case 14: danhsachnhansu.xuatFileThongKeNamKinhNghiem(); break;
                 case 15: danhsachnhansu.xuatFileThongKeGPA(); break;
+                case 16: danhsachnhansu.xuatFileDanhSachNhanSu(); break;
+                case 17: danhsachnhansu.inChiTietNhanSuChinhThuc(); break;
+                case 18: danhsachnhansu.inChiTietNhanSuThucTap(); break;
+                case 19: danhsachnhansu.in(); break;
                 default: System.out.println("Lua chon khong hop le. Vui long thu lai!"); break;
 }
         }
@@ -122,6 +130,7 @@ public class Runner {
             System.out.println("8. Xoa nhan su trong phong ban");
             System.out.println("9. Sua phong ban");
             System.out.println("10. Thông tin nhân sự trong phòng ban");
+            System.out.println("11. In danh sách phòng ban");
             System.out.println("0. De quay lai");
             System.out.print("Lua chon: ");
             int choice = sc.nextInt();
@@ -142,9 +151,6 @@ public class Runner {
                 case 9:  danhsachphongban.suaPhongBan(); break;
                 case 10: danhsachphongban.inNhanSuPb(); break;
                 case 11: danhsachphongban.inThongTin(); break;
-                case 12: 
-                    danhsachphongban.addPhongBan(new PhongBan("PB001", "NC", null, "Trong"));
-                    break;
                 default: System.out.println("Nhap sai roi ni oi !!!");break;
             }
         }
@@ -316,9 +322,9 @@ public class Runner {
         danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS003", "Le", "Chi", 26, "Đà Nẵng", "0923456789", "Nữ", "1999-03-15", "chi.le@example.com", null, 2));
         danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS004", "Pham", "Dung", 30, "Hải Phòng", "0934567890", "Nữ", "1995-11-02", "dung.pham@example.com", null, 5));
         danhsachnhansu.addNhanSu(new NhanSuChinhThuc("NS005", "Do", "Khang", 35, "Cần Thơ", "0945678901", "Nam", "1990-07-19", "khang.do@example.com", null, 10));
-        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS006", "Hoang", "Linh", 22, "Nghệ An", "0956789012", "Nữ", "2003-01-25", "lingdg@gmail.com",null,3,3.5,"ABC University"));
-        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS007", "Vu", "Minh", 23, "Quảng Ninh", "0967890123", "Nam", "2001-12-30", "minhdc@gmail.com",null,4,3.8,"XYZ Institute"));
-        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS008", "Bui", "Trang", 21, "Thừa Thiên Huế", "0978901234", "Nữ", "2004-06-14", "tranglc@gmail.com",null,2,3.6,"DEF College"));
+        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS006", "Hoang", "Linh", 22, "Nghệ An", "0956789012", "Nữ", "2003-01-25", "lingdg@gmail.com",null,3,3.5));
+        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS007", "Vu", "Minh", 23, "Quảng Ninh", "0967890123", "Nam", "2001-12-30", "minhdc@gmail.com",null,4,3.8));
+        danhsachnhansu.addNhanSu(new NhanSuThucTap("NS008", "Bui", "Trang", 21, "Thừa Thiên Huế", "0978901234", "Nữ", "2004-06-14", "tranglc@gmail.com",null,2,3.6));
 
         // cơ sở dữ liệu phòng ban
         danhsachphongban.addPhongBan(new PhongBan("PB001", "Phòng Nhân Sự", null, "Trong"));

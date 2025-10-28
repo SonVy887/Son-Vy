@@ -3,16 +3,14 @@ import java.util.Scanner;
 public class NhanSuThucTap extends NhanSu {
     private int thoigianthuctap; // in months
     private  double gpa;
-    private String truongdaihoc;
     Scanner sc = new Scanner (System.in);
 
 
     // Constructor
-    public NhanSuThucTap(String manhansu, String ho, String ten, int tuoi, String diachi, String sodienthoai, String gioitinh, String ngaysinh, String email, PhongBan phongban,int thoigianthuctap,double gpa,String truongdaihoc) {
+    public NhanSuThucTap(String manhansu, String ho, String ten, int tuoi, String diachi, String sodienthoai, String gioitinh, String ngaysinh, String email, PhongBan phongban,int thoigianthuctap,double gpa) {
         super(manhansu, ho, ten, tuoi, diachi, sodienthoai, gioitinh, ngaysinh, email, phongban);
         this.thoigianthuctap = thoigianthuctap;
         this.gpa = gpa;
-        this.truongdaihoc = truongdaihoc;
     }
     public NhanSuThucTap() {
         super();
@@ -30,32 +28,32 @@ public class NhanSuThucTap extends NhanSu {
     public void setGpa(double gpa) {
         this.gpa = gpa;
     }
-    public String getTruongDaiHoc() {
-        return truongdaihoc;
-    }
-    public void setTruongDaiHoc(String truongdaihoc) {
-        this.truongdaihoc = truongdaihoc;
-    }
-
-    @Override
-    public void inThongTin() {
-        System.out.println("====================================================================================================================================================================================");
-        System.out.printf("|%-15s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-20s|%-15s|%-20s|%-15s|%-10s|\n",
-        "Mã Nhân Sự","Họ", "Tên",
-        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Email", "Lương Cơ Bản", "Thời Gian Thực Tập", "GPA","Trường Đại Học","Phong Ban");
-        System.out.printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        System.out.printf("|%-15s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-20s|%-15s|%-20s|%-15s|%-10s|\n",
+    //
+    public void inChiTietTT() {
+        // System.out.println("====================================================================================================================================================================================");
+        // System.out.printf("|%-15s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-20s|%-15s|%-20s|%-15s|%-10s|\n",
+        // "Mã Nhân Sự","Họ", "Tên",
+        // "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        // "Ngày Sinh", "Email", "Lương Cơ Bản", "Thời Gian Thực Tập", "GPA","Trường Đại Học","Phong Ban");
+        // System.out.printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-20s|%-12s|%-8s tháng|%-5s|%,18.2f VNĐ\n",
         manhansu, ho, ten,
         tuoi, diachi, sodienthoai, gioitinh, 
-        ngaysinh, email, luongcoban,
-        thoigianthuctap, gpa, truongdaihoc,phongban == null ? "Rong" : phongban.getMaPhongBan());
-        System.out.println("====================================================================================================================================================================================");
+        ngaysinh, email, phongban == null ? "Rong" : phongban.getMaPhongBan(),
+        thoigianthuctap, gpa,luongcoban);
+        // System.out.println("====================================================================================================================================================================================");
     }
-
+    @Override
+    public void inThongTin() {
+        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-24s|%-11s|%-13s|%,18.2f VNĐ\n",
+        manhansu, ho, ten,
+        tuoi, diachi, sodienthoai, gioitinh, 
+        ngaysinh, email,
+        phongban==null ? "Rong" : phongban.getMaPhongBan(), loai(), luongcoban);
+    }
     @Override
     public String loai() {
-        return "Nhân Sự Thực Tập";
+        return "Thực Tập";
     }
 
 
@@ -72,7 +70,5 @@ public class NhanSuThucTap extends NhanSu {
         System.out.print("Nhap GPA: ");
         this.gpa = sc.nextDouble();
         sc.nextLine();
-        System.out.print("Nhap truong dai hoc: ");
-        this.truongdaihoc = sc.nextLine();
     }
 }

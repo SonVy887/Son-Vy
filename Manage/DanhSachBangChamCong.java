@@ -169,6 +169,11 @@ public class DanhSachBangChamCong implements IBangChamCong {
         bcc.setNghiKhongPhep(sc.nextInt());sc.nextLine();
 
     }
+    // tra ve danh sach ban cham cong
+    @Override
+    public BangChamCong[] getBangChamCong() {
+        return this.bcc;
+    }
     // in
     @Override
     public void inBangChamCong() {

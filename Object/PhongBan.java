@@ -41,16 +41,23 @@ public class PhongBan {
 
     //in thong tin phong ban
     public void inThongTinPhongBan() {
-        System.out.println("========================================================================================");
-        System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Ma Phong Ban", "Ten Phong Ban", "Truong Phong", "Ngay Nhan Chuc","So luong Nhan Su");
-        System.out.printf("----------------------------------------------------------------------------------------\n");
+        // System.out.println("========================================================================================");
+        // System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Ma Phong Ban", "Ten Phong Ban", "Truong Phong", "Ngay Nhan Chuc","So luong Nhan Su");
+        // System.out.printf("----------------------------------------------------------------------------------------\n");
         System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n",
         this.maphongban, this.tenphongban, (this.truongphong != null ? truongphong.getMaNhanSu() : "Trong"), this.ngaynhanchuc,this.soluongtrongpb);
-        System.out.println("========================================================================================");
+        // System.out.println("========================================================================================");
         
     }
     //thong tin nhan su trong phong ban
     public void inThongTinChiTiet(){
+        System.out.println("\n============================================================================================================================================================================");
+        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-24s|%-11s|%-13s|%22s\n",
+        "Mã NS","Họ", "Tên",
+        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Email", "Phòng Ban", "Loại NS"," Lương Cơ Bản");
+        System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+
         for(int i = 0; i < soluongtrongpb;i++){
             dsns[i].inThongTin();
         }
