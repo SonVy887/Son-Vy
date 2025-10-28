@@ -18,6 +18,7 @@ public interface IBangChamCong {
     void inBangChamCong();
 
     BangChamCong[] getBangChamCong();
-
+    // xuat file bang cham cong
+    void xuatFileBangChamCong();
     int tongNgayCong(String manhansu);
 }

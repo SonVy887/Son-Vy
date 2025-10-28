@@ -24,6 +24,9 @@ public interface IPhanCong {
     PhanCong timKiem(String maPhanCong);
     
     void in();
-
     double tienThuong(String maNhanSu);
+
+    PhanCong[] getPhanCong();
+    // xuat file phan cong
+    void xuatFilePhanCong();
 }

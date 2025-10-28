@@ -5,11 +5,11 @@ public class PhanCong {
     private String maphancong;
     private NhanSu nhansu;
     private DoAn doan;
-    private String thoigian;
+    private int thoigian;
     Scanner sc = new Scanner(System.in);
 
     public PhanCong(){}
-    public PhanCong(String maphancong, NhanSu nhansu, DoAn doan, String thoigian){
+    public PhanCong(String maphancong, NhanSu nhansu, DoAn doan, int thoigian){
         this.maphancong = maphancong;
         this.nhansu = nhansu;
         this.doan = doan;
@@ -23,12 +23,12 @@ public class PhanCong {
     
     // in 
     public void inThongTinPhanCong(){
-        System.out.println("=================================================================");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
-        System.out.println("-----------------------------------------------------------------");
+        // System.out.println("=================================================================");
+        // System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
+        // System.out.println("-----------------------------------------------------------------");
         System.out.printf("|%-15s|%-15s|%-15s|%15s|\n",maphancong,nhansu == null ? "Trống" : nhansu.getMaNhanSu(),
         doan == null ? "Trống" : doan.getMaDoAn(),thoigian);
-        System.out.println("=================================================================");
+        // System.out.println("=================================================================");
     }
     //nhap
     public void nhapPhanCong(){
@@ -57,11 +57,11 @@ public class PhanCong {
         this.doan = doan;
     }
 
-    public String getThoiGian() {
+    public int getThoiGian() {
         return thoigian;
     }
 
-    public void setThoiGian(String thoigian) {
+    public void setThoiGian(int thoigian) {
         this.thoigian = thoigian;
     }
     public static void main(String[] args){

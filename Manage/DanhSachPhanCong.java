@@ -4,6 +4,9 @@ import Object.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 
 public class DanhSachPhanCong implements IPhanCong {
@@ -101,7 +104,7 @@ public class DanhSachPhanCong implements IPhanCong {
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
                 System.out.print("Vui lòng nhập thời gian mới: ");
-                dspc[i].setThoiGian(sc.nextLine());
+                dspc[i].setThoiGian(sc.nextInt());sc.nextLine();
                 System.out.println("Sửa thành công");
             }
         }
@@ -111,7 +114,7 @@ public class DanhSachPhanCong implements IPhanCong {
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
                 System.out.print("Vui lòng nhập thời gian mới: ");
-                dspc[i].setThoiGian(sc.nextLine());
+                dspc[i].setThoiGian(sc.nextInt());sc.nextLine();
                 System.out.println("Sửa thành công");            
             }
         }
@@ -138,11 +141,15 @@ public class DanhSachPhanCong implements IPhanCong {
         }
 
         System.out.print("Nhập thời gian: ");
-        String thoigian = sc.nextLine();
+        int thoigian = sc.nextInt();sc.nextLine();
 
         System.out.print("Nhập mã phân công: ");
-        String maphancong = sc.nextLine();
+        String maphancong = sc.nextLine().toUpperCase();
         PhanCong pc = timKiem(maphancong);
+        if(pc == null){
+            System.out.println("Phân công chưa tồn tại");
+            return;
+        }
 
         pc.setDoAn(da);
         pc.setNhanSu(ns);
@@ -185,8 +192,32 @@ public class DanhSachPhanCong implements IPhanCong {
     }
     @Override
     public void in(){
+        System.out.println("=================================================================");
+        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
+        System.out.println("-----------------------------------------------------------------");
+
         for (int i = 0; i < n; i++) {
             dspc[i].inThongTinPhanCong();
+        }
+    }
+    @Override
+    public PhanCong[] getPhanCong() {
+        return this.dspc;
+    }
+    @Override
+    public void xuatFilePhanCong() {
+        try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
+            PhanCong[] pc = getPhanCong();
+            write.println("=================================================================");
+            write.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
+            write.println("-----------------------------------------------------------------");
+            for(PhanCong p : pc) {
+                write.printf("|%-15s|%-15s|%-15s|%15s|\n",p.getMaPhanCong(),
+                p.getNhanSu() == null ? "Trống" : p.getNhanSu().getMaNhanSu(),
+                p.getDoAn() == null ? "Trống" : p.getDoAn().getMaDoAn(),p.getThoiGian());
+            }
+        }catch(IOException e) {
+            System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());
         }
     }
 }

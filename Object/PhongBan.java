@@ -124,6 +124,9 @@ public class PhongBan {
     public void setTruongPhong(NhanSu ns){
         this.truongphong = ns;
     }
+    public NhanSu getTruongPhong() {
+        return this.truongphong;
+    }
     public NhanSu[] getDsns(){
         return dsns;
     }

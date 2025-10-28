@@ -1,0 +1,6 @@
+========================================================================================
+|Ma Phong Ban     |Ten Phong Ban     |Truong Phong  |Ngay Nhan Chuc  |So luong Nhan Su |
+----------------------------------------------------------------------------------------
+|PB001            |Phòng Nhân Sự     |Trong         |Trong           |0                |
+|PB002            |Phòng Kỹ Thuật    |Trong         |Trong           |0                |
+|PB003            |Phòng Kinh Doanh  |Trong         |Trong           |0                |

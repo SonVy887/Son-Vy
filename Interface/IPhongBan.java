@@ -35,4 +35,7 @@ public interface IPhongBan {
 
     void inThongTin();
     void inNhanSuPb();// da test
+    PhongBan[] getPhongBan();
+    // xuat file phong ban
+    void xuatFilePhongBan();
 }

@@ -3,6 +3,10 @@ import java.util.*;
 import Object.*;
 import Interface.*;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+
 public class DanhSachPhongBan implements IPhongBan {
     private PhongBan[] dspb;
     private int n;
@@ -41,6 +45,12 @@ public class DanhSachPhongBan implements IPhongBan {
         dspb[n]= new PhongBan();
         dspb[n].nhapThongTinPhongBan();
         this.n++;
+    }
+    @Override
+    public void addPhongBan(PhongBan pb){
+        dspb = Arrays.copyOf(dspb, n + 1);
+        dspb[n] = pb;
+        n++;
     }
     //sua phong ban
     @Override
@@ -302,9 +312,23 @@ public class DanhSachPhongBan implements IPhongBan {
 
     }
     @Override
-    public void addPhongBan(PhongBan pb){
-        dspb = Arrays.copyOf(dspb, n + 1);
-        dspb[n] = pb;
-        n++;
+    public PhongBan[] getPhongBan() {
+        return this.dspb;
+    }
+    @Override
+    public void xuatFilePhongBan() {
+        try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhongBan.txt"))) {
+            PhongBan[] pb = getPhongBan();
+            write.println("========================================================================================");
+            write.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Ma Phong Ban", "Ten Phong Ban", "Truong Phong", "Ngay Nhan Chuc","So luong Nhan Su");
+            write.printf("----------------------------------------------------------------------------------------\n");
+            for(PhongBan p : pb) {
+                write.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n",
+                p.getMaPhongBan(), p.getTenPhongBan(), (p.getTruongPhong() != null ? p.getTruongPhong().getMaNhanSu() : "Trong"),
+                p.getNgayNhanChuc(),p.getSoLuongNhanSu());
+            }
+        }catch(IOException e) {
+            System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());
+        }
     }
 }

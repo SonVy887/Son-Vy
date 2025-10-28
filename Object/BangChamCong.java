@@ -31,15 +31,15 @@ public class BangChamCong {
     }
 
     public void in() {
-        System.out.println("\n=============================================================================================================================");
-        System.out.printf("|%-15s|%-20s|%-18s|%-20s|%-15s|%-15s|%-15s|\n","Mã NV", "Họ và tên", "Phòng ban", "Tổng ngày công", "Nghỉ P", "Nghỉ Ốm", "Nghỉ KP");
-        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("|%-15s|%-20s|%-18s|%-20d|%-15d|%-15d|%-15d|\n",
+        // System.out.println("\n=============================================================================================================================");
+        // System.out.printf("|%-15s|%-20s|%-18s|%-20s|%-15s|%-15s|%-15s|\n","Mã NV", "Họ và tên", "Phòng ban", "Tổng ngày công", "Nghỉ P", "Nghỉ Ốm", "Nghỉ KP");
+        // System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("|%-15s|%-20s|%-18s|%-15d Ngày|%-10d Ngày|%-10d Ngày|%-10d Ngày|\n",
         nhansu == null ? "Trống" : nhansu.getMaNhanSu(),
         nhansu == null ? "Trống" : nhansu.getHoNhanSu() + " " + nhansu.getTenNhanSu(),
         nhansu == null ? "Trống" : nhansu.getPhongBan(),
         tongngaycong, nghiphep, nghiom, nghikhongphep);
-        System.out.println("==============================================================================================================================");
+        // System.out.println("==============================================================================================================================");
     }
 
     public void nhap() {
@@ -84,14 +84,5 @@ public class BangChamCong {
     }
     public NhanSu getNhanSu() {
         return this.nhansu;
-    }
-
-    public static void main(String[] args){
-        BangChamCong bcc1 = new BangChamCong("CC001", null, 22, 2, 1, 0);
-        BangChamCong bcc2 = new BangChamCong("CC002", null, 20, 1, 0, 1);
-        BangChamCong bcc3 = new BangChamCong("CC003", null, 23, 0, 1, 0);
-        bcc1.in();
-        bcc2.in();
-        bcc3.in();
     }
 }

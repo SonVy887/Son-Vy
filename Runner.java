@@ -131,6 +131,7 @@ public class Runner {
             System.out.println("9. Sua phong ban");
             System.out.println("10. Thông tin nhân sự trong phòng ban");
             System.out.println("11. In danh sách phòng ban");
+            System.out.println("12. Xuat file phong ban");
             System.out.println("0. De quay lai");
             System.out.print("Lua chon: ");
             int choice = sc.nextInt();
@@ -151,6 +152,7 @@ public class Runner {
                 case 9:  danhsachphongban.suaPhongBan(); break;
                 case 10: danhsachphongban.inNhanSuPb(); break;
                 case 11: danhsachphongban.inThongTin(); break;
+                case 12: danhsachphongban.xuatFilePhongBan(); break;
                 default: System.out.println("Nhap sai roi ni oi !!!");break;
             }
         }
@@ -234,6 +236,7 @@ public class Runner {
             System.out.println("5. Tìm kiếm phân công");
             System.out.println("6. Phân công nhân sự");
             System.out.println("7. In thông tin");
+            System.out.println("8. Xuất file phân công");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -250,11 +253,9 @@ public class Runner {
                 case 5: danhsachphancong.timKiem();break;
                 case 6: danhsachphancong.phanCongDoAn();break;
                 case 7: danhsachphancong.in();break;
+                case 8: danhsachphancong.xuatFilePhanCong(); break;
 
-                case 36: 
-                    danhsachphancong.addPhancong(new PhanCong("PC001",null,null,"30"));
-                    danhsachphancong.addPhancong(new PhanCong("PC002",null,null,"25"));
-                    danhsachphancong.addPhancong(new PhanCong("PC003",null,null,"21"));
+                
             }
         }
     }
@@ -268,6 +269,7 @@ public class Runner {
             System.out.println("5. Tìm kiếm bảng chấm công");
             System.out.println("6. Chấm công nhân sự");
             System.out.println("7. In bảng chấm công");
+            System.out.println("8. Xuất file bảng chấm công");
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
@@ -283,6 +285,7 @@ public class Runner {
                 case 5: danhsachchamcong.timKiem();break;
                 case 6: danhsachchamcong.setNhanSuCc();break;
                 case 7: danhsachchamcong.inBangChamCong();break;
+                case 8: danhsachchamcong.xuatFileBangChamCong();break;
             }
         }
     }
@@ -337,14 +340,14 @@ public class Runner {
         danhsachdoan.themDoAn(new DoAn("DA003", "Phần mềm kế toán doanh nghiệp", "Đà Nẵng", null, "2023-03-10", "2023-09-10"));
 
         // cơ sở dữ liệu phân công
-        danhsachphancong.addPhancong(new PhanCong("PC001", null, null, "30"));
-        danhsachphancong.addPhancong(new PhanCong("PC002", null, null, "25"));
-        danhsachphancong.addPhancong(new PhanCong("PC003", null, null, "21"));
+        danhsachphancong.addPhancong(new PhanCong("PC001", null, null, 0));
+        danhsachphancong.addPhancong(new PhanCong("PC002", null, null, 0));
+        danhsachphancong.addPhancong(new PhanCong("PC003", null, null, 0));
 
         // cơ sở dữ liệu bảng chấm công
-        danhsachchamcong.themBangChamCong(new BangChamCong("BCC001", null, 22, 2, 1, 0));
-        danhsachchamcong.themBangChamCong(new BangChamCong("BCC002", null, 20, 3, 0, 1));
-        danhsachchamcong.themBangChamCong(new BangChamCong("BCC003", null, 23, 1, 0, 0));
+        danhsachchamcong.themBangChamCong(new BangChamCong("BCC001", null, 0, 0, 0, 0));
+        danhsachchamcong.themBangChamCong(new BangChamCong("BCC002", null, 0, 0, 0, 0));
+        danhsachchamcong.themBangChamCong(new BangChamCong("BCC003", null, 0, 0, 0, 0));
 
         // cơ sở dữ liệu bảng lương
         danhsachbangluong.themBangLuong(new BangLuong("BL002",null, 0.0));

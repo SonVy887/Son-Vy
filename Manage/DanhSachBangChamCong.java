@@ -6,6 +6,9 @@ import Manage.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class DanhSachBangChamCong implements IBangChamCong {
     private BangChamCong[] bcc;
@@ -174,9 +177,31 @@ public class DanhSachBangChamCong implements IBangChamCong {
     public BangChamCong[] getBangChamCong() {
         return this.bcc;
     }
+    // xuat file bang cham cong
+    public void xuatFileBangChamCong() {
+        try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCong.txt"))) {
+            BangChamCong[] bcc = getBangChamCong();
+            write.println("=============================================================================================================================");
+            write.printf("|%-15s|%-20s|%-18s|%-20s|%-15s|%-15s|%-15s|\n","Mã NV", "Họ và tên", "Phòng ban", "Tổng ngày công", "Nghỉ Phép", "Nghỉ Ốm", "Nghỉ KP");
+            write.println("------------------------------------------------------------------------------------------------------------------------------");
+            for(BangChamCong c : bcc) {
+                write.printf("|%-15s|%-20s|%-18s|%-15d Ngày|%-10d Ngày|%-10d Ngày|%-10d Ngày|\n",
+                c.getNhanSu() == null ? "Trống" : c.getNhanSu().getMaNhanSu(),
+                c.getNhanSu() == null ? "Trống" : c.getNhanSu().getHoNhanSu() + " " + c.getNhanSu().getTenNhanSu(),
+                c.getNhanSu() == null ? "Trống" : c.getNhanSu().getPhongBan(),
+                c.getTongNgayCong(), c.getNghiPhep(), c.getNghiOm(), c.getNghiKhongPhep());
+            }
+        }catch(IOException e) {
+            System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());
+        }
+    }
     // in
     @Override
     public void inBangChamCong() {
+        System.out.println("\n=============================================================================================================================");
+        System.out.printf("|%-15s|%-20s|%-18s|%-20s|%-15s|%-15s|%-15s|\n","Mã NV", "Họ và tên", "Phòng ban", "Tổng ngày công", "Nghỉ Phép", "Nghỉ Ốm", "Nghỉ KP");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+
         for (int i = 0; i < n; i++) {
             bcc[i].in();
         }
