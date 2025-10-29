@@ -21,5 +21,9 @@ public interface ILuongKhenThuong {
     
     void in();// da test
     double getLuong(String manhansu);
+
+    LuongKhenThuong[] getDanhSachLuongKhen();
+    // xuat file
+    void xuatFileLuongKhen();
     
 } 

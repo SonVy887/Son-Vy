@@ -45,6 +45,7 @@ public class DanhSachNhanSu implements INhanSu {
             sc.nextLine();
 
             dsns = new NhanSu[n];
+
             for(int i = 0; i < n;i++){
                 if(choice == 1)
                     dsns[i] = new NhanSuChinhThuc();
@@ -60,17 +61,18 @@ public class DanhSachNhanSu implements INhanSu {
         System.out.println("1. Nhập nhân sự chính thức");
         System.out.println("2. Nhập nhân sự thực tập");
         System.out.println("==========================");
-        System.out.print("Lua chon: ");
+        System.out.print("Lựa chọn: ");
         int choice = sc.nextInt();
         sc.nextLine();
 
         System.out.print("Nhập mã nhân sự để kiểm tra: ");
-        while(kiemTraDuyNhat(sc.nextLine())) {
+        while(kiemTraDuyNhat(sc.nextLine().toUpperCase())) {
             System.out.println("Nhân sự này đã tồn tại");
             System.out.print("Mời bạn nhập lại: ");
         }
 
         NhanSu ns = null;
+
         if(choice == 1){
             ns = new NhanSuChinhThuc();
         }else if (choice == 2){
@@ -444,10 +446,10 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void in(){
         System.out.println("\n============================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-24s|%-11s|%-13s|%22s\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-13s|%22s\n",
         "Mã NS","Họ", "Tên",
-        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Email", "Phòng Ban", "Loại NS"," Lương Cơ Bản");
+        "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm" "Loại NS"," Lương Cơ Bản");
         System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         for(int i = 0; i < n;i++){
             dsns[i].inThongTin();
@@ -457,10 +459,10 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void inChiTietNhanSuChinhThuc() {
         System.out.println("\n=========================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-24s|%-11s|%-10s|%22s\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-10s|%22s\n",
         "Mã NS","Họ", "Tên",
-        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Email", "Phòng Ban", "Năm K/N"," Lương Cơ Bản");
+        "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm" "Năm K/N"," Lương Cơ Bản");
         System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
@@ -474,10 +476,10 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void inChiTietNhanSuThucTap() {
         System.out.println("\n================================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-8s|%-16s|%-15s|%-12s|%-12s|%-20s|%-12s|%-14s|%-5s|%22s\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-12s|%-16s|%-14s|%-5s|%22s\n",
         "Mã NS","Họ", "Tên",
-        "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Email", "Phòng Ban", "Thời Gian T/T", "GPA", "Lương Cơ Bản");
+        "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm" "Thời Gian T/T", "GPA", "Lương Cơ Bản");
         System.out.printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
@@ -506,20 +508,18 @@ public class DanhSachNhanSu implements INhanSu {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachNhanSu.txt"))) {
             NhanSu[] danhSach = getNhanSu();
             write.println("==================================================================================================================================================================");
-            write.printf("|%-16s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-24s|%-11s|%22s|\n",
-            "Mã Nhân Sự","Họ", "Tên",
-            "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-            "Ngày Sinh", "Email", "Phòng Ban", "Lương Cơ Bản");
+            write.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%22s|\n",
+            "Mã NS","Họ", "Tên",
+            "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
+            "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào làm", "Loại" "Lương Cơ Bản");
             write.printf("------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             for(NhanSu ns : danhSach) {
-                if(ns instanceof NhanSuChinhThuc) {
-                    write.printf("|%-16s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-24s|%-11s|%,18.2f VNĐ|\n",
+                    write.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%,18.2f VNĐ|\n",
                     ns.getMaNhanSu(), ns.getHoNhanSu(), ns.getTenNhanSu(),
-                    ns.getTuoi(), ns.getDiaChi(), ns.getSoDienThoai(), ns.getGioiTinh(), 
-                    ns.getNgaySinh(), ns.getEmail(),
-                    ns.getPhongBan()==null ? "Rong" : ns.getPhongBan().getMaPhongBan(),
+                    ns.getDiaChi(), ns.getSoDienThoai(), ns.getGioiTinh(), 
+                    ns.getNgaySinh(), ns.getMaChucVu(),
+                    ns.getPhongBan()== "" ? "Rong" : ns.getPhongBan(), ns.getNgayVaoLam(), ns.loai(),
                     ns.getLuongCoBan());
-                }
             }
             write.println("==================================================================================================================================================================");
         }catch (Exception e) {
@@ -531,12 +531,11 @@ public class DanhSachNhanSu implements INhanSu {
         while(true){
             System.out.println("1. Sửa tên nhân sự");
             System.out.println("2. Sửa họ nhân sự");
-            System.out.println("3. Sửa tuổi nhân sự");
+            System.out.println("3. Sửa ngày vào làm");
             System.out.println("4. Sửa địa chỉ");
             System.out.println("5. Sửa số điện thoại");
             System.out.println("6. Sửa giới tính");
             System.out.println("7. Sửa ngày sinh");
-            System.out.println("8. Sửa email");
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
@@ -554,8 +553,8 @@ public class DanhSachNhanSu implements INhanSu {
                     ns.setHoNhanSu(sc.nextLine());
                     System.out.println("Sửa thành công");break;
                 case 3: 
-                    System.out.print("Vui lòng nhập tuổi mới: ");
-                    ns.setTuoi(sc.nextInt());sc.nextLine();
+                    System.out.print("Vui lòng nhập ngày vào làm mới: ");
+                    ns.setNgayVaoLam(sc.nextLine());
                     System.out.println("Sửa thành công");break;
                 case 4: 
                     System.out.print("Vui lòng nhập địa chỉ mới: ");
@@ -572,10 +571,6 @@ public class DanhSachNhanSu implements INhanSu {
                 case 7:
                     System.out.println("Vui lòng nhập ngày sinh mới(dd-MM-yyyy): ");
                     ns.setNgaySinh(sc.nextLine());
-                    System.out.println("Sửa thành công");break;
-                case 8:
-                    System.out.print("Vui lòng nhập email mới: ");
-                    ns.setEmail(sc.nextLine());
                     System.out.println("Sửa thành công");break;
             }
         }

@@ -3,6 +3,9 @@ import Interface.*;
 import Object.*;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
     private LuongKhenThuong[] dslk;
@@ -160,6 +163,10 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
     //in thong tin
     @Override
     public void in(){
+        System.out.println("===========================================Bảng Lương Khen Thưởng===============================================");
+        System.out.printf("|%-15s|%-18s|%-15s|%-15s|%-18s|%24s|\n","Mã","Lương Thưởng","Lý do","Nhân Sự","Thưởng Lễ","Tổng Lương");
+        System.out.println("----------------------------------------------------------------------------------------------------------------");
+
         for(int i = 0; i < n;i++){
             dslk[i].inThongTinKhenThuong();
         }
@@ -196,6 +203,26 @@ public class DanhSachLuongKhenThuong implements ILuongKhenThuong{
             }
         }
         return 0.0;
+    }
+    @Override
+    public LuongKhenThuong[] getDanhSachLuongKhen() {
+        return this.dslk;
+    }
+    @Override 
+    public void xuatFileLuongKhen() {
+        try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachLuongKhen.txt"))) {
+            LuongKhenThuong[] lkt = getDanhSachLuongKhen();
+            write.println("===========================================Bảng Lương Khen Thưởng===============================================");
+            write.printf("|%-15s|%-18s|%-15s|%-15s|%-18s|%24s|\n","Mã","Lương Thưởng","Lý do","Nhân Sự","Thưởng Lễ","Tổng Lương");
+            write.println("----------------------------------------------------------------------------------------------------------------");
+            for(LuongKhenThuong l : lkt) {
+                write.printf("|%-15s|%-,18.2f|%-15s|%-15s|%-,18.2f|%,20.2f VND|\n",
+                l.getMaLuongKhenThuong(),l.getLuongKhenThuong(),l.getLyDo(),
+                l.getNhanSu() == null ? "Trong" : l.getNhanSu().getMaNhanSu(),l.thuongLe(),l.tongLuong());
+            }
+        }catch(IOException e) {
+            System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
+        }
     }
 
 }

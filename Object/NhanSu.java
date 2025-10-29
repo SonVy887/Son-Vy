@@ -7,14 +7,14 @@ public abstract class NhanSu {
     protected String manhansu;
     protected String ten;
     protected String ho;
-    protected int tuoi;
     protected String diachi;
     protected String sodienthoai;
     protected String gioitinh;
     protected String ngaysinh;
-    protected String email;
     protected final double luongcoban = 5_000_000;
-    protected PhongBan phongban;
+    protected String maphongban;
+    protected String ngayvaolam;
+    protected String machucvu;
     Scanner sc = new Scanner(System.in);
 
 
@@ -25,57 +25,52 @@ public abstract class NhanSu {
         this.manhansu = copy.manhansu;
         this.ho = copy.ho;
         this.ten = copy.ten;
-        this.tuoi = copy.tuoi;
         this.diachi = copy.diachi;
         this.sodienthoai = copy.sodienthoai;
         this.gioitinh = copy.gioitinh;
         this.ngaysinh = copy.ngaysinh;
-        this.email = copy.email;
-        this.phongban = copy.phongban;
+        this.maphongban = copy.maphongban;
+        this.ngayvaolam = copy.ngayvaolam;
+        this.machucvu = copy.machucvu;
     }
-    public NhanSu(String manhansu, String ho, String ten, int tuoi, String diachi, String sodienthoai, String gioitinh, String ngaysinh, String email, PhongBan phongban) {
+    public NhanSu(String manhansu, String ho, String ten, String diachi, String sodienthoai, String gioitinh, String ngaysinh, String maphongban, String ngayvaolam, String machucvu) {
         this.manhansu = manhansu;
         this.ho = ho;
         this.ten = ten;
-        this.tuoi = tuoi;
         this.diachi = diachi;
         this.sodienthoai = sodienthoai;
         this.gioitinh = gioitinh;
         this.ngaysinh = ngaysinh;
-        this.email = email;
-        this.phongban = phongban;
+        this.maphongban = maphongban;
+        this.ngayvaolam = ngayvaolam;
+        this.machucvu = machucvu;
     }
     //============================================================>
-    public abstract double tinhLuong();
-    //============================================================>
     public void nhapThongTin() {
-        System.out.print("Nhap ma nhan su:");
+        System.out.print("Nhập mã nhân sự (VD: NS001): ");
         this.manhansu = sc.nextLine().toUpperCase();
 
-        System.out.print("Nhap ho: ");
+        System.out.print("Nhập họ: ");
         this.ho = sc.nextLine();
 
-        System.out.print("Nhap ten: ");
+        System.out.print("Nhập tên: ");
         this.ten = sc.nextLine();
 
-        System.out.print("Nhap tuoi: ");
-        this.tuoi = sc.nextInt();
-        sc.nextLine();
 
-        System.out.print("Nhap dia chi: ");
+        System.out.print("Nhập địa chỉ: ");
         this.diachi = sc.nextLine();
 
-        System.out.print("Nhap so dien thoai: ");
+        System.out.print("Nhập số điện thoại: ");
         this.sodienthoai = sc.nextLine();
 
-        System.out.print("Nhap gioi tinh: ");
+        System.out.print("Nhập giới tính: ");
         this.gioitinh = sc.nextLine();
 
-        System.out.print("Nhap ngay sinh: ");
+        System.out.print("Nhập ngày sinh (dd/MM/yyyy): ");
         this.ngaysinh = sc.nextLine();
 
-        System.out.print("Nhap ten email (khong can phan duoi): ");
-        this.email = sc.nextLine() + "@gmail.com";
+        System.out.print("Nhập ngày vào làm (dd/MM/yyyy): ");
+        this.ngayvaolam = sc.nextLine();
 
     }
     //============================================================>
@@ -92,8 +87,6 @@ public abstract class NhanSu {
     public String getTenNhanSu(){ return ten;}
     public void setTenNhanSu(String ten){ this.ten = ten;}
     public String getHoVaTenNhanSu(){ return ho + " " + ten;}
-    public int getTuoi(){ return tuoi;}
-    public void setTuoi(int tuoi){ this.tuoi = tuoi;}
     public String getDiaChi(){ return diachi;}
     public void setDiaChi(String diachi){ this.diachi = diachi;}
     public String getSoDienThoai(){ return sodienthoai;}
@@ -102,11 +95,14 @@ public abstract class NhanSu {
     public void setGioiTinh(String gioitinh){ this.gioitinh = gioitinh;}
     public String getNgaySinh(){ return ngaysinh;}
     public void setNgaySinh(String ngaysinh){ this.ngaysinh = ngaysinh;}
-    public String getEmail(){ return email;}
-    public void setEmail(String email){ this.email = email;}
     public double getLuongCoBan(){ return luongcoban;}
-    public PhongBan getPhongBan(){ return phongban;}
-    public void setPhongBan(PhongBan phongban){ this.phongban = phongban;}//set pb
+    public String getPhongBan(){ return maphongban;}
+    public void setPhongBan(String maphongban){ this.maphongban = maphongban;}//set pb
+    public String getNgayVaoLam(){ return ngayvaolam;}
+    public void setNgayVaoLam(String ngayvaolam){ this.ngayvaolam = ngayvaolam;}
+    public String getMaChucVu(){ return machucvu;}
+    public void setMaChucVu(String machucvu){ this.machucvu = machucvu;}
+
 
 
     public LocalDate convert(){
@@ -117,5 +113,21 @@ public abstract class NhanSu {
             return LocalDate.parse(this.ngaysinh,transType);
         }
         return null;
+    }
+
+    public int tinhThamNien() {
+        String[] type = {"dd-MM-yyyy", "yyyy-MM-dd"};
+        LocalDate ngaythangnam = null;
+
+        for(String f : type){
+            try {
+                DateTimeFormatter transType = DateTimeFormatter.ofPattern(f);
+                ngaythangnam = LocalDate.parse(this.ngayvaolam,transType);
+            break;
+            } catch (Exception e) {
+                System.out.println("Lỗi " + e.getMessage());
+            }
+        }
+        return Period.between(ngaythangnam, LocalDate.now()).getYears();
     }
 }

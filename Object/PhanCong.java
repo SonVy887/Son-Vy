@@ -3,22 +3,26 @@ import java.util.Scanner;
 
 public class PhanCong {
     private String maphancong;
-    private NhanSu nhansu;
-    private DoAn doan;
+    private String manhansu;
+    private String maduan;
     private int thoigian;
+    private double thuong;
     Scanner sc = new Scanner(System.in);
 
     public PhanCong(){}
-    public PhanCong(String maphancong, NhanSu nhansu, DoAn doan, int thoigian){
+    public PhanCong(String maphancong, String manhansu, String maduan, int thoigian, double thuong){
         this.maphancong = maphancong;
-        this.nhansu = nhansu;
-        this.doan = doan;
+        this.manhansu = manhansu;
+        this.maduan = maduan;
         this.thoigian = thoigian;
+        this.thuong = thuong;
     }
     public PhanCong(PhanCong pc){
-        this.nhansu = pc.nhansu;
-        this.doan = pc.doan;
+        this.maphancong = pc.maphancong;
+        this.manhansu = pc.manhansu;
+        this.maduan = pc.maduan;
         this.thoigian = pc.thoigian;
+        this.thuong = pc.thuong;
     }
     
     // in 
@@ -26,8 +30,8 @@ public class PhanCong {
         // System.out.println("=================================================================");
         // System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
         // System.out.println("-----------------------------------------------------------------");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n",maphancong,nhansu == null ? "Trống" : nhansu.getMaNhanSu(),
-        doan == null ? "Trống" : doan.getMaDoAn(),thoigian);
+        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n",maphancong,manhansu =="" ? "Trống" : manhansu,
+        maduan == "" ? "Trống" : maduan,thoigian);
         // System.out.println("=================================================================");
     }
     //nhap
@@ -41,20 +45,20 @@ public class PhanCong {
     public void setMaPhanCong(String maphancong){
         this.maphancong = maphancong;
     }
-    public NhanSu getNhanSu() {
-        return nhansu;
+    public String getNhanSu() {
+        return manhansu;
     }
 
-    public void setNhanSu(NhanSu nhansu) {
-        this.nhansu = nhansu;
+    public void setNhanSu(String manhansu) {
+        this.manhansu = manhansu;
     }
 
-    public DoAn getDoAn() {
-        return doan;
+    public String getDuAn() {
+        return maduan;
     }
 
-    public void setDoAn(DoAn doan) {
-        this.doan = doan;
+    public void setDuAn(String maduan) {
+        this.maduan = maduan;
     }
 
     public int getThoiGian() {
@@ -64,8 +68,11 @@ public class PhanCong {
     public void setThoiGian(int thoigian) {
         this.thoigian = thoigian;
     }
-    public static void main(String[] args){
-        PhanCong pc = new PhanCong();
-        pc.inThongTinPhanCong();
+
+    public double getThuong() {
+        return this.thuong;
+    }
+    public void setThuong(double thuong) {
+        this.thuong = thuong;
     }
 }

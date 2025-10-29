@@ -26,16 +26,6 @@ public interface IPhongBan {
 
     void setTruongPhong();// da test
 
-    // them nhan su vao pb
-    void themNhanSuPb();// da test
-    void themSoLuongNhanSuPb();
-
-    //xoa nhan su phong ban
-    void xoaNhanSuPb();
-
     void inThongTin();
-    void inNhanSuPb();// da test
-    PhongBan[] getPhongBan();
-    // xuat file phong ban
     void xuatFilePhongBan();
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Arrays;
 
 public class DanhSachBangLuong implements IBangLuong {
-    private IBangChamCong cnbcc;
+    private IBangChamCongNgay cnbcc;
     private IPhanCong cnpc;
     private ILuongKhenThuong cnlkt;
     private INhanSu cnns;
@@ -14,7 +14,7 @@ public class DanhSachBangLuong implements IBangLuong {
     private int n;
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachBangLuong(IBangChamCong cnbcc, IPhanCong cnpc, ILuongKhenThuong cnlkt, INhanSu cnns) {
+    public DanhSachBangLuong(IBangChamCongNgay cnbcc, IPhanCong cnpc, ILuongKhenThuong cnlkt, INhanSu cnns) {
         this.cnbcc = cnbcc;
         this.cnpc = cnpc;
         this.cnlkt = cnlkt;

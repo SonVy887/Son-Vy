@@ -13,11 +13,10 @@ public class DanhSachPhanCong implements IPhanCong {
     private PhanCong[] dspc;
     private int n;
     private INhanSu cnns; // chuc nang nhan su
-    private IDoAn cnda; // chuc nang do an
-    private final double thuong = 500_000;
+    private IDuAn cnda; // chuc nang do an
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachPhanCong(INhanSu cnns, IDoAn cnda){
+    public DanhSachPhanCong(INhanSu cnns, IDuAn cnda){
         dspc = new PhanCong[0];
         this.n = 0;
         this.cnns = cnns;
@@ -132,9 +131,9 @@ public class DanhSachPhanCong implements IPhanCong {
         }
 
         System.out.print("Nhập mã đồ án: ");
-        String madoan = sc.nextLine().toUpperCase();
+        String maduan = sc.nextLine().toUpperCase();
 
-        DoAn da = cnda.timDoAn(madoan);
+        DuAn da = cnda.timDuAn(maduan);
         if(da == null){
             System.out.println("Đồ án chưa tồn tại");
             return;
@@ -151,8 +150,8 @@ public class DanhSachPhanCong implements IPhanCong {
             return;
         }
 
-        pc.setDoAn(da);
-        pc.setNhanSu(ns);
+        pc.setDuAn(da.getMaDuAn());
+        pc.setNhanSu(ns.getMaNhanSu());
         pc.setThoiGian(thoigian);
     }
 
@@ -179,21 +178,21 @@ public class DanhSachPhanCong implements IPhanCong {
         }
         return null;
     }
-    // tien thuong
+    // tien thuong nhan su làm nhiều dự án
     @Override
     public double tienThuong(String manhansu){
         int count = 0;
         for(int i = 0; i < n;i++){
-            if(dspc[i].getNhanSu().getMaNhanSu().equals(manhansu)){
+            if(dspc[i].getNhanSu().equals(manhansu)){
                 count++;
             }
         }
-        return count * thuong;
+        return count * 500_000;
     }
     @Override
     public void in(){
         System.out.println("=================================================================");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
+        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Dự Án","Thời Gian");
         System.out.println("-----------------------------------------------------------------");
 
         for (int i = 0; i < n; i++) {
@@ -209,12 +208,12 @@ public class DanhSachPhanCong implements IPhanCong {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
             PhanCong[] pc = getPhanCong();
             write.println("=================================================================");
-            write.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
+            write.printf("|%-15s|%-15s|%-15s|%15s|%-15s\n","Mã Phân Công","Mã Nhân Sự","Mã Dự Án","Thời Gian","Thưởng");
             write.println("-----------------------------------------------------------------");
             for(PhanCong p : pc) {
-                write.printf("|%-15s|%-15s|%-15s|%15s|\n",p.getMaPhanCong(),
-                p.getNhanSu() == null ? "Trống" : p.getNhanSu().getMaNhanSu(),
-                p.getDoAn() == null ? "Trống" : p.getDoAn().getMaDoAn(),p.getThoiGian());
+                write.printf("|%-15s|%-15s|%-15s|%15s|%-15s\n",p.getMaPhanCong(),
+                p.getNhanSu() == "" ? "Trống" : p.getNhanSu().,
+                p.getDuAn() == "" ? "Trống" : p.getDuAn(),p.getThoiGian(),p.setThuong(tienThuong(p.getNhanSu()).getThuong());
             }
         }catch(IOException e) {
             System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());

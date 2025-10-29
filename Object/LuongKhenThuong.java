@@ -41,9 +41,9 @@ public class LuongKhenThuong {
     }
     // in thong tin khen thuong
     public void inThongTinKhenThuong(){
-        System.out.println("===========================================Bảng Lương Khen Thưởng===============================================");
-        System.out.printf("|%-15s|%-18s|%-15s|%-15s|%-18s|%24s|\n","Mã","Lương Thưởng","Lý do","Nhân Sự","Thưởng Lễ","Tổng Lương");
-        System.out.println("----------------------------------------------------------------------------------------------------------------");
+        // System.out.println("===========================================Bảng Lương Khen Thưởng===============================================");
+        // System.out.printf("|%-15s|%-18s|%-15s|%-15s|%-18s|%24s|\n","Mã","Lương Thưởng","Lý do","Nhân Sự","Thưởng Lễ","Tổng Lương");
+        // System.out.println("----------------------------------------------------------------------------------------------------------------");
         System.out.printf("|%-15s|%-,18.2f|%-15s|%-15s|%-,18.2f|%,20.2f VND|\n",maluongkhenthuong,luongkhenthuong,lydo,
         nhansu == null ? "Trong" : nhansu.getMaNhanSu(),thuongLe(),tongLuong());
     }
