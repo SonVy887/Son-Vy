@@ -55,7 +55,6 @@ public interface INhanSu {
     void inChiTietNhanSuChinhThuc();
     // in chi tiet nhan su thuc tap
     void inChiTietNhanSuThucTap();
-    // tra ve danh sach nhan su
-    NhanSu[] getNhanSu();
+    // xuat file danh sach nhan su
     void xuatFileDanhSachNhanSu();
 }

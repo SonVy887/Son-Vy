@@ -7,18 +7,19 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-public class DanhSachPhongBan implements IPhongBan {
+public class DanhSachPhongBan {
     private PhongBan[] dspb;
     private int n;
+    private DanhSachNhanSu cnns;
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachPhongBan() {
+    public DanhSachPhongBan(DanhSachNhanSu cnns) {
         dspb = new PhongBan[0];
         n = 0;
+        this.cnns = cnns;
     }
 
     //them n phong ban dau tien
-    @Override
     public void addSoLuongPhongBan(){
         System.out.println("Nhập n phòng ban đầu tiên: ");
         this.n = sc.nextInt();
@@ -29,8 +30,7 @@ public class DanhSachPhongBan implements IPhongBan {
             dspb[i] = new PhongBan();
             dspb[i].nhapThongTinPhongBan();
         }
-    }
-    @Override 
+    } 
     public void addPhongBan(){// da test
 
         System.out.print("Vui lòng nhập mã phòng ban để kiểm tra: ");
@@ -44,14 +44,12 @@ public class DanhSachPhongBan implements IPhongBan {
         dspb[n].nhapThongTinPhongBan();
         this.n++;
     }
-    @Override
     public void addPhongBan(PhongBan pb){
         dspb = Arrays.copyOf(dspb, n + 1);
         dspb[n] = pb;
         n++;
     }
     //sua phong ban
-    @Override
     public void suaPhongBan(String maphongban){// chua
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
@@ -65,7 +63,6 @@ public class DanhSachPhongBan implements IPhongBan {
         }
         System.out.println("Không tìm thấy phòng ban");
     }
-    @Override
     public void suaPhongBan(){
         System.out.print("Nhập mã phòng ban cần sửa: ");
         String maphongban = sc.nextLine().toUpperCase();
@@ -83,7 +80,6 @@ public class DanhSachPhongBan implements IPhongBan {
         System.out.println("Không tìm thấy phòng ban");
     }
     //xoa phong ban
-    @Override
     public void xoaPhongBan(String maphongban){//chua
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
@@ -96,7 +92,6 @@ public class DanhSachPhongBan implements IPhongBan {
        }
        System.out.println("Không tìm thấy phòng ban");
     }
-    @Override
     public void xoaPhongBan(){// chua test
         System.out.println("Nhập mã phòng ban muốn xóa: ");
         String maphongban = sc.nextLine().toUpperCase();
@@ -114,7 +109,6 @@ public class DanhSachPhongBan implements IPhongBan {
 
     }
     // tim phong ban
-    @Override
     public void timKiem(){
         System.out.print("Nhập mã phòng ban muốn tìm: ");
         String maphongban = sc.nextLine().toUpperCase();
@@ -127,7 +121,6 @@ public class DanhSachPhongBan implements IPhongBan {
         }
         System.out.println("không tìm thấy phòng ban");
     }
-    @Override
     public PhongBan timKiem(String maphongban){
 
         for(int i = 0; i < n;i++){
@@ -138,7 +131,6 @@ public class DanhSachPhongBan implements IPhongBan {
         return null;
     }
     // tim theo ten
-    @Override
     public void timKiemTheoTen(){
         System.out.println("Nhập tên phòng ban: ");
         String tenphongban = sc.nextLine();
@@ -154,7 +146,6 @@ public class DanhSachPhongBan implements IPhongBan {
             System.out.println("Không tìm thấy tên");
         }
     }
-    @Override
     public PhongBan[] timKiemTheoTen(String tenphongban){
         PhongBan[] kq = new PhongBan[0];
         int j = 0;
@@ -168,7 +159,6 @@ public class DanhSachPhongBan implements IPhongBan {
         return kq;
         
     }
-    @Override
     public void setTruongPhong() {
         System.out.print("Nhập mã phòng ban cần có trưởng phòng: ");
         String maphongban = sc.nextLine().toUpperCase();
@@ -190,7 +180,6 @@ public class DanhSachPhongBan implements IPhongBan {
     }
 
     // in
-    @Override
     public void inThongTin(){
         System.out.println("\n========================================================================================");
         System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức","Số lượng Nhân Sự");
@@ -209,18 +198,13 @@ public class DanhSachPhongBan implements IPhongBan {
         }
         return false;
     }
-    @Override
-    public PhongBan[] getPhongBan() {
-        return this.dspb;
-    }
-    @Override
+    // xuat file phong ban
     public void xuatFilePhongBan() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhongBan.txt"))) {
-            PhongBan[] pb = getPhongBan();
             write.println("========================================================================================");
             write.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởnng Phòng", "Ngày Nhận Chức");
             write.printf("----------------------------------------------------------------------------------------\n");
-            for(PhongBan p : pb) {
+            for(PhongBan p : dspb) {
                 write.printf("|%-17s|%-18s|%-14s|%-16s|\n",
                 p.getMaPhongBan(), p.getTenPhongBan(), (p.getTruongPhong() == "" ? "Trong" : p.getTruongPhong()),
                 p.getNgayNhanChuc());

@@ -10,14 +10,14 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
+public class DanhSachBangChamCongNgay {
     private BangChamCongNgay[] bccn;
     private int n; 
-    private INhanSu cnns;
+    private DanhSachNhanSu cnns;
     Scanner sc = new Scanner(System.in);
 
 
-    public DanhSachBangChamCongNgay(INhanSu cnns) {
+    public DanhSachBangChamCongNgay(DanhSachNhanSu cnns) {
         bccn = new BangChamCongNgay[0];
         this.n = 0;
         this.cnns = cnns;
@@ -32,7 +32,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         return false;
     }
     // them 
-    @Override
     public void themBangChamCongNgay() {
         System.out.print("Vui lòng nhập mã chấm công ngày: ");
         while(kiemTra(sc.nextLine())){
@@ -45,13 +44,11 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         bccn[n].nhap();
         this.n++;
     }
-    @Override
     public void themBangChamCongNgay(BangChamCongNgay bccn1) {
         bccn = Arrays.copyOf(bccn, n + 1);
         bccn[n] = bccn1;
         this.n++;
-    }
-    @Override 
+    } 
     public void them() {
         System.out.print("Nhập n chấm công ngày đầu tiên: ");
         this.n = sc.nextInt();
@@ -65,7 +62,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
     }
 
     // xoa
-    @Override
     public void xoaBangChamCongNgay() {
         System.out.print("Nhập mã chấm công ngày: ");
         String machamcong = sc.nextLine().toUpperCase();
@@ -80,8 +76,7 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
             }
         }
         System.out.println("Xóa thất bại");
-    }
-    @Override 
+    } 
     public void xoaBangChamCongNgay(String machamcong) {
         for(int i = 0; i < n;i++){
             if(bccn[i].getMaChamCong().equals(machamcong)){
@@ -94,7 +89,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         }
         System.out.println("Xóa thất bại");
     }
-    @Override
     public void suaBangChamCongNgay() {
         System.out.print("Nhập mã chấm công ngày: ");
         String machamcong = sc.nextLine().toUpperCase();
@@ -106,8 +100,7 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
             }
         }
         System.out.println("Sửa thất bại");
-    }
-    @Override 
+    } 
     public void suaBangChamCongNgay(String machamcong){
         for(int i = 0; i < n; i++) {
             if(bccn[i].getMaChamCong().equals(machamcong)){
@@ -117,7 +110,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         }
         System.out.println("Sửa thất bại");
     }
-    @Override
     public void timKiem() {
         System.out.print("Nhập mã chấm công ngày: ");
         String machamcong = sc.nextLine().toUpperCase();
@@ -129,8 +121,7 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
             }
         }
         System.out.println("Tìm kiếm thất bại");
-    }
-    @Override 
+    } 
     public BangChamCongNgay timKiem(String machamcong) {
         for(int i = 0; i < n; i++) {
             if(bccn[i].getMaChamCong().equals(machamcong)){
@@ -139,7 +130,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         }
         return null;
     }
-    @Override
     public void chamCongNhanSu() {
         System.out.print("Nhập mã nhân sự: ");
         String manhansu = sc.nextLine().toUpperCase();
@@ -166,20 +156,13 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         bccn.setMaNhanSu(ns.getMaNhanSu());
         System.out.println("Chấm công thành công");
     }
-    // tra ve danh sach ban cham cong
-    @Override
-    public BangChamCongNgay[] getBangChamCongNgay() {
-        return this.bccn;
-    }
     // xuat file bang cham cong
-    @Override
     public void xuatFileBangChamCongNgay() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCongNgay.txt"))) {
-            BangChamCongNgay[] b = getBangChamCongNgay();
             write.println("\n=============================================================================================================================");
             write.printf("|%-15s|%-15s|%-18s|%-10s\n","Mã Chấm Công","Mã Nhân Sự","Ngày Làm Việc","Trạng Thái");
             write.println("------------------------------------------------------------------------------------------------------------------------------");
-            for(BangChamCongNgay c : b) {
+            for(BangChamCongNgay c : bccn) {
                 write.printf("|%-15s|%-15s|%-18s|%-10s\n",
                 c.getMaChamCong() == "" ? "Trống" : c.getMaChamCong(),
                 c.getMaNhanSu() == "" ? "Trống" : c.getMaNhanSu(),
@@ -191,7 +174,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         }
     }
     // in
-    @Override
     public void inBangChamCongNgay() {
         System.out.println("\n=============================================================================================================================");
         System.out.printf("|%-15s|%-15s|%-18s|%-10s\n","Mã Chấm Công","Mã Nhân Sự","Ngày Làm Việc","Trạng Thái");
@@ -202,7 +184,6 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
         }
     }
     // lấy ngày công
-    @Override
     public int tongNgayCong(String manhansu) {
         int tongngaydilam = 0;
         for(int i = 0; i < n;i++){
@@ -221,8 +202,16 @@ public class DanhSachBangChamCongNgay implements IBangChamCongNgay {
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine(); 
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            } 
             if(choice == 0) break;
 
             switch(choice){

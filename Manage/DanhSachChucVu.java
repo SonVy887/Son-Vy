@@ -3,16 +3,22 @@ import Interface.*;
 import Object.*;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class DanhSachChucVu implements IChucVu {
+
+public class DanhSachChucVu {
     private ChucVu[] dscv;
     private int n;
+    private DanhSachNhanSu cnns;
     Scanner sc = new Scanner(System.in);
 
 
-    public DanhSachChucVu(){
+    public DanhSachChucVu(DanhSachNhanSu cnns){
         dscv = new ChucVu[0];
         this.n = 0;
+        this.cnns = cnns;
     }
 
 
@@ -25,7 +31,6 @@ public class DanhSachChucVu implements IChucVu {
         return false;
     }
     // them
-    @Override 
     public void themBangChucVu() {
         System.out.print("Vui lòng nhập mã để kiểm tra: ");
         while(kiemTra(sc.nextLine())) {
@@ -38,13 +43,11 @@ public class DanhSachChucVu implements IChucVu {
         dscv[n].nhapChucVu();
         this.n++;
     }
-    @Override 
     public void themBangChucVu(ChucVu cv) {
         dscv = Arrays.copyOf(dscv, n + 1);
         dscv[n] = cv;
         this.n++;
     }
-    @Override 
     public void them() {
         System.out.print("Vui lòng nhập n chức vụ đầu tiên: ");
         this.n = sc.nextInt();
@@ -86,7 +89,6 @@ public class DanhSachChucVu implements IChucVu {
         }
     }
     // sua
-    @Override 
     public void suaBangChucVu() {
         System.out.print("Vui lòng nhập mã chức vụ để xóa: ")
         String machucvu = sc.nextLine();
@@ -101,7 +103,6 @@ public class DanhSachChucVu implements IChucVu {
     @Override
     public void suaBangChucVu(String machucvu) {
         
-
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
                 sua(dscv[i]);
@@ -129,6 +130,24 @@ public class DanhSachChucVu implements IChucVu {
             }
         }
     }
+    // trao chuc vu cho nhan su
+    public void traoChucVuNhanSu() {
+        System.out.print("Nhập mã chức vụ: ");
+        ChucVu cv = timKiem(sc.nextLine());
+        if(cv == null) {
+            System.out.println("Chức vụ không tồn tại");
+            return;
+        }
+
+        System.out.print("Nhập mã nhân sự: ");
+        NhanSu ns = cnns.timKiem(sc.nextLine());
+        if(ns == null) {
+            System.out.println("Nhân sự chưa tồn tại");
+            return;
+        }
+        
+        ns.setMaChucVu(cv.getMaChucVu());
+    } 
     // in bang chuc vu
     public void inThongTinChucVu() {
         System.out.printf("|%-15s|%-15s|%-15s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
@@ -136,6 +155,28 @@ public class DanhSachChucVu implements IChucVu {
         for(int i = 0; i < n;i++) {
             dscv[i].inChucVu();
         }
+    }
+    // xuat file bang chuc vu
+    public void xuatFileBangChucVu() {
+        try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachChucVu.txt"))) {
+            write.println("=======================================================");
+            write.printf("|%-15s|%-15s|%-15s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
+            write.println("-------------------------------------------------------");
+            for(ChucVu cv : dscv) {
+                write.printf("|%-15s|%-15s|%-15s|\n",cv.getMaChucVu(),cv.getTenChucVu(),cv.getPhuCapChucVu());
+            }
+        }catch(IOException e) {
+            System.out.println("Không thể ghi xuống file: "+ e.getMessage());
+        }
+    }
+    // lay phu cap nhan su
+    public double tienPhuCapChucVu(String machucvu) {
+        for(int i = 0; i < n;i++) {
+            if(dscv[i].getTenChucVu().equalsIgnoreCase(machucvu)) {
+                return dscv[i].getPhuCapChucVu();
+            }
+        }
+        return 0.0;
     }
     // sua phu
     public void sua(ChucVu cv) {
@@ -145,8 +186,17 @@ public class DanhSachChucVu implements IChucVu {
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt();sc.nextLine();
+            int choice;
 
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
+            
             if(choice == 0) break;
 
             switch(choice) {

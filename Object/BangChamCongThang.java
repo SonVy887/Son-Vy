@@ -12,7 +12,7 @@ public class BangChamCongThang {
 
     //constructors
     public BangChamCongThang(){}
-    public BangChamCongThang(String machamcongthang, String manhansu, int thang, int nam, String songaylamviec, String songaynghi) {
+    public BangChamCongThang(String machamcongthang, String manhansu, int thang, int nam, int songaylamviec, int songaynghi) {
         this.machamcongthang = machamcongthang;
         this.manhansu = manhansu;
         this.thang = thang;
@@ -37,7 +37,7 @@ public class BangChamCongThang {
     public void in() {
         // System.out.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n","Mã BCCT", "Mã NS", "Tháng", "Năm", "Số Ngày Làm", "Số Ngày Nghỉ");
         // System.out.println("---------------------------------------------------------------------------------------------------------------");
-        System.out.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n", mabangchamcongthang, manhansu == "" ? "Trống" : manhansu,
+        System.out.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n", machamcongthang, manhansu == "" ? "Trống" : manhansu,
         thang, nam, songaylamviec, songaynghi);
     }
 
@@ -75,7 +75,7 @@ public class BangChamCongThang {
     public int getSoNgayNghi() {
         return this.songaynghi;
     }
-    public void setNgayNghi(int songaynghi) {
+    public void setSoNgayNghi(int songaynghi) {
         this.songaynghi = songaynghi;
     }
 }

@@ -46,6 +46,7 @@ public class DuAn {
 
         System.out.print("Nhập ngày kết thúc: ");
         this.ngayketthuc = sc.nextLine();
+
     }
     // in thong tin do an
     public void inDuAn(){

@@ -33,10 +33,10 @@ public class NhanSuChinhThuc extends NhanSu {
         // "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
         // "Ngày Sinh", "Email", "Phòng Ban", "Năm K/N"," Lương Cơ Bản");
         // System.out.printf("-----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%,18.2f VNĐ\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu,
+        ngaysinh, machucvu == "" ? "Trống" : machucvu,
         maphongban=="" ? "Rong" : maphongban, ngayvaolam, loai(), luongcoban);
         // System.out.println("===========================================================================================================================================================");
     }

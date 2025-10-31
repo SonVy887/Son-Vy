@@ -2,15 +2,18 @@ package Manage;
 import Object.*;
 import java.util.*;
 import Interface.*;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 
-public class DanhSachDuAn implements IDuAn {
+public class DanhSachDuAn {
     private DuAn[] dsda;
     private int n;
-    IPhongBan cnpb;// chuc nang phong ban
+    DanhSachPhongBan cnpb;// chuc nang phong ban
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachDuAn(IPhongBan cnpb){
+    public DanhSachDuAn(DanhSachPhongBan cnpb){
         dsda = new DuAn[0];
         this.n = 0;
         this.cnpb = cnpb;
@@ -25,7 +28,6 @@ public class DanhSachDuAn implements IDuAn {
         return false;
     }
     // them do an
-    @Override
     public void themDuAn(){
         System.out.print("Vui lòng nhập mã dự án để kiểm tra: ");
         while(kiemTra(sc.nextLine())){
@@ -38,14 +40,12 @@ public class DanhSachDuAn implements IDuAn {
         dsda[n].nhapDuAn();
         this.n++;
     }
-    @Override
     public void themDuAn(DuAn da){
         dsda = Arrays.copyOf(dsda, n + 1);
         dsda[n] = da;
         this.n++;
     }
     // them n danh sach do an dau tien
-    @Override
     public void themSoLuongDuAn(){
         System.out.print("Nhập n dự án muốn đầu tiên: ");
         this.n = sc.nextInt();
@@ -58,7 +58,6 @@ public class DanhSachDuAn implements IDuAn {
         }
     }
     // sua du an
-    @Override
     public void suaDuAn(){
         System.out.print("Nhập mã dự án cần sửa: ");
         String maduan = sc.nextLine().toUpperCase();
@@ -71,7 +70,6 @@ public class DanhSachDuAn implements IDuAn {
         }
         System.out.print("Không tìm thấy dự án");
     }
-    @Override
     public void suaDuAn(String maduan){
         for(int i = 0; i < n;i++){
             if(dsda[i].getMaDuAn().equals(maduan)){
@@ -81,7 +79,6 @@ public class DanhSachDuAn implements IDuAn {
         }
         System.out.print("Không tìm thấy dự án");
     }
-    @Override
     public DuAn timDuAn(String maduan){
          for(int i = 0; i < n;i++){
             if(dsda[i].getMaDuAn().equals(maduan)){
@@ -92,7 +89,6 @@ public class DanhSachDuAn implements IDuAn {
         return null;
     }
     // tim du an
-    @Override
     public void timDuAn(){
         System.out.print("nhập mã dự án cần tìm: ");
         String maduan = sc.nextLine().toUpperCase();
@@ -106,7 +102,6 @@ public class DanhSachDuAn implements IDuAn {
         System.out.print("Không tìm thấy dự án");
     }
     // xoa du an
-    @Override
     public void xoaDuAn(){
         System.out.print("Nhập mã dự án muốn xóa: ");
         String maduan = sc.nextLine().toUpperCase();
@@ -122,7 +117,6 @@ public class DanhSachDuAn implements IDuAn {
         }
         System.out.println("Xóa thất bại");
     }
-    @Override
     public void xoaDuAn(String maduan){
         for(int i = 0; i < n;i++){
             if(dsda[i].getMaDuAn().equals(maduan)){
@@ -136,7 +130,6 @@ public class DanhSachDuAn implements IDuAn {
         System.out.println("Xóa thất bại");
     }
     //tim kiem theo ten
-    @Override
     public void timKiemTheoTen(){
         System.out.print("Nhập tên dự án cần tìm: ");
         String tenduan = sc.nextLine();
@@ -149,7 +142,6 @@ public class DanhSachDuAn implements IDuAn {
         }
         System.out.print("Không tìm thấy dự án");
     }
-    @Override
     public DuAn[] timKiemTheoTen(String tenduan){
         DuAn[] kq = new DuAn[0];
         int j = 0;
@@ -162,7 +154,6 @@ public class DanhSachDuAn implements IDuAn {
         }
         return kq;
     }
-    @Override
     public void ganPhongBanDa(){
         System.out.print("Nhập mã dự án: ");
         String maduan = sc.nextLine().toUpperCase();
@@ -183,7 +174,6 @@ public class DanhSachDuAn implements IDuAn {
         da.setPhongBan(pb.getMaPhongBan());
     }
     // tim du an chua co pb
-    @Override
     public void timDuAnChuaPb(){
         for(int i = 0; i < n;i++){
             if(dsda[i].getPhongBan() == null){
@@ -193,7 +183,6 @@ public class DanhSachDuAn implements IDuAn {
         }
         System.out.println("Không tìm thấy");
     }
-    @Override
     public DuAn[] searchDuAnChuaPb(){
         DuAn[] kq = new DuAn[0];
         int j = 0;
@@ -205,8 +194,7 @@ public class DanhSachDuAn implements IDuAn {
             }
         }
         return kq;
-    }
-    @Override 
+    } 
     public void inThongTinDuAn(){
         System.out.println("\n==========================================================================================================================");
         System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n","Mã Dự Án","Tên Dự Án","Phòng Ban","Địa Điểm","Ngày Bắt Đầu","Ngày Kết Thúc");
@@ -216,13 +204,7 @@ public class DanhSachDuAn implements IDuAn {
             dsda[i].inDuAn();
         }
     }
-    // tra về danh sach du an
-    @Override
-    public DuAn[] getDanhSachDuAn(){
-        return this.dsda;
-    }
     // xuat file danh sach du an
-    @Override
     public void xuatFileDanhSachDuAn() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachDuAn.txt"))) {
             write.println("\n==========================================================================================================================");
@@ -234,7 +216,7 @@ public class DanhSachDuAn implements IDuAn {
                 dsda[i].getDiaDiem(), dsda[i].getNgayBatDau(), dsda[i].getNgayKetThuc());
             }
         }catch(IOException e) {
-            System.out.println("Lỗi không thể xuất file");
+            System.out.println("Lỗi không thể xuất file" + e.getMessage());
         }
     }
     // hàm phụ
@@ -247,8 +229,16 @@ public class DanhSachDuAn implements IDuAn {
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt(); 
-            sc.nextLine();
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
             if(choice == 0) break;
 
             switch(choice) {

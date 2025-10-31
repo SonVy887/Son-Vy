@@ -11,10 +11,10 @@ public abstract class NhanSu {
     protected String sodienthoai;
     protected String gioitinh;
     protected String ngaysinh;
-    protected final double luongcoban = 5_000_000;
     protected String maphongban;
     protected String ngayvaolam;
     protected String machucvu;
+    protected final double luongcoban = 5_000_000;
     Scanner sc = new Scanner(System.in);
 
 

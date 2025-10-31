@@ -1,16 +1,18 @@
 import Manage.*;
 import Object.*;
-import Interface.*;
 import java.util.Scanner;
 
+// sua lai
 public class Runner {
-    private INhanSu danhsachnhansu;
-    private IPhongBan danhsachphongban;
-    private IDuAn danhsachduan;
-    private ILuongKhenThuong danhsachkhenthuong;
-    private IPhanCong danhsachphancong;
-    private IBangChamCongNgay danhsachbangchamcongngay;
-    private IBangLuong danhsachbangluong;
+    private DanhSachNhanSu danhsachnhansu;
+    private DanhSachPhongBan danhsachphongban;
+    private DanhSachDuAn danhsachduan;
+    private DanhSachPhanCong danhsachphancong;
+    private DanhSachBangChamCongNgay danhsachbangchamcongngay;
+    private DanhSachBangChamCongThang danhsachbangchamcongthang;
+    private DanhSachQuyDinhThuongLe danhsachquydinhthuongle;
+    private DanhSachPhuCapThamNien danhsachphucapthamnien;
+    private DanhSachBangLuongThang danhsachbangluongthang;
     Scanner sc = new Scanner(System.in);
 
     // mau chot lien ket
@@ -18,13 +20,13 @@ public class Runner {
         danhsachnhansu = new DanhSachNhanSu();
         danhsachphongban = new DanhSachPhongBan(danhsachnhansu);
         danhsachduan = new DanhSachDuAn(danhsachphongban);
-        danhsachkhenthuong = new DanhSachLuongKhenThuong(danhsachnhansu);
         danhsachphancong = new DanhSachPhanCong(danhsachnhansu,danhsachduan);
         danhsachbangchamcongngay = new DanhSachBangChamCongNgay(danhsachnhansu);
-        danhsachbangluong = new DanhSachBangLuong(danhsachbangchamcongngay, danhsachphancong, danhsachkhenthuong,danhsachnhansu);
+        danhsachbangchamcongthang = new DanhSachBangChamCongThang(danhsachbangchamcongngay, danhsachnhansu);
+        danhsachquydinhthuongle = new DanhSachQuyDinhThuongLe();
+        danhsachphucapthamnien = new DanhSachPhuCapThamNien();
+        danhsachbangluongthang = new DanhSachBangLuongThang(danhsachbangchamcongthang, danhsachphancong, danhsachnhansu, danhsachphucapthamnien, danhsachquydinhthuongle);
     }
-
-
 
     public void run() {
         while(true){
@@ -32,14 +34,27 @@ public class Runner {
             System.out.println("1.Quản Lý Nhân Sự");
             System.out.println("2.Quản Lý Phòng Ban");
             System.out.println("3.Quản Lý Dự Án");
-            System.out.println("4.Quản lý Lương Khen Thưởng");
-            System.out.println("5.Quản Lý Phân Công");
-            System.out.println("6.Quản Lý Chấm Công");
-            System.out.println("7.Quản lý bảng lương");
+            System.out.println("4.Quản Lý Phân Công");
+            System.out.println("5.Quản Lý Chấm Công Ngày");
+            System.out.println("6.Quản Lý Chấm Công Tháng");
+            System.out.println("7.Quản lý Quy Định Phụ Cấp Tham Niên");
+            System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
-            int choice = sc.nextInt();
+            int choice;
 
-            if(choice == 8) break;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;
+            }
+
+            if(choice == 0) {
+                danhsachphucapthamnien.xuatFilePhuCapThamNien();
+                break;
+            }
 
 
 
@@ -49,10 +64,11 @@ public class Runner {
                 case 1: quanLyNhanSu(); break;
                 case 2: quanLyPhongBan();break;
                 case 3: quanLyDuAn();break;
-                case 4: quanLyLuongKhenThuong();break;
-                case 5: quanLyPhanCong();break;
-                case 6: quanLyBangChamCongNgay();break;
-                case 7: quanLyBangLuong();break;
+                case 4: quanLyPhanCong();break;
+                case 5: quanLyBangChamCongNgay();break;
+                case 6: quanLyChamCongThang();break;
+                case 7: quanLyQuyDinhPhuCapThamNien();break;
+                default: run();
             }//switch
         }// while
     }// run()
@@ -84,11 +100,17 @@ public class Runner {
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
+            int choice;
 
-
-
-            int choice = sc.nextInt();
-            sc.nextLine();
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
+            
             if(choice == 0) break;
 
             String maNhanSu = null;
@@ -120,21 +142,27 @@ public class Runner {
         while(true){
             System.out.println("\n========= Menu Quản Lý Phòng Ban ========");
             System.out.println("1. Them phong ban");
-            System.out.println("2. Them so luong phong ban");
+            System.out.println("2. Them n phong ban đầu tiên");
             System.out.println("3. Xoa phong ban bang ma");
             System.out.println("4. Tim phong ban bang ma");
             System.out.println("5. Tim phong ban bang ten");
             System.out.println("6. Cap nhat truong phong");
-            System.out.println("7. Them nhan su vao phong ban");
-            System.out.println("8. Xoa nhan su trong phong ban");
-            System.out.println("9. Sua phong ban");
-            System.out.println("10. Thông tin nhân sự trong phòng ban");
-            System.out.println("11. In danh sách phòng ban");
-            System.out.println("12. Xuat file phong ban");
+            System.out.println("7. Sua phong ban");
+            System.out.println("8. In danh sách phòng ban");
+            System.out.println("9. Xuat file phong ban");
             System.out.println("0. De quay lai");
             System.out.print("Lua chon: ");
-            int choice = sc.nextInt();
-            sc.nextLine();
+
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;
+            }
 
             if(choice == 0) break;
 
@@ -146,12 +174,9 @@ public class Runner {
                 case 4:  danhsachphongban.timKiem(); break;
                 case 5:  danhsachphongban.timKiemTheoTen(); break;
                 case 6:  danhsachphongban.setTruongPhong(); break;
-                case 7:  danhsachphongban.themNhanSuPb(); break;
-                case 8:  danhsachphongban.xoaNhanSuPb(); break;
-                case 9:  danhsachphongban.suaPhongBan(); break;
-                case 10: danhsachphongban.inNhanSuPb(); break;
-                case 11: danhsachphongban.inThongTin(); break;
-                case 12: danhsachphongban.xuatFilePhongBan(); break;
+                case 7:  danhsachphongban.suaPhongBan(); break;
+                case 8: danhsachphongban.inThongTin(); break;
+                case 9: danhsachphongban.xuatFilePhongBan(); break;
                 default: System.out.println("Nhap sai roi ni oi !!!");break;
             }
         }
@@ -172,8 +197,16 @@ public class Runner {
             System.out.println("0. Quay lại");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;
+            }
 
             if(choice == 0) break;
 
@@ -187,41 +220,9 @@ public class Runner {
                 case 7:  danhsachduan.inThongTinDuAn(); break;
                 case 8:  danhsachduan.ganPhongBanDa();break;
                 case 9:  danhsachduan.timDuAnChuaPb(); break;
-                case 10: danhsachduan.xuatFileDuAn(); break;
+                case 10: danhsachduan.xuatFileDanhSachDuAn(); break;
 
                 default:System.out.println("Lựa chọn không hợp lệ!");break;
-            }
-        }
-    }
-    private void quanLyLuongKhenThuong(){
-        while(true){
-            System.out.println("==========Menu Quản Lý Khen Thưởng==========");
-            System.out.println("1. Thêm lương khen thưởng");
-            System.out.println("2. Thêm n lương khen thưởng");
-            System.out.println("3. Xóa lương khen thưởng");
-            System.out.println("4. Sửa lương khen thưởng");
-            System.out.println("5. Tìm kiếm lương khen thưởng");
-            System.out.println("6. Cập nhật nhân sự được khen thưởng");
-            System.out.println("7. Xuất file lương khen thưởng");
-            System.out.println("10. In thông tin lương khen thưởng");
-            System.out.println("0. Để quay lại");
-
-            System.out.print("Lựa chọn: ");
-            int choice = sc.nextInt();
-
-            sc.nextLine();
-
-            if(choice == 0) break;
-
-            switch(choice){
-                case 1: danhsachkhenthuong.themLuongKhen();break;
-                case 2: danhsachkhenthuong.themNhieuLuongKhen();break;
-                case 3: danhsachkhenthuong.xoaLuongKhen();break;
-                case 4: danhsachkhenthuong.suaLuongKhen();break;
-                case 5: danhsachkhenthuong.timKiemLuongKhen();break;
-                case 6: danhsachkhenthuong.ganNhanSu();break;
-                case 7: danhsachkhenthuong.xuatFileLuongKhen();break;
-                case 10: danhsachkhenthuong.in();break;
             }
         }
     }
@@ -229,7 +230,7 @@ public class Runner {
         while(true){
             System.out.println("\n========== MENU QUẢN LÝ PHÂN CÔNG ==========");
             System.out.println("1. Thêm phân công");
-            System.out.println("2. Thêm nhiều phân công");
+            System.out.println("2. Thêm n phân công đầu tiên");
             System.out.println("3. Xóa phân công");
             System.out.println("4. Sửa phân công");
             System.out.println("5. Tìm kiếm phân công");
@@ -239,8 +240,16 @@ public class Runner {
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
 
             if(choice == 0) break;
 
@@ -253,8 +262,6 @@ public class Runner {
                 case 6: danhsachphancong.phanCongDoAn();break;
                 case 7: danhsachphancong.in();break;
                 case 8: danhsachphancong.xuatFilePhanCong(); break;
-
-                
             }
         }
     }
@@ -272,23 +279,70 @@ public class Runner {
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
 
             if(choice == 0) break;
             switch(choice) {
-                case 1: danhsachbangchamcongngay.themBangChamCong();break;
+                case 1: danhsachbangchamcongngay.themBangChamCongNgay();break;
                 case 2: danhsachbangchamcongngay.them();break;
-                case 3: danhsachbangchamcongngay.xoaBangChamCong();break;
-                case 4: danhsachbangchamcongngay.suaBangChamCong();break;
+                case 3: danhsachbangchamcongngay.xoaBangChamCongNgay();break;
+                case 4: danhsachbangchamcongngay.suaBangChamCongNgay();break;
                 case 5: danhsachbangchamcongngay.timKiem();break;
-                case 6: danhsachbangchamcongngay.setNhanSuCc();break;
-                case 7: danhsachbangchamcongngay.inBangChamCong();break;
-                case 8: danhsachbangchamcongngay.xuatFileBangChamCong();break;
+                case 6: danhsachbangchamcongngay.chamCongNhanSu();break;
+                case 7: danhsachbangchamcongngay.inBangChamCongNgay();break;
+                case 8: danhsachbangchamcongngay.xuatFileBangChamCongNgay();break;
             }
         }
     }
-    private void quanLyBangLuong() {
+    private void quanLyChamCongThang(){
+        while(true){
+            System.out.println("\n========== MENU QUẢN LÝ CHẤM CÔNG THÁNG ==========");
+            System.out.println("1. Thêm bảng chấm công tháng");
+            System.out.println("2. Thêm n bảng chấm công tháng đầu tiên");
+            System.out.println("3. Xóa bảng chấm công tháng");
+            System.out.println("4. Sửa bảng chấm công tháng");
+            System.out.println("5. Tìm kiếm bảng chấm công tháng");
+            System.out.println("6. Chấm công tháng cho nhân sự");
+            System.out.println("7. In bảng chấm công tháng");
+            System.out.println("8. Xuất file bảng chấm công tháng");
+            System.out.println("0. Để thoát");
+            System.out.print("Lựa chọn: ");
+
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
+
+            if(choice == 0) break;
+
+            switch(choice) {
+                case 1: danhsachbangchamcongthang.themBangChamCongThang();break;
+                case 2: danhsachbangchamcongthang.them();break;
+                case 3: danhsachbangchamcongthang.xoaBangChamCongThang();break;
+                case 4: danhsachbangchamcongthang.suaBangChamCongThang();break;
+                case 5: danhsachbangchamcongthang.timKiem();break;
+                case 6: danhsachbangchamcongthang.chamCongThangChoNhanSu();break;
+                case 7: danhsachbangchamcongthang.inBangChamCongThang();break;
+                case 8: danhsachbangchamcongthang.xuatFileBangChamCongThang();break;
+            }
+        }
+    }
+    private void quanLyBangLuongThang() {
         while(true){
             System.out.println("\n========== MENU QUẢN LÝ BẢNG LƯƠNG ==========");
             System.out.println("1. Thêm bảng lương");
@@ -301,21 +355,68 @@ public class Runner {
             System.out.println("10. In thông tin bảng lương");
             System.out.print("Lựa chọn: ");
 
+            int choice;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
 
-            int choice = sc.nextInt();
-            sc.nextLine();
             if(choice == 0) break;
 
             switch(choice){
-                case 1: danhsachbangluong.themBangLuong();break;
-                case 2: danhsachbangluong.them();break;
-                case 3: danhsachbangluong.xoaBangLuong();break;
-                case 4: danhsachbangluong.suaBangLuong();break;
-                case 5: danhsachbangluong.timKiem();break;
-                case 8: danhsachbangluong.tinhBangLuongNhanSu();break;
-                case 10: danhsachbangluong.inThongTin();break;
+                case 1: danhsachbangluongthang.themBangLuongThang();break;
+                case 2: danhsachbangluongthang.them();break;
+                case 3: danhsachbangluongthang.xoaBangLuongThang();break;
+                case 4: danhsachbangluongthang.suaBangLuongThang();break;
+                case 5: danhsachbangluongthang.timKiem();break;
+                //case 8: danhsachbangluongthang.tinhBangLuongNhanSu();break;
+                //case 10: danhsachbangluongthang.inThongTin();break;
             }
         }
+    }
+    private void quanLyQuyDinhPhuCapThamNien() {
+        while(true) {
+            System.out.println("1. Thêm quy định phụ cấp thâm niên");
+            System.out.println("2. Thêm n quy định phụ cấp thâm niên đầu tiên");
+            System.out.println("3. Sửa quy định phụ cấp thâm niên ");
+            System.out.println("4. Xóa quy định phụ cấp thâm niên ");
+            System.out.println("5. Tìm kiếm quy định phụ cấp thâm niên");
+            System.out.println("6. Tìm kiếm số tiền phụ cấp thâm niên");
+            System.out.println("7. Tìm kiếm năm phụ cấp thâm niên");
+            System.out.println("8. In phụ cấp thâm niên");
+            System.out.println("0. Để quay lại");
+            System.out.print("Lựa chọn: ");
+
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
+
+            if(choice == 0) break;
+
+            switch(choice) {
+                case 1: danhsachphucapthamnien.themQuyDinhPCTN();break;
+                case 2: danhsachphucapthamnien.them();break;
+                case 3: danhsachphucapthamnien.suaQuyDinhPCTN();break;
+                case 4: danhsachphucapthamnien.xoaQuyDinhPCTN();break;
+                case 5: danhsachphucapthamnien.tiemKiemTheoMa();break;
+                case 6: danhsachphucapthamnien.timKiemTheoSoTien();break;
+                case 7: danhsachphucapthamnien.timKiemTheoNam();break;
+                case 8: danhsachphucapthamnien.inPhucCapThamNien();break;
+            }
+        }
+
+
     }
 }
 

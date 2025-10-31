@@ -59,10 +59,10 @@ public class NhanSuThucTap extends NhanSu {
     }
     @Override
     public void inThongTin() {
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|-12s|%-11s|%-16s|%-13s|%,18.2f VNĐ\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|-12s|%-11s|%-16s|%-10s|%,18.2f VNĐ\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
-        ngaysinh,machucvu, maphongban=="" ? "Rỗng" : maphongban, ngayvaolam, loai(), luongcoban);
+        ngaysinh,machucvu ==""?"Trống" : machucvu, maphongban=="" ? "Rỗng" : maphongban, ngayvaolam, loai(), luongcoban);
     }
     @Override
     public String loai() {

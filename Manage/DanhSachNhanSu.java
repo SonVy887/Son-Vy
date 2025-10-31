@@ -87,9 +87,10 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void suaNhanSu(String manhansu){
         for(int i = 0; i < n; i++){
-            if(dsns[i].getMaNhanSu().equals(manhansu))
+            if(dsns[i].getMaNhanSu().equals(manhansu)) {
                 sua(dsns[i]);
                 return;
+            }
         }
         System.out.print("Không tìm thấy nhân sự");
     }
@@ -99,9 +100,10 @@ public class DanhSachNhanSu implements INhanSu {
         String manhansu = sc.nextLine().toUpperCase();
         
         for(int i = 0; i < n;i++){
-            if(dsns[i].getMaNhanSu().equals(manhansu))
+            if(dsns[i].getMaNhanSu().equals(manhansu)) {
                 sua(dsns[i]);
                 return;
+            }
         }
         System.out.println("Không tìm thấy nhân sự");
     }
@@ -445,12 +447,12 @@ public class DanhSachNhanSu implements INhanSu {
     // hien thi danh sach
     @Override
     public void in(){
-        System.out.println("\n============================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-13s|%22s\n",
+        System.out.println("\n======================================================================================================================================================================");
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-10s|%22s\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm" "Loại NS"," Lương Cơ Bản");
-        System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Loại NS"," Lương Cơ Bản");
+        System.out.printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         for(int i = 0; i < n;i++){
             dsns[i].inThongTin();
         }
@@ -462,7 +464,7 @@ public class DanhSachNhanSu implements INhanSu {
         System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-10s|%22s\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm" "Năm K/N"," Lương Cơ Bản");
+        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Năm K/N"," Lương Cơ Bản");
         System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
@@ -479,7 +481,7 @@ public class DanhSachNhanSu implements INhanSu {
         System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-12s|%-16s|%-14s|%-5s|%22s\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm" "Thời Gian T/T", "GPA", "Lương Cơ Bản");
+        "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Thời Gian T/T", "GPA", "Lương Cơ Bản");
         System.out.printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
@@ -497,23 +499,17 @@ public class DanhSachNhanSu implements INhanSu {
         }
         return false;
     }
-    // tra ve danh sach nhan su
-    @Override
-    public NhanSu[] getNhanSu() {
-        return this.dsns;
-    }
     // xuat file danh sach nhan su
     @Override
     public void xuatFileDanhSachNhanSu() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachNhanSu.txt"))) {
-            NhanSu[] danhSach = getNhanSu();
             write.println("==================================================================================================================================================================");
             write.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%22s|\n",
             "Mã NS","Họ", "Tên",
             "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-            "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào làm", "Loại" "Lương Cơ Bản");
+            "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào làm", "Loại", "Lương Cơ Bản");
             write.printf("------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-            for(NhanSu ns : danhSach) {
+            for(NhanSu ns : dsns) {
                     write.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%,18.2f VNĐ|\n",
                     ns.getMaNhanSu(), ns.getHoNhanSu(), ns.getTenNhanSu(),
                     ns.getDiaChi(), ns.getSoDienThoai(), ns.getGioiTinh(), 
@@ -522,9 +518,10 @@ public class DanhSachNhanSu implements INhanSu {
                     ns.getLuongCoBan());
             }
             write.println("==================================================================================================================================================================");
-        }catch (Exception e) {
+        }catch(IOException e) {
             System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
         }
+
     }
     // sửa phụ
     public void sua(NhanSu ns){

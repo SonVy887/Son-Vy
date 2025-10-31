@@ -9,14 +9,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-public class DanhSachPhanCong implements IPhanCong {
+public class DanhSachPhanCong {
     private PhanCong[] dspc;
     private int n;
-    private INhanSu cnns; // chuc nang nhan su
-    private IDuAn cnda; // chuc nang do an
+    private DanhSachNhanSu cnns; // chuc nang nhan su
+    private DanhSachDuAn cnda; // chuc nang do an
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachPhanCong(INhanSu cnns, IDuAn cnda){
+    public DanhSachPhanCong(DanhSachNhanSu cnns, DanhSachDuAn cnda){
         dspc = new PhanCong[0];
         this.n = 0;
         this.cnns = cnns;
@@ -32,7 +32,6 @@ public class DanhSachPhanCong implements IPhanCong {
         return false;
     }
     // them bang phan cong
-    @Override
     public void addPhanCong(){
         System.out.print("Vui lòng nhập mã phân công để kiểm tra: ");
         while(kiemTra(sc.nextLine())){
@@ -45,14 +44,12 @@ public class DanhSachPhanCong implements IPhanCong {
         dspc[n].nhapPhanCong();
         this.n++;
     }
-    @Override
     public void addPhancong(PhanCong pc){
         dspc = Arrays.copyOf(dspc, n + 1);
         dspc[n] = pc;
         this.n++;
     }
     // them n phan cong dau tien
-    @Override
     public void addSoLuongPhanCong(){
         System.out.print("Nhập n phân công đầu tiên: ");
         this.n = sc.nextInt();
@@ -65,7 +62,6 @@ public class DanhSachPhanCong implements IPhanCong {
         }
     }
     // xoa bang phan cong
-    @Override
     public void xoaPhanCong(){
         System.out.print("Nhập mã phân công muốn xóa: ");
         String maphancong = sc.nextLine().toUpperCase();
@@ -81,7 +77,6 @@ public class DanhSachPhanCong implements IPhanCong {
         }
         System.out.println("Xóa thất bại");
     }
-    @Override
     public void xoaPhanCong(String maphancong){
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
@@ -95,32 +90,38 @@ public class DanhSachPhanCong implements IPhanCong {
         System.out.println("Xóa thất bại");
     }
     // sua phan cong 
-    @Override
     public void suaPhanCong(){
         System.out.print("Nhập mã phân công: ");
         String maphancong = sc.nextLine().toUpperCase();
 
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
-                System.out.print("Vui lòng nhập thời gian mới: ");
-                dspc[i].setThoiGian(sc.nextInt());sc.nextLine();
-                System.out.println("Sửa thành công");
+                sua(dspc[i]);
+                return;
             }
         }
+        System.out.println("Sửa thất bại");
     }
-    @Override
+    
     public void suaPhanCong(String maphancong){
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
-                System.out.print("Vui lòng nhập thời gian mới: ");
-                dspc[i].setThoiGian(sc.nextInt());sc.nextLine();
-                System.out.println("Sửa thành công");            
+                sua(dspc[i]);
+                return;            
             }
         }
+        System.out.println("Sửa thất bại");
     }
     // phan cong nhan su lam do an
-    @Override
     public void phanCongDoAn(){
+        System.out.print("Nhập mã phân công: ");
+        String maphancong = sc.nextLine().toUpperCase();
+        PhanCong pc = timKiem(maphancong);
+        if(pc == null){
+            System.out.println("Phân công chưa tồn tại");
+            return;
+        }
+
         System.out.print("Nhập mã nhân sự: ");
         String manhansu = sc.nextLine().toUpperCase();
 
@@ -142,21 +143,13 @@ public class DanhSachPhanCong implements IPhanCong {
         System.out.print("Nhập thời gian: ");
         int thoigian = sc.nextInt();sc.nextLine();
 
-        System.out.print("Nhập mã phân công: ");
-        String maphancong = sc.nextLine().toUpperCase();
-        PhanCong pc = timKiem(maphancong);
-        if(pc == null){
-            System.out.println("Phân công chưa tồn tại");
-            return;
-        }
-
+        pc.bangDoKho();
         pc.setDuAn(da.getMaDuAn());
         pc.setNhanSu(ns.getMaNhanSu());
         pc.setThoiGian(thoigian);
     }
 
     // tim kiem ma phan cong
-    @Override
     public void timKiem(){
         System.out.print("Nhập mã phân công: ");
         String maphancong = sc.nextLine().toUpperCase();
@@ -169,7 +162,6 @@ public class DanhSachPhanCong implements IPhanCong {
         System.out.println("Không tìm thấy");
         return;
     }
-    @Override
     public PhanCong timKiem(String maphancong){
         for (int i = 0; i < n; i++) {
             if(dspc[i].getMaPhanCong().equals(maphancong)){
@@ -179,7 +171,6 @@ public class DanhSachPhanCong implements IPhanCong {
         return null;
     }
     // tien thuong nhan su làm nhiều dự án
-    @Override
     public double tienThuong(String manhansu){
         int count = 0;
         for(int i = 0; i < n;i++){
@@ -189,34 +180,62 @@ public class DanhSachPhanCong implements IPhanCong {
         }
         return count * 500_000;
     }
-    @Override
     public void in(){
         System.out.println("=================================================================");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Dự Án","Thời Gian");
+        System.out.printf("|%-15s|%-15s|%-15s|%15s|%-13s|%-20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
         System.out.println("-----------------------------------------------------------------");
 
         for (int i = 0; i < n; i++) {
             dspc[i].inThongTinPhanCong();
         }
     }
-    @Override
-    public PhanCong[] getPhanCong() {
-        return this.dspc;
-    }
-    @Override
+    // xuat file phan cong
     public void xuatFilePhanCong() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
-            PhanCong[] pc = getPhanCong();
             write.println("=================================================================");
-            write.printf("|%-15s|%-15s|%-15s|%15s|%-15s\n","Mã Phân Công","Mã Nhân Sự","Mã Dự Án","Thời Gian","Thưởng");
+            write.printf("|%-15s|%-15s|%-15s|%15s|-13s|%-20s\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
             write.println("-----------------------------------------------------------------");
-            for(PhanCong p : pc) {
-                write.printf("|%-15s|%-15s|%-15s|%15s|%-15s\n",p.getMaPhanCong(),
-                p.getNhanSu() == "" ? "Trống" : p.getNhanSu().,
-                p.getDuAn() == "" ? "Trống" : p.getDuAn(),p.getThoiGian(),p.setThuong(tienThuong(p.getNhanSu()).getThuong());
+            for(PhanCong p : dspc) {
+                write.printf("|%-15s|%-15s|%-15s|%15s|%-13s|%-20.2f|\n",p.getMaPhanCong(),
+                p.getNhanSu() == "" ? "Trống" : p.getNhanSu(),
+                p.getDuAn() == "" ? "Trống" : p.getDuAn(),p.getThoiGian(),p.getDoKho(), p.getThuong());
             }
         }catch(IOException e) {
             System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());
+        }
+    }
+    // sua phu
+    public void sua(PhanCong pc) {
+        while(true) {
+            System.out.println("\n");
+            System.out.println("1. Sửa thời gian");
+            System.out.println("2. Sửa độ khó");
+            System.out.println("0. Để thoát");
+            System.out.println("Lựa chọn: ");
+
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;
+            }
+
+            if(choice == 0) break;
+
+            switch(choice) {
+                case 1:    
+                    System.out.print("Nhập thời gian mới: ");
+                    pc.setThoiGian(sc.nextInt());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 2:
+                    System.out.print("Chọn độ khó mới: ");
+                    pc.bangDoKho();
+                    System.out.println("Sửa thành công");break;
+            }
         }
     }
 }
