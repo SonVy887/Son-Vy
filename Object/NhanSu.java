@@ -14,7 +14,7 @@ public abstract class NhanSu {
     protected String maphongban;
     protected String ngayvaolam;
     protected String machucvu;
-    protected final double luongcoban = 5_000_000;
+    protected double luongcoban = 5_000_000;
     Scanner sc = new Scanner(System.in);
 
 
@@ -107,10 +107,11 @@ public abstract class NhanSu {
 
     public LocalDate convert(){
         String[] type = {"dd-MM-yyyy", "yyyy-MM-dd"};
-
         for(String f : type){
-            DateTimeFormatter transType = DateTimeFormatter.ofPattern(f);
-            return LocalDate.parse(this.ngaysinh,transType);
+            try{
+                DateTimeFormatter transType = DateTimeFormatter.ofPattern(f);
+                return LocalDate.parse(this.ngaysinh,transType);
+            }catch(Exception e){}
         }
         return null;
     }
@@ -122,11 +123,8 @@ public abstract class NhanSu {
         for(String f : type){
             try {
                 DateTimeFormatter transType = DateTimeFormatter.ofPattern(f);
-                ngaythangnam = LocalDate.parse(this.ngayvaolam,transType);
-            break;
-            } catch (Exception e) {
-                System.out.println("Lỗi " + e.getMessage());
-            }
+                ngaythangnam = LocalDate.parse(ngayvaolam,transType);
+            } catch (Exception e) {}
         }
         return Period.between(ngaythangnam, LocalDate.now()).getYears();
     }

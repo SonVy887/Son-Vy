@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class DanhSachBangLuongThang {
     private DanhSachBangChamCongThang dscct;
@@ -13,19 +15,21 @@ public class DanhSachBangLuongThang {
     private DanhSachNhanSu dsns;
     private DanhSachPhuCapThamNien dspctn;
     private DanhSachQuyDinhThuongLe dsqdtl;
-
+    private DanhSachChucVu dscv;
     private BangLuongThang[] dsblt;
     private int n;
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachBangLuongThang(DanhSachBangChamCongThang dscct,  DanhSachPhanCong dspc, DanhSachNhanSu dsns, DanhSachPhuCapThamNien dspctn, DanhSachQuyDinhThuongLe dsqdtl) {
+    public DanhSachBangLuongThang(DanhSachBangChamCongThang dscct,  DanhSachPhanCong dspc, DanhSachNhanSu dsns, DanhSachPhuCapThamNien dspctn, DanhSachQuyDinhThuongLe dsqdtl, DanhSachChucVu dscv) {
         this.dscct = dscct;
         this.dspc = dspc;
         this.dsns = dsns;
         this.dspctn = dspctn;
         this.dsqdtl = dsqdtl;
+        this.dscv = dscv;
         dsblt = new BangLuongThang[0];
         this.n = 0;
+        docFileBangLuongThang();
     }
     // kiem tra
     private boolean kiemTra(String mabangluong) {
@@ -142,66 +146,183 @@ public class DanhSachBangLuongThang {
         System.out.println("Tìm kiếm thất bại");
         return null;
     }
-    // sua phu
-    public void sua(BangLuongThang blt) {
-        System.out.println("1. Sửa tháng");
-        System.out.println("2. Sửa năm");
-        System.out.println("3. Sửa lương cơ bản");
-        System.out.println("4. Sửa thưởng lễ");
-        System.out.println("5. Sửa thưởng dự án");
-        System.out.println("6. Sửa phụ cấp");
-        System.out.println("7. Sửa trừ lương");
-        System.out.println("8. Sửa tổng lương");
-        System.out.println("0. Để thoát");
-        System.out.println("Lựa chọn: ");
+    // tinh luong thang cho nhan su 
+    public void tinhLuongThang() {
+        System.out.print("Nhập mã nhân sự: ");
+        String manhansu = sc.nextLine().toUpperCase();
 
-       int choice;
-
-        try {
-            choice = sc.nextInt();
-            sc.nextLine(); 
-        } catch (Exception e) {
-            System.out.println("Vui lòng nhập số!");
-            sc.nextLine();
-            continue;      
+        NhanSu ns = dsns.timKiem(manhansu);
+        if(ns == null) {
+            System.out.println("Nhân sự chưa được khởi tạo");
+            return;
         }
-        if(choice == 0) break;
 
-        switch(choice) {
-            case 1: 
-                System.out.print("Nhập tháng mới: ");
-                blt.setThang(sc.nextInt());
-                System.out.println("Sửa thành công");break;
-            case 2: 
-                System.out.print("Nhập năm mới: ");
-                blt.setNam(sc.nextInt());
-                System.out.println("Sửa thành công");break;
-            case 3: 
-                System.out.print("Nhập mã lương cơ bản mới: ");
-                blt.setLuongCoBan(sc.nextDouble());
-                System.out.println("Sửa thành công");break;
-            case 4: 
-                System.out.print("Nhập thưởng lễ mới: ");
-                blt.setThuongLe(sc.nextDouble());
-                System.out.println("Sửa thành công");break;
-            case 5:
-                System.out.print("Nhập thưởng dự án mới: ");
-                blt.setThuongDuAn(sc.nextDouble());
-                System.out.println("Sửa thành công");break;
-            case 6:
-                System.out.print("Nhập phụ cấp mới: ");
-                blt.setPhuCap(sc.nextDouble());
-                System.out.println("Sửa thành công");break;
-            case 7:
-                System.out.print("Nhập lương trừ mới: ");
-                blt.setTruLuong(sc.nextDouble());
-                System.out.println("Sửa thành công");break;
-            case 8:
-                System.out.print("Nhập tổng lương mới: ");
-                blt.setTongLuong(sc.nextDouble());sc.nextLine();
-                System.out.println("Sửa thành công");break;
-        }   
+        System.out.print("Nhập mã bảng lương tháng: ");
+        String mabangluong = sc.nextLine().toUpperCase();
+
+        BangLuongThang blt = timKiem(mabangluong);
+        if(blt == null) {
+            System.out.println("Mã bảng lương chưa tồn tại");
+            return;
+        }
+        blt.setMaNhanSu(manhansu);
+
+        System.out.print("Nhập mã lương thưởng lễ: ");
+        Double tienthuongle = dsqdtl.timKiemTheoMa(sc.nextLine().toUpperCase()).getSoTienThuongLe();
+        
+        Double tienduan = dspc.tienThuong(manhansu);
+        Double luongcoban = ns.getLuongCoBan();
+        Double tienphucapcv = tinhPhuCapChucVu(manhansu);
+        Double tienphucaptn = tinhPhuCapThamNien(manhansu);
+        Double tienluongtru = tinhTruLuong(manhansu);
+
+        Double tongluong = tienthuongle + tienphucaptn + tienduan + tienphucapcv + luongcoban;
+
+        blt.setLuongCoBan(luongcoban);
+        blt.setPhuCapThamNien(tienphucaptn);
+        blt.setThuongDuAn(tienduan);
+        blt.setThuongLe(tienthuongle);
+        blt.setPhuCapChucVu(tienphucapcv);
+        blt.setTruLuong(tienluongtru);
+        blt.setTongLuong(tongluong - tienluongtru);
 
     }
-    
+    // tinh phu cap tham nien
+    private double tinhPhuCapThamNien(String manhansu) {
+        int namtn = dsns.timKiem(manhansu).tinhThamNien();
+        if(dspctn.timKiemTheoNam(namtn)== null) {
+            return 500_000;
+        }
+        return dspctn.timKiemTheoNam(namtn).getSoTienPhuCap();
+    }
+    // tinh phu cap chuc vu
+    private double tinhPhuCapChucVu(String manhansu) {
+        return dscv.tienPhuCapChucVu(dsns.timKiem(manhansu).getMaChucVu());
+    }
+    // tinh trừ lương
+    private double tinhTruLuong(String manhansu) {
+        int songaynghi = dscct.timKiemNhanSuBCCT(manhansu).getSoNgayNghi();
+        return 500_000 * songaynghi;
+    }
+    // in 
+    public void inBangLuongThang() {
+        System.out.println("\n=======================================================================================================================================================================");
+        System.out.printf("|%-10s|%-10s|%-10s|%18s|%18s|%18s|%18s|%18s|%18s|%18s|\n","Mã BLT", "Tháng/năm", "Mã NS", "Lương Cơ Bản", "Thưởng lễ", "Thưởng dự án", "Thưởng PCCV", "Thưởng PCTN", "Trừ Lương", "Tổng lương");
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+        for(int i = 0; i < n;i++) {
+            dsblt[i].in();
+        }
+    }
+    // xuat file
+    public void xuatFileBangLuongThang() {
+        try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangLuongThang.txt"))) {
+            write.println("=======================================================================================================================================================================");
+            write.printf("|%-10s|%-10s|%-10s|%18s|%18s|%18s|%18s|%18s|%18s|%18s|\n","Mã BLT", "Tháng/năm", "Mã NS", "Lương Cơ Bản", "Thưởng lễ", "Thưởng dự án", "Thưởng PCCV", "Thưởng PCTN", "Trừ Lương", "Tổng lương");
+            write.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            for(int i = 0; i < n;i++) {
+                write.printf("|%-10s|%-10s|%-10s|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|\n",
+                dsblt[i].getMaBangLuongThang(), dsblt[i].getThang()+"/"+dsblt[i].getNam(), dsblt[i].getMaNhanSu(), dsblt[i].getLuongCoBan(), dsblt[i].getThuongLe(), dsblt[i].getThuongDuAn(), dsblt[i].getPhuCapChucVu(), dsblt[i].getPhuCapThamNien(), dsblt[i].getTruLuong(), dsblt[i].getTongLuong());
+            }
+        }catch(IOException e) {
+            System.out.println("Xuất file thất bại" + e.getMessage());
+        }
+    }
+    // doc file
+    public void docFileBangLuongThang() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangLuongThang.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+
+                String mabangluong = info[1].trim();
+                String[] info1 = info[2].split("/");
+                int thang = Integer.parseInt(info1[0].trim());
+                int nam = Integer.parseInt(info1[1].trim());
+                String manhansu = info[3].trim();
+                Double luongcoban = Double.parseDouble(info[4].trim().replace(",","").replace("VNĐ",""));
+                Double thuongle = Double.parseDouble(info[5].trim().replace(",","").replace("VNĐ",""));
+                Double thuongduan = Double.parseDouble(info[6].trim().replace(",","").replace("VNĐ",""));
+                Double thuongpccv = Double.parseDouble(info[7].trim().replace(",","").replace("VNĐ",""));
+                Double thuongpctn = Double.parseDouble(info[8].trim().replace(",","").replace("VNĐ",""));
+                Double truluong = Double.parseDouble(info[9].trim().replace(",","").replace("VNĐ",""));
+                Double tongluong = Double.parseDouble(info[10].trim().replace(",","").replace("VNĐ",""));
+
+                themBangLuongThang(new BangLuongThang(mabangluong, thang, nam, manhansu, luongcoban, thuongle, thuongduan, thuongpccv, thuongpctn, truluong, tongluong));
+            }
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ file" + e.getMessage());
+        }
+    }
+    // sua phu
+    public void sua(BangLuongThang blt) {
+        while(true) {
+            System.out.println("1. Sửa tháng");
+            System.out.println("2. Sửa năm");
+            System.out.println("3. Sửa lương cơ bản");
+            System.out.println("4. Sửa thưởng lễ");
+            System.out.println("5. Sửa thưởng dự án");
+            System.out.println("6. Sửa phụ cấp thâm niên");
+            System.out.println("7. Sửa phụ cấp chức vụ");
+            System.out.println("9. Sửa trừ lương");
+            System.out.println("10. Sửa tổng lương");
+            System.out.println("0. Để thoát");
+            System.out.println("Lựa chọn: ");
+
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
+            if(choice == 0) break;
+
+            switch(choice) {
+                case 1: 
+                    System.out.print("Nhập tháng mới: ");
+                    blt.setThang(sc.nextInt());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 2: 
+                    System.out.print("Nhập năm mới: ");
+                    blt.setNam(sc.nextInt());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 3: 
+                    System.out.print("Nhập mã lương cơ bản mới: ");
+                    blt.setLuongCoBan(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 4: 
+                    System.out.print("Nhập thưởng lễ mới: ");
+                    blt.setThuongLe(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 5:
+                    System.out.print("Nhập thưởng dự án mới: ");
+                    blt.setThuongDuAn(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 6:
+                    System.out.print("Nhập phụ cấp thâm niên mới: ");
+                    blt.setPhuCapThamNien(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 7:
+                    System.out.print("Nhập phụ cấp chức vụ mới: ");
+                    blt.setPhuCapChucVu(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 8:
+                    System.out.print("Nhập lương trừ mới: ");
+                    blt.setTruLuong(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+                case 9:
+                    System.out.print("Nhập tổng lương mới: ");
+                    blt.setTongLuong(sc.nextDouble());sc.nextLine();
+                    System.out.println("Sửa thành công");break;
+            }
+        }
+    }
 }

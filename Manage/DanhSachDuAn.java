@@ -5,6 +5,8 @@ import Interface.*;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 
 public class DanhSachDuAn {
@@ -17,6 +19,7 @@ public class DanhSachDuAn {
         dsda = new DuAn[0];
         this.n = 0;
         this.cnpb = cnpb;
+        docFileDanhSachDuAn();
     }
     // kiem tra duy nhat
     public boolean kiemTra(String maduan) {
@@ -207,16 +210,40 @@ public class DanhSachDuAn {
     // xuat file danh sach du an
     public void xuatFileDanhSachDuAn() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachDuAn.txt"))) {
-            write.println("\n==========================================================================================================================");
+            write.println("==========================================================================================================================");
             write.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n","Mã Dự Án","Tên Dự Án","Phòng Ban","Địa Điểm","Ngày Bắt Đầu","Ngày Kết Thúc");
             write.println("--------------------------------------------------------------------------------------------------------------------------");
             for(int i = 0; i < n;i++){
                 write.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n",
-                dsda[i].getMaDuAn(), dsda[i].getTenDuAn(), (dsda[i].getPhongBan() == "" ? "Trống" : dsda[i].getPhongBan()),
+                dsda[i].getMaDuAn(), dsda[i].getTenDuAn(), dsda[i].getPhongBan() != null ? dsda[i].getPhongBan() : "Trống",
                 dsda[i].getDiaDiem(), dsda[i].getNgayBatDau(), dsda[i].getNgayKetThuc());
             }
         }catch(IOException e) {
             System.out.println("Lỗi không thể xuất file" + e.getMessage());
+        }
+    }
+    // doc File
+    public void docFileDanhSachDuAn() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachDuAn.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+
+                String maduan = info[1].trim();
+                String tenduan = info[2].trim();
+                String maphongban = info[3].trim();
+                String diadiem = info[4].trim();
+                String ngaybatdau = info[5].trim();
+                String ngayketthuc = info[6].trim();
+
+                themDuAn(new DuAn(maduan, tenduan, diadiem, maphongban, ngaybatdau, ngayketthuc));
+            }
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ file" + e.getMessage());
         }
     }
     // hàm phụ

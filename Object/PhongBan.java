@@ -33,12 +33,8 @@ public class PhongBan {
 
     //in thong tin phong ban
     public void inThongTinPhongBan() {
-        // System.out.println("========================================================================================");
-        // System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Ma Phong Ban", "Ten Phong Ban", "Truong Phong", "Ngay Nhan Chuc","So luong Nhan Su");
-        // System.out.printf("----------------------------------------------------------------------------------------\n");
         System.out.printf("|%-17s|%-18s|%-14s|%-16s|\n",
-        maphongban, tenphongban, matruongphong == "" ? "Trong" : matruongphong, ngaynhanchuc);
-        // System.out.println("========================================================================================");
+        maphongban, tenphongban, matruongphong == null ? "Trống" : matruongphong, ngaynhanchuc == null ? "Trống" : ngaynhanchuc);
         
     }
     

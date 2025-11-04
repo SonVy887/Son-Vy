@@ -7,6 +7,8 @@ import Object.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 
 public class DanhSachNhanSu implements INhanSu {
@@ -18,7 +20,9 @@ public class DanhSachNhanSu implements INhanSu {
     public DanhSachNhanSu() {
         dsns = new NhanSu[0];
         n = 0;
+        docFileDanhSachNhanSu();
     }
+    
     // them nhan su
     @Override
     public void addNhanSu(NhanSu ns){
@@ -448,11 +452,11 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void in(){
         System.out.println("\n======================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-10s|%22s\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%22s|\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
         "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Loại NS"," Lương Cơ Bản");
-        System.out.printf("---------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         for(int i = 0; i < n;i++){
             dsns[i].inThongTin();
         }
@@ -460,12 +464,12 @@ public class DanhSachNhanSu implements INhanSu {
     // in chi tiet nhan su chinh thuc
     @Override
     public void inChiTietNhanSuChinhThuc() {
-        System.out.println("\n=========================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-11s|%-16s|%-10s|%22s\n",
+        System.out.println("\n=====================================================================================================================================================================-");
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%22s|\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
         "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Năm K/N"," Lương Cơ Bản");
-        System.out.printf("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.printf("----------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
             if(dsns[i] instanceof NhanSuChinhThuc){
@@ -477,12 +481,12 @@ public class DanhSachNhanSu implements INhanSu {
     // in chi tiet nhan su thuc tap
     @Override
     public void inChiTietNhanSuThucTap() {
-        System.out.println("\n================================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-12s|%-12s|%-16s|%-14s|%-5s|%22s\n",
+        System.out.println("\n==============================================================================================================================================================================");
+        System.out.printf("|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-14s|%-5s|%22s|\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
         "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Thời Gian T/T", "GPA", "Lương Cơ Bản");
-        System.out.printf("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.printf("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
             if(dsns[i] instanceof NhanSuThucTap){
@@ -503,29 +507,73 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void xuatFileDanhSachNhanSu() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachNhanSu.txt"))) {
-            write.println("==================================================================================================================================================================");
-            write.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%22s|\n",
-            "Mã NS","Họ", "Tên",
-            "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-            "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào làm", "Loại", "Lương Cơ Bản");
-            write.printf("------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
             for(NhanSu ns : dsns) {
-                    write.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-13s|%,18.2f VNĐ|\n",
-                    ns.getMaNhanSu(), ns.getHoNhanSu(), ns.getTenNhanSu(),
-                    ns.getDiaChi(), ns.getSoDienThoai(), ns.getGioiTinh(), 
-                    ns.getNgaySinh(), ns.getMaChucVu(),
-                    ns.getPhongBan()== "" ? "Rong" : ns.getPhongBan(), ns.getNgayVaoLam(), ns.loai(),
-                    ns.getLuongCoBan());
+                if(ns instanceof NhanSuChinhThuc) {
+                    NhanSuChinhThuc nsct = (NhanSuChinhThuc) ns;
+                    write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%-,18.2fVNĐ|\n",
+                    nsct.loai(), nsct.getMaNhanSu(), nsct.getHoNhanSu(), nsct.getTenNhanSu(),
+                    nsct.getDiaChi(), nsct.getSoDienThoai(), nsct.getGioiTinh(), 
+                    nsct.getNgaySinh(), nsct.getMaChucVu() == "" ? "Trống" : nsct.getMaChucVu(),
+                    nsct.getPhongBan() == "" ? "Trống" : nsct.getPhongBan(), nsct.getNgayVaoLam(), nsct.getSoNamKinhNghiem(), nsct.getLuongCoBan());
+                }
+                else {
+                    NhanSuThucTap nstt = (NhanSuThucTap) ns;
+                    write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-8s|%-5s|%-,18.2fVNĐ|\n",
+                    nstt.loai(), nstt.getMaNhanSu(), nstt.getHoNhanSu(), nstt.getTenNhanSu(),
+                    nstt.getDiaChi(), nstt.getSoDienThoai(), nstt.getGioiTinh(), 
+                    nstt.getNgaySinh(), nstt.getMaChucVu() == "" ? "Trống" : nstt.getMaChucVu(), nstt.getPhongBan() == "" ? "Trống" : nstt.getPhongBan(), nstt.getNgayVaoLam(),
+                    nstt.getThoiGianThucTap(), nstt.getGpa(), nstt.getLuongCoBan());
+                }
             }
-            write.println("==================================================================================================================================================================");
         }catch(IOException e) {
             System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
         }
-
     }
-    // sửa phụ
+    // doc file
+    public void docFileDanhSachNhanSu() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachNhanSu.txt"))) {
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+
+                if(info[1].trim().equals("TT")) {
+                    String manhansu = info[2].trim();
+                    String ho = info[3].trim();
+                    String ten = info[4].trim();
+                    String diachi = info[5].trim();
+                    String sodienthoai = info[6].trim();
+                    String gioitinh = info[7].trim();
+                    String ngaysinh = info[8].trim();
+                    String machucvu = info[9].trim();
+                    String maphongban = info[10].trim();
+                    String ngayvaolam = info[11].trim();
+                    int thoigiantt = Integer.parseInt(info[12].trim());
+                    Double gpa = Double.parseDouble(info[13].trim());                    
+                    NhanSu ns = new NhanSuThucTap(manhansu, ho, ten, diachi, sodienthoai, gioitinh, ngaysinh, maphongban, ngayvaolam, machucvu, thoigiantt, gpa);
+                    addNhanSu(ns);
+                }else {
+                    String manhansu = info[2].trim();
+                    String ho = info[3].trim();
+                    String ten = info[4].trim();
+                    String diachi = info[5].trim();
+                    String sodienthoai = info[6].trim();
+                    String gioitinh = info[7].trim();
+                    String ngaysinh = info[8].trim();
+                    String machucvu = info[9].trim();
+                    String maphongban = info[10].trim();
+                    String ngayvaolam = info[11].trim();
+                    int namkn = Integer.parseInt(info[12].trim());
+                    NhanSu ns = new NhanSuChinhThuc(manhansu, ho, ten, diachi, sodienthoai, gioitinh, ngaysinh, maphongban, ngayvaolam, machucvu, namkn);
+                    addNhanSu(ns);
+                }
+            }
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ file" + e.getMessage());
+        }
+    }
     public void sua(NhanSu ns){
         while(true){
+            System.out.println("\n========= CHỨC NĂNG SỬA ==========");
             System.out.println("1. Sửa tên nhân sự");
             System.out.println("2. Sửa họ nhân sự");
             System.out.println("3. Sửa ngày vào làm");
@@ -536,10 +584,19 @@ public class DanhSachNhanSu implements INhanSu {
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice;
+
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } catch(Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;
+            }
 
             if(choice == 0) break;
+
             switch(choice){
                 case 1: 
                     System.out.print("Vui lòng nhập tên mới: ");

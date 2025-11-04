@@ -1,5 +1,4 @@
 package Manage;
-import Interface.*;
 import Object.*;
 
 import java.util.Arrays;
@@ -7,6 +6,8 @@ import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 
 public class DanhSachPhanCong {
@@ -21,6 +22,7 @@ public class DanhSachPhanCong {
         this.n = 0;
         this.cnns = cnns;
         this.cnda = cnda;
+        docFilePhanCong();
     }
     // kiem tra duy nhat
     public boolean kiemTra(String maphancong){
@@ -34,7 +36,7 @@ public class DanhSachPhanCong {
     // them bang phan cong
     public void addPhanCong(){
         System.out.print("Vui lòng nhập mã phân công để kiểm tra: ");
-        while(kiemTra(sc.nextLine())){
+        while(kiemTra(sc.nextLine().toUpperCase())){
             System.out.println("Mã phân công đã tồn tại");
             System.out.print("Vui lòng nhập lại: ");
         }
@@ -140,13 +142,8 @@ public class DanhSachPhanCong {
             return;
         }
 
-        System.out.print("Nhập thời gian: ");
-        int thoigian = sc.nextInt();sc.nextLine();
-
-        pc.bangDoKho();
         pc.setDuAn(da.getMaDuAn());
         pc.setNhanSu(ns.getMaNhanSu());
-        pc.setThoiGian(thoigian);
     }
 
     // tim kiem ma phan cong
@@ -170,33 +167,51 @@ public class DanhSachPhanCong {
         }
         return null;
     }
-    // tien thuong nhan su làm nhiều dự án
-    public double tienThuong(String manhansu){
-        int count = 0;
-        for(int i = 0; i < n;i++){
-            if(dspc[i].getNhanSu().equals(manhansu)){
-                count++;
-            }
-        }
-        return count * 500_000;
-    }
+    // in
     public void in(){
-        System.out.println("=================================================================");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|%-13s|%-20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
-        System.out.println("-----------------------------------------------------------------");
+        System.out.println("=====================================================================================");
+        System.out.printf("|%-10s|%-10s|%-10s|%-15s|%-13s|%20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
+        System.out.println("-------------------------------------------------------------------------------------");
 
         for (int i = 0; i < n; i++) {
             dspc[i].inThongTinPhanCong();
         }
     }
+    // tim kiem theo do kho
+    public void timKiemTheoDoKho() {
+        System.out.print("Nhập độ khó tìm kiếm: ");
+        String dokho = sc.nextLine();
+
+        for(int i = 0; i < n;i++) {
+            if(dspc[i].getDoKho().equalsIgnoreCase(dokho)) {
+                dspc[i].inThongTinPhanCong();
+            }
+        }
+    }
+    public void timKiemTheoDoKho(String dokho) {
+        for(int i = 0; i < n;i++) {
+             if(dspc[i].getDoKho().equalsIgnoreCase(dokho)) {
+                dspc[i].inThongTinPhanCong();
+            }
+        }
+    }
+    // tien thuong nhan su làm dự án
+    public double tienThuong(String manhansu){
+        for(int i = 0; i < n;i++) {
+            if(dspc[i].getNhanSu().equals(manhansu)) {
+                return dspc[i].getThuong();
+            }
+        }
+        return 0.0;
+    }
     // xuat file phan cong
     public void xuatFilePhanCong() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
-            write.println("=================================================================");
-            write.printf("|%-15s|%-15s|%-15s|%15s|-13s|%-20s\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
-            write.println("-----------------------------------------------------------------");
+            write.println("=====================================================================================");
+            write.printf("|%-10s|%-10s|%-10s|%-15s|%-13s|%20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
+            write.println("-------------------------------------------------------------------------------------");
             for(PhanCong p : dspc) {
-                write.printf("|%-15s|%-15s|%-15s|%15s|%-13s|%-20.2f|\n",p.getMaPhanCong(),
+                write.printf("|%-10s|%-10s|%-10s|%-9s tháng|%-13s|%,17.2fVNĐ|\n",p.getMaPhanCong(),
                 p.getNhanSu() == "" ? "Trống" : p.getNhanSu(),
                 p.getDuAn() == "" ? "Trống" : p.getDuAn(),p.getThoiGian(),p.getDoKho(), p.getThuong());
             }
@@ -204,10 +219,36 @@ public class DanhSachPhanCong {
             System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());
         }
     }
+    // doc file
+    public void docFilePhanCong() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
+
+            String line;
+
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+
+                String maphancong = info[1].trim();
+                String manhansu = info[2].trim();
+                String maduan = info[3].trim();
+                String[] info1 = info[4].split("");
+                int thoigian = Integer.parseInt(info1[0].trim());
+                String dokho = info[5].trim();
+                double thuong = Double.parseDouble(info[6].trim().replace("VNĐ","").replace(",",""));
+
+                addPhancong(new PhanCong(maphancong, manhansu, maduan, thoigian, thuong, dokho));
+            }
+        }catch(Exception e) {
+            System.out.println("Không có dữ liệu từ file" + e.getMessage());
+        } 
+    }
     // sua phu
     public void sua(PhanCong pc) {
         while(true) {
-            System.out.println("\n");
+            System.out.println("\n========== CHỨC NĂNG SỬA ==========");
             System.out.println("1. Sửa thời gian");
             System.out.println("2. Sửa độ khó");
             System.out.println("0. Để thoát");

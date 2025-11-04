@@ -3,7 +3,10 @@ import Object.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class DanhSachBangChamCongThang {
     private BangChamCongThang[] bcct;
@@ -15,11 +18,13 @@ public class DanhSachBangChamCongThang {
 
     public DanhSachBangChamCongThang(DanhSachBangChamCongNgay bccn, DanhSachNhanSu cnns) {
         bcct = new BangChamCongThang[0];
-        this.n = 0;
+        this.n = 0; 
         this.bccn = bccn;
         this.cnns = cnns;
+        docFileBangChamCongThang();
     }
 
+    // kiem tra
     private boolean kiemTra(String machamcongthang) {
         for(int i = 0; i < n;i++) {
             if(bcct[i].getMaChamCongThang().equals(machamcongthang)) {
@@ -130,10 +135,32 @@ public class DanhSachBangChamCongThang {
         }
         return null;
     }
+    // tim kiem nhan su tren bang cham cong thang
+    public void timKiemNhanSuBCCT() {
+        System.out.print("Nhập mã nhân sự cần tìm: ");
+        String manhansu = sc.nextLine().toUpperCase();
+
+        for(int i = 0; i < n;i++) {
+            if(bcct[i].getMaNhanSu().equals(manhansu)) {
+                bcct[i].in();
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy nhân sự");
+    }
+    public BangChamCongThang timKiemNhanSuBCCT(String manhansu) {
+        for(int i = 0; i < n;i++) {
+            if(bcct[i].getMaNhanSu().equals(manhansu)) {
+                return bcct[i];
+            }
+        }
+        return null;
+    }
     // in bang cham cong thang
     public void inBangChamCongThang() {
+        System.out.println("=======================================================================");
         System.out.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n","Mã BCCT", "Mã NS", "Tháng", "Năm", "Số Ngày Làm", "Số Ngày Nghỉ");
-        System.out.println("---------------------------------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------");
         for(int i = 0; i < n;i++) {
             bcct[i].in();
         }
@@ -157,40 +184,65 @@ public class DanhSachBangChamCongThang {
             return;
         }
         System.out.print("Nhập tháng: ");
-        bcct.setThang(sc.nextInt());sc.nextLine();
+        int thang = sc.nextInt();sc.nextLine();
+        bcct.setThang(thang);
 
         System.out.print("Nhập năm: ");
         bcct.setNam(sc.nextInt());sc.nextLine();
         
-        int[] ngaylamviec_nghi = tinhToanNgayLamViec(manhansu);
+        int[] ngaylamviec_nghi = tinhToanNgayLamViec(manhansu, thang);
         bcct.setSoNgayLamViec(ngaylamviec_nghi[0]);
         bcct.setSoNgayNghi(ngaylamviec_nghi[1]);
 
         bcct.setMaNhanSu(manhansu);
     }
+
     // tính toán số ngày làm việc và số ngày nghỉ
-    private int[] tinhToanNgayLamViec(String manhansu) {
+    private int[] tinhToanNgayLamViec(String manhansu, int thang) {
         int songaylamviec = 0;
         int songaynghi = 0;
 
-        songaylamviec = bccn.tongNgayCong(manhansu);
+        songaylamviec = bccn.tongNgayCong(manhansu, thang);
         songaynghi = 20 - songaylamviec;
 
         return new int[] {songaylamviec, songaynghi};
     }
+    
     // xuat file bang cham cong thang
     public void xuatFileBangChamCongThang() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCongThang.txt"))) {
-            write.println("\n=============================================================================================================================");
+            write.println("=======================================================================");
             write.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n","Mã BCCT", "Mã NS", "Tháng", "Năm", "Số Ngày Làm", "Số Ngày Nghỉ");
-            write.println("---------------------------------------------------------------------------------------------------------------");
+            write.println("-----------------------------------------------------------------------");
             for(int i = 0; i < n;i++) {
                 write.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n", bcct[i].getMaChamCongThang(), bcct[i].getMaNhanSu() == "" ? "Trống" : bcct[i].getMaNhanSu(),
                 bcct[i].getThang(), bcct[i].getNam(), bcct[i].getSoNgayLamViec(), bcct[i].getSoNgayNghi());
             }
-            write.println("=============================================================================================================================");
         } catch (Exception e) {
             System.out.println("Lỗi xuất file bảng chấm công tháng" + e.getMessage());
+        }
+    }
+    public void docFileBangChamCongThang() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCongThang.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+
+                String machamcongt = info[1].trim();
+                String manhansu = info[2].trim();
+                int thang = Integer.parseInt(info[3].trim());
+                int nam = Integer.parseInt(info[4].trim());
+                int songaylamviec = Integer.parseInt(info[5].trim());
+                int songaynghi = Integer.parseInt(info[6].trim());
+
+                themBangChamCongThang(new BangChamCongThang(machamcongt, manhansu, thang, nam, songaylamviec, songaynghi));
+            }
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ fiel" + e.getMessage());
         }
     }
     // sửa phụ

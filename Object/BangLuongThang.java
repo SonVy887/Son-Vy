@@ -9,13 +9,14 @@ public class BangLuongThang {
     private double luongcoban;
     private double thuongle;
     private double thuongduan;
-    private double phucap;
+    private double phucapchucvu;
+    private double phucapthamnien;
     private double truluong;
     private double tongluong;
     Scanner sc = new Scanner(System.in);
 
     public BangLuongThang(){}
-    public BangLuongThang(String mabangluongthang, int thang, int nam, String manhansu, double luongcoban, double thuongle, double thuongduan, double phucap, double truluong, double tongluong) {
+    public BangLuongThang(String mabangluongthang, int thang, int nam, String manhansu, double luongcoban, double thuongle, double thuongduan, double phucapchucvu, double phucapthamnien, double truluong, double tongluong) {
         this.mabangluongthang = mabangluongthang;
         this.thang = thang;
         this.nam = nam;
@@ -23,7 +24,8 @@ public class BangLuongThang {
         this.luongcoban = luongcoban;
         this.thuongle = thuongle;
         this.thuongduan = thuongduan;
-        this.phucap = phucap;
+        this.phucapchucvu = phucapchucvu;
+        this.phucapthamnien = phucapthamnien;
         this.truluong = truluong;
         this.tongluong = tongluong;
     }
@@ -35,14 +37,15 @@ public class BangLuongThang {
         this.luongcoban = copy.luongcoban;
         this.thuongle = copy.thuongle;
         this.thuongduan = copy.thuongduan;
-        this.phucap = copy.phucap;
+        this.phucapchucvu = copy.phucapchucvu;
+        this.phucapthamnien = copy.phucapthamnien;
         this.truluong = copy.truluong;
         this.tongluong = copy.tongluong;
     }
 
     public void nhapBangLuong() {
         System.out.print("Nhập mã bảng lương tháng (VD: BLT001): ");
-        this.mabangluongthang = sc.nextLine();
+        this.mabangluongthang = sc.nextLine().toUpperCase();
 
         System.out.print("Nhập tháng: ");
         this.thang = sc.nextInt();
@@ -52,7 +55,7 @@ public class BangLuongThang {
         sc.nextLine();
     }
     public void in() {
-        System.out.printf("|%-15s|%-15s|%-15s|%-15s|%-15s|%-15s|%-15s|%-15s|%-15s|\n",mabangluongthang, thang +"/"+nam, manhansu, luongcoban, thuongle, thuongduan, phucap, truluong, tongluong);
+        System.out.printf("|%-10s|%-10s|%-10s|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|\n",mabangluongthang, thang +"/"+nam, manhansu, luongcoban, thuongle, thuongduan, phucapchucvu, phucapthamnien, truluong, tongluong);
     }
 
     public String getMaBangLuongThang() {
@@ -97,11 +100,17 @@ public class BangLuongThang {
     public void setThuongDuAn(double thuongduan) {
         this.thuongduan = thuongduan;
     }
-    public double getPhuCap() {
-        return this.phucap;
+    public double getPhuCapChucVu() {
+        return this.phucapchucvu;
     }
-    public void setPhuCap(double phucap) {
-        this.phucap = phucap;
+    public void setPhuCapChucVu(double phucapchucvu) {
+        this.phucapchucvu = phucapchucvu;
+    }
+    public double getPhuCapThamNien() {
+        return this.phucapthamnien;
+    }
+    public void setPhuCapThamNien(double phucapthamnien) {
+        this.phucapthamnien = phucapthamnien;
     }
     public double getTruLuong() {
         return this.truluong;

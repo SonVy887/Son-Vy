@@ -53,7 +53,7 @@ public class DuAn {
         // System.out.println("==========================================================================================================================");
         // System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n","Mã  Án","Tên Đồ Án","Phòng Ban","Địa Điểm","Ngày Bắt Đầu","Ngày Kết Thúc");
         // System.out.println("--------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n",maduan,tenduan,maphongban == "" ? "Trống" : maphongban,diadiem,ngaybatdau,ngayketthuc);
+        System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n",maduan,tenduan,maphongban == null ? "Trống" : maphongban,diadiem,ngaybatdau,ngayketthuc);
     }
     // Getter and Setter
     public String getMaDuAn() {

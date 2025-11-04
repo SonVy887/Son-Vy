@@ -1,11 +1,12 @@
 package Manage;
-import Interface.*;
 import Object.*;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 
 public class DanhSachChucVu {
@@ -19,6 +20,7 @@ public class DanhSachChucVu {
         dscv = new ChucVu[0];
         this.n = 0;
         this.cnns = cnns;
+        docFileBangChucVu();
     }
 
 
@@ -33,13 +35,13 @@ public class DanhSachChucVu {
     // them
     public void themBangChucVu() {
         System.out.print("Vui lòng nhập mã để kiểm tra: ");
-        while(kiemTra(sc.nextLine())) {
+        while(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Mã chức vụ đã tồn tại!");
             System.out.print("Vui lòng nhập lại: ");
         }
 
         dscv = Arrays.copyOf(dscv, n + 1);
-        dscv[n] = new ChuVu();
+        dscv[n] = new ChucVu();
         dscv[n].nhapChucVu();
         this.n++;
     }
@@ -52,17 +54,17 @@ public class DanhSachChucVu {
         System.out.print("Vui lòng nhập n chức vụ đầu tiên: ");
         this.n = sc.nextInt();
 
-        dscv[n] = new ChuVu[n];
+        dscv = new ChucVu[n];
+
         for(int i = 0; i < n;i++) {
             dscv[i]= new ChucVu();
             dscv[i].nhapChucVu();
         }
     }
     // xoa 
-    @Override
     public void xoaBangChucVu() {
         System.out.print("Vui nhập mã chức vụ để xóa: ");
-        String machucvu = sc.nextLine();
+        String machucvu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
@@ -75,7 +77,6 @@ public class DanhSachChucVu {
             }
         }
     }
-    @Override
     public void xoaBangChucVu(String machucvu) {
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
@@ -90,8 +91,8 @@ public class DanhSachChucVu {
     }
     // sua
     public void suaBangChucVu() {
-        System.out.print("Vui lòng nhập mã chức vụ để xóa: ")
-        String machucvu = sc.nextLine();
+        System.out.print("Vui lòng nhập mã chức vụ để sửa: ");
+        String machucvu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
@@ -100,7 +101,6 @@ public class DanhSachChucVu {
             }
         }
     }
-    @Override
     public void suaBangChucVu(String machucvu) {
         
         for(int i = 0; i < n;i++) {
@@ -111,10 +111,9 @@ public class DanhSachChucVu {
         }
     }
     // tim kiem
-    @Override
     public void timKiem() {
         System.out.print("Vui lòng nhập mã chức vụ để tìm kiếm: ");
-        String machucvu = sc.nextLine();
+        String machucvu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
@@ -122,25 +121,46 @@ public class DanhSachChucVu {
             }
         }
     }
-    @Override
     public ChucVu timKiem(String machucvu) {
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
                 return dscv[i];
             }
         }
+        return null;
+    }
+    // tim kiếm theo tên
+    public void timKiemTheoTen() {
+        String tenchucvu = sc.nextLine();
+
+        for(int i = 0; i < n;i++) {
+            if(dscv[i].getTenChucVu().equalsIgnoreCase(tenchucvu)) {
+                dscv[i].inChucVu();
+                return;
+            }
+        }
+        System.out.println("Tìm kiếm thất bại");
+    }
+    public ChucVu timKiemTheo(String tenchucvu) {
+        for(int i = 0; i < n;i++) {
+            if(dscv[i].getTenChucVu().equalsIgnoreCase(tenchucvu)) {
+                return dscv[i];
+            }
+        }
+        return null;
+
     }
     // trao chuc vu cho nhan su
     public void traoChucVuNhanSu() {
         System.out.print("Nhập mã chức vụ: ");
-        ChucVu cv = timKiem(sc.nextLine());
+        ChucVu cv = timKiem(sc.nextLine().toUpperCase());
         if(cv == null) {
             System.out.println("Chức vụ không tồn tại");
             return;
         }
 
         System.out.print("Nhập mã nhân sự: ");
-        NhanSu ns = cnns.timKiem(sc.nextLine());
+        NhanSu ns = cnns.timKiem(sc.nextLine().toUpperCase());
         if(ns == null) {
             System.out.println("Nhân sự chưa tồn tại");
             return;
@@ -150,8 +170,9 @@ public class DanhSachChucVu {
     } 
     // in bang chuc vu
     public void inThongTinChucVu() {
-        System.out.printf("|%-15s|%-15s|%-15s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
-
+        System.out.println("\n======================================================");
+        System.out.printf("|%-15s|%-15s|%21s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
+        System.out.println("------------------------------------------------------");
         for(int i = 0; i < n;i++) {
             dscv[i].inChucVu();
         }
@@ -160,19 +181,40 @@ public class DanhSachChucVu {
     public void xuatFileBangChucVu() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachChucVu.txt"))) {
             write.println("=======================================================");
-            write.printf("|%-15s|%-15s|%-15s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
+            write.printf("|%-15s|%-15s|%21s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
             write.println("-------------------------------------------------------");
             for(ChucVu cv : dscv) {
-                write.printf("|%-15s|%-15s|%-15s|\n",cv.getMaChucVu(),cv.getTenChucVu(),cv.getPhuCapChucVu());
+                write.printf("|%-15s|%-15s|%,18.2fVNĐ|\n",cv.getMaChucVu(),cv.getTenChucVu(),cv.getPhuCapChucVu());
             }
         }catch(IOException e) {
             System.out.println("Không thể ghi xuống file: "+ e.getMessage());
         }
     }
+    // doc file
+    public void docFileBangChucVu() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachChucVu.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
+
+            String line;
+
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+                String machucvu = info[1].trim();
+                String tenchucvu = info[2].trim();
+                Double phucapchucvu = Double.parseDouble(info[3].trim().replace("VNĐ","").replace(",",""));
+
+                themBangChucVu(new ChucVu(machucvu, tenchucvu, phucapchucvu));
+            }
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ fie" + e.getMessage());
+        }
+    }
     // lay phu cap nhan su
     public double tienPhuCapChucVu(String machucvu) {
         for(int i = 0; i < n;i++) {
-            if(dscv[i].getTenChucVu().equalsIgnoreCase(machucvu)) {
+            if(dscv[i].getMaChucVu().equals(machucvu)) {
                 return dscv[i].getPhuCapChucVu();
             }
         }
@@ -181,8 +223,9 @@ public class DanhSachChucVu {
     // sua phu
     public void sua(ChucVu cv) {
         while(true) {
+            System.out.println("\n========== BẢNG CHỨC NĂNG SỬA ==========");
             System.out.println("1. Sửa tên chức vụ");
-            System.out.println("2. Sửa thưởng phụ cấp")
+            System.out.println("2. Sửa thưởng phụ cấp");
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 

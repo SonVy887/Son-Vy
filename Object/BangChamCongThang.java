@@ -32,11 +32,9 @@ public class BangChamCongThang {
     // nhập 
     public void nhap() {
         System.out.print("Nhập mã chấm công tháng (VD:BCCT001): ");
-        this.machamcongthang = sc.nextLine();
+        this.machamcongthang = sc.nextLine().toUpperCase();
     }
     public void in() {
-        // System.out.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n","Mã BCCT", "Mã NS", "Tháng", "Năm", "Số Ngày Làm", "Số Ngày Nghỉ");
-        // System.out.println("---------------------------------------------------------------------------------------------------------------");
         System.out.printf("|%-10s|%-8s|%-7s|%-7s|%-16s|%-16s|\n", machamcongthang, manhansu == "" ? "Trống" : manhansu,
         thang, nam, songaylamviec, songaynghi);
     }

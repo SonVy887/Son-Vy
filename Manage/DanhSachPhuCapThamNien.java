@@ -31,11 +31,18 @@ public class DanhSachPhuCapThamNien {
 
     // thêm
     public void themQuyDinhPCTN() {
+        System.out.print("Vui lòng nhập mã thâm niên để kiểm tra: ");
+        while(kiemTra(sc.nextLine().toUpperCase())) {
+            System.out.println("Mã này đã tồn tại!");
+            System.out.print("Vui lòng nhập lại: ");
+        }
+
         dsqdpc = Arrays.copyOf(dsqdpc, n + 1);
         dsqdpc[n] = new QuyDinhPhuCapThamNien();
         dsqdpc[n].nhap();
         this.n++;
     }
+
     public void themQuyDinhPCTN(QuyDinhPhuCapThamNien a) {
         dsqdpc = Arrays.copyOf(dsqdpc, n + 1);
         dsqdpc[n] = a;
@@ -57,7 +64,7 @@ public class DanhSachPhuCapThamNien {
     // xoa
     public void xoaQuyDinhPCTN() {
         System.out.print("Nhập mã phụ cấp thâm niên để xóa: ");
-        String mapcthamnien = sc.nextLine();
+        String mapcthamnien = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dsqdpc[i].getMaPCThamNien().equals(mapcthamnien)) {
@@ -88,7 +95,7 @@ public class DanhSachPhuCapThamNien {
     // sua
     public void suaQuyDinhPCTN() {
         System.out.print("Nhập mã quy định phụ cấp thâm niên muốn sửa: ");
-        String mapcthamnien = sc.nextLine();
+        String mapcthamnien = sc.nextLine().toUpperCase();
 
         for(int i  = 0; i < n;i++) {
             if(dsqdpc[i].getMaPCThamNien().equals(mapcthamnien)) {
@@ -110,7 +117,7 @@ public class DanhSachPhuCapThamNien {
     // tim kiem theo ma
     public void tiemKiemTheoMa() {
         System.out.print("Nhập mã phụ cấp thâm niên muốn tìm kiếm: ");
-        String mapcthamnien = sc.nextLine();
+        String mapcthamnien = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dsqdpc[i].getMaPCThamNien().equals(mapcthamnien)) {
@@ -174,6 +181,7 @@ public class DanhSachPhuCapThamNien {
     }
     // in
     public void inPhucCapThamNien() {
+        System.out.println("===========================================================");
         System.out.printf("|%-15s|%-17s|%24s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
         System.out.println("-----------------------------------------------------------");
         for(int i = 0; i < n;i++) {
@@ -183,7 +191,8 @@ public class DanhSachPhuCapThamNien {
     // xuat file phu cap tham nien
     public void xuatFilePhuCapThamNien() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhuCapThamNien.txt"))) {
-            write.printf("|%-15s|%-17s|%-23s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
+            write.println("===========================================================");
+            write.printf("|%-15s|%-17s|%23s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
             write.println("-----------------------------------------------------------");
             for(QuyDinhPhuCapThamNien p : dsqdpc) {
                 write.printf("|%-15s|%-17d|%,17.2f/tháng|\n",
@@ -197,6 +206,8 @@ public class DanhSachPhuCapThamNien {
         try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhuCapThamNien.txt"))) {
             br.readLine();
             br.readLine();
+            br.readLine();
+
             String line;
             while((line = br.readLine()) != null) {
                 
@@ -212,9 +223,15 @@ public class DanhSachPhuCapThamNien {
             System.out.println("Lỗi đọc dữ liệu từ file" + e.getMessage());
         }
     }
+    // thong ke so tien phu cap tham nien 
+    // public int[] thongKeTienPCTN() {
+
+    // }
+    
     // sua phu
     public void sua(QuyDinhPhuCapThamNien a) {
         while(true) {
+            System.out.println("\n========== CHỨC NĂNG SỬA ==========");
             System.out.println("1. Sửa số năm thưởng phụ cấp thâm niên");
             System.out.println("2. Sửa số tiền thưởng phụ cấp thâm niên");
             System.out.println("0. Để thoát");
@@ -243,7 +260,4 @@ public class DanhSachPhuCapThamNien {
             }
         }
     }
-
-
-
 }

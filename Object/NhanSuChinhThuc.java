@@ -18,27 +18,19 @@ public class NhanSuChinhThuc extends NhanSu {
         this.sonamkinhnghiem = copy.sonamkinhnghiem;
     }
     public void inChiTietCT() {
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu,
-        maphongban=="" ? "Rong" : maphongban, ngayvaolam, sonamkinhnghiem, luongcoban);
+        ngaysinh, machucvu =="" ? "Trống" : machucvu,
+        maphongban=="" ? "Trống" : maphongban, ngayvaolam, sonamkinhnghiem, luongcoban);
     }
-    //===============================================================
     @Override
     public void inThongTin() {
-        // System.out.println("===========================================================================================================================================================");
-        // System.out.printf("|%-17s|%-8s|%-10s|%-8s|%-12s|%-15s|%-12s|%-12s|%-24s|%-11s|%-13s|%22s\n",
-        // "Mã NS","Họ", "Tên",
-        // "Tuổi", "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
-        // "Ngày Sinh", "Email", "Phòng Ban", "Năm K/N"," Lương Cơ Bản");
-        // System.out.printf("-----------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-12s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
         ngaysinh, machucvu == "" ? "Trống" : machucvu,
-        maphongban=="" ? "Rong" : maphongban, ngayvaolam, loai(), luongcoban);
-        // System.out.println("===========================================================================================================================================================");
+        maphongban=="" ? "Trống" : maphongban, ngayvaolam, loai(), luongcoban);
     }
     @Override 
     public String loai(){

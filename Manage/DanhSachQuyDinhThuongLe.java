@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class DanhSachQuyDinhThuongLe {
     private QuyDinhThuongLe[] dsqdtl;
@@ -15,6 +17,7 @@ public class DanhSachQuyDinhThuongLe {
     public DanhSachQuyDinhThuongLe() {
         dsqdtl = new QuyDinhThuongLe[0];
         this.n = 0;
+        docFileDanhSachThuongLe();
     }
 
     // kiem tra
@@ -29,7 +32,7 @@ public class DanhSachQuyDinhThuongLe {
     // them 
     public void themQuyDinhThuongLe() {
         System.out.print("Vui lòng nhập mã thưởng lễ để kiểm tra: ");
-        while(kiemTra(sc.nextLine())) {
+        while(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Mã thưởng lễ đã tồn tại!");
             System.out.print("Vui lòng nhập lại: ");
         }
@@ -60,7 +63,7 @@ public class DanhSachQuyDinhThuongLe {
     // xoa 
     public void xoaQuyDinhThuongLe() {
         System.out.print("Nhập mã quy định thưởng lễ bạn muốn xóa: ");
-        String mathuongle = sc.nextLine();
+        String mathuongle = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dsqdtl[i].getMaThuongLe().equals(mathuongle)) {
@@ -92,7 +95,7 @@ public class DanhSachQuyDinhThuongLe {
     // sua
     public void suaQuyDinhThuongLe() {
         System.out.print("Nhập mã quy định thưởng lễ muốn sửa: ");
-        String mathuongle = sc.nextLine();
+        String mathuongle = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dsqdtl[i].getMaThuongLe().equals(mathuongle)) {
@@ -116,7 +119,7 @@ public class DanhSachQuyDinhThuongLe {
     // tim kiem theo ma
     public void timKiemTheoMa() {
         System.out.print("Nhập mã thưởng lễ muốn tìm kiếm: ");
-        String mathuongle = sc.nextLine();
+        String mathuongle = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n ;i++) {
             if(dsqdtl[i].getMaThuongLe().equals(mathuongle)) {
@@ -180,8 +183,9 @@ public class DanhSachQuyDinhThuongLe {
     }
     // in 
     public void inDanhSachQuyDinhThuongLe() {
-        System.out.printf("|%-15s|%-15s|%-15s|%-20.2f|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
-        System.out.println("---------------------------------------------------------------------------------------------");
+        System.out.println("\n=============================================================================");
+        System.out.printf("|%-15s|%-20s|%-15s|%23s|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
+        System.out.println("-----------------------------------------------------------------------------");
 
         for(int i = 0; i < n;i++) {
             dsqdtl[i].in();
@@ -190,21 +194,68 @@ public class DanhSachQuyDinhThuongLe {
     // xuat file quy dinh thuong le
     public void xuatFileThuongLe() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachQuyDinhThuongLe.txt"))) {
-        write.printf("|%-15s|%-15s|%-15s|%-20.2f|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
-        write.println("---------------------------------------------------------------------------------------------");
+        write.println("===========================================================================");
+        write.printf("|%-15s|%-20s|%-15s|%20s|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
+        write.println("---------------------------------------------------------------------------");
 
         for(QuyDinhThuongLe d : dsqdtl) {
-            write.printf("|%-15s|%-15s|%-15s|%,19.2f|\n",d.getMaThuongLe(),d.getTenThuongLe(),d.getNgayThangLe(),d.getSoTienThuongLe());
+            write.printf("|%-15s|%-20s|%-15s|%,17.2fVNĐ|\n",d.getMaThuongLe(),d.getTenThuongLe(),d.getNgayThangLe(),d.getSoTienThuongLe());
         }
         }catch(Exception e) {
             System.out.println("Lỗi không thể ghi xuống file" + e.getMessage());
         }
     }
+    // doc file
+    public void docFileDanhSachThuongLe() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachQuyDinhThuongLe.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
 
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
 
+                String mathuongle = info[1].trim();
+                String tenthuongle = info[2].trim();
+                String ngaythangle = info[3].trim();
+                Double tienthuong = Double.parseDouble(info[4].trim().replace("VNĐ","").replace(",",""));
+
+                themQuyDinhThuongLe(new QuyDinhThuongLe(mathuongle, tenthuongle, ngaythangle, tienthuong));
+            }
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ file" + e.getMessage());
+        }
+    }
+
+    // thong ke ten le co so tien lon hon 1tr
+    public String[] thongKeTienTL() {
+        String[] kq = new String[0];
+        int j = 0;
+
+        for(int i = 0; i < n;i++) {
+            if(dsqdtl[i].getSoTienThuongLe() >= 1) {
+                kq = Arrays.copyOf(kq, j + 1);
+                kq[j++] = dsqdtl[i].getTenThuongLe();
+            }
+        }
+        return kq;
+    }
+    // xuat 
+    public void xuat() {
+        try(PrintWriter wr = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongketientl.txt"))) {
+            String[] kq = thongKeTienTL();
+            for(String s : kq) {
+                wr.println(s);
+            }
+        }catch(IOException e) {
+            System.out.println("lỗi" + e.getMessage());
+        }
+    }
     // sua phu
     public void sua(QuyDinhThuongLe qdtl) {
         while(true){
+            System.out.println("\n========== CHỨC NĂNG SỬA ==========");
             System.out.println("1. Sửa ngày tháng lễ");
             System.out.println("2. Sửa tên lễ");
             System.out.println("3. Sửa số tiền thưởng lễ");

@@ -30,32 +30,35 @@ public class PhanCong {
     
     // in 
     public void inThongTinPhanCong(){
-        // System.out.println("=================================================================");
-        // System.out.printf("|%-15s|%-15s|%-15s|%15s|\n","Mã Phân Công","Mã Nhân Sự","Mã Đồ Án","Thời Gian");
-        // System.out.println("-----------------------------------------------------------------");
-        System.out.printf("|%-15s|%-15s|%-15s|%15s|%-13s|%-20s\n",maphancong,manhansu =="" ? "Trống" : manhansu,
+        System.out.printf("|%-10s|%-10s|%-10s|%-9s tháng|%-13s|%,17.2fVNĐ|\n",maphancong,manhansu =="" ? "Trống" : manhansu,
         maduan == "" ? "Trống" : maduan,thoigian,dokho == "" ? "Trống" : dokho, thuong);
-        // System.out.println("=================================================================");
     }
     //nhap
     public void nhapPhanCong(){
         System.out.print("Nhập mã phân công (VD: PC001): ");
         this.maphancong = sc.nextLine().toUpperCase();
+
+        System.out.print("Nhập thời gian: ");
+        this.thoigian = sc.nextInt();sc.nextLine();
+
+        System.out.println("Nhập độ khó: ");
+        bangDoKho();
+
     }
     public void bangDoKho() {
-        System.out.println("\n");
+        System.out.println("\n=========== BẢNG ĐỘ KHÓ ==========");
         System.out.println("1. Khó");
         System.out.println("2. Trung bình");
         System.out.println("3. Dễ");
         System.out.println("0. Để thoát");
-        System.out.println("Lựa chọn: ");
+        System.out.print("Lựa chọn: ");
 
         int choice = sc.nextInt();sc.nextLine();
 
         switch(choice) {
-            case 1:this.dokho = "Khó";break;
-            case 2:this.dokho = "Trung bình";break;
-            case 3:this.dokho = "Dễ";break;
+            case 1:this.dokho = "Khó";this.thuong = 2_000_000;break;
+            case 2:this.dokho = "Trung bình";this.thuong = 1_000_000;break;
+            case 3:this.dokho = "Dễ";this.thuong = 600_000;break;
         }
     }
 

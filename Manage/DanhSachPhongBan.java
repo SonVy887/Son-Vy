@@ -6,6 +6,8 @@ import Interface.*;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class DanhSachPhongBan {
     private PhongBan[] dspb;
@@ -17,6 +19,7 @@ public class DanhSachPhongBan {
         dspb = new PhongBan[0];
         n = 0;
         this.cnns = cnns;
+        docFilePhongBan();
     }
 
     //them n phong ban dau tien
@@ -93,7 +96,7 @@ public class DanhSachPhongBan {
        System.out.println("Không tìm thấy phòng ban");
     }
     public void xoaPhongBan(){// chua test
-        System.out.println("Nhập mã phòng ban muốn xóa: ");
+        System.out.print("Nhập mã phòng ban muốn xóa: ");
         String maphongban = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -175,15 +178,16 @@ public class DanhSachPhongBan {
             return;
         }
         pb.setTruongPhong(ns.getMaNhanSu());
-        System.out.print("Nhập ngày nhận chức(dd-MM-yyyy): ");
+        System.out.print("Nhập ngày nhận chức(dd/MM/yyyy): ");
         pb.setNgayNhanChuc(sc.nextLine());
+        ns.setMaChucVu("CV001");
     }
 
     // in
     public void inThongTin(){
-        System.out.println("\n========================================================================================");
-        System.out.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức","Số lượng Nhân Sự");
-        System.out.printf("----------------------------------------------------------------------------------------\n");
+        System.out.println("\n======================================================================");
+        System.out.printf("|%-17s|%-18s|%-14s|%-16s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức");
+        System.out.printf("----------------------------------------------------------------------\n");
 
         for (int i = 0; i < n; i++) {
             dspb[i].inThongTinPhongBan();
@@ -201,16 +205,69 @@ public class DanhSachPhongBan {
     // xuat file phong ban
     public void xuatFilePhongBan() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhongBan.txt"))) {
-            write.println("========================================================================================");
-            write.printf("|%-17s|%-18s|%-14s|%-16s|%-17s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởnng Phòng", "Ngày Nhận Chức");
-            write.printf("----------------------------------------------------------------------------------------\n");
+            write.println("======================================================================");
+            write.printf("|%-17s|%-18s|%-14s|%-16s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởnng Phòng", "Ngày Nhận Chức");
+            write.printf("----------------------------------------------------------------------\n");
             for(PhongBan p : dspb) {
                 write.printf("|%-17s|%-18s|%-14s|%-16s|\n",
-                p.getMaPhongBan(), p.getTenPhongBan(), (p.getTruongPhong() == "" ? "Trong" : p.getTruongPhong()),
-                p.getNgayNhanChuc());
+                p.getMaPhongBan(), p.getTenPhongBan(), (p.getTruongPhong() !=null ? p.getTruongPhong() : "Trống"),
+                p.getNgayNhanChuc() != null ? p.getNgayNhanChuc() : "Trống");
             }
         }catch(IOException e) {
             System.out.println("Đã xảy ra lỗi khi xuất file: "+ e.getMessage());
+        }
+    }
+    // doc file
+    public void docFilePhongBan() {
+        try(BufferedReader br = new BufferedReader(new FileReader("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhongBan.txt"))) {
+            br.readLine();
+            br.readLine();
+            br.readLine();
+
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] info = line.split("\\|");
+                String maphongban = info[1].trim();
+                String tenphongban = info[2].trim();
+                String matruongphong = info[3].trim();
+                String ngaynhanchuc = info[4].trim();
+
+                addPhongBan(new PhongBan(maphongban, tenphongban, matruongphong, ngaynhanchuc));
+            }
+
+        }catch(IOException e) {
+            System.out.println("Không có dữ liệu từ file" + e.getMessage());
+        }
+    }
+    // sua phu
+    public void sua(PhongBan pb) {
+        while(true) {
+            System.out.println("\n========== CHỨC NĂNG SỬA =========");
+            System.out.println("1. Sửa tên phòng ban");
+            System.out.println("2. Sửa ngày nhận chức");
+            System.out.println("0. Để thoát");
+            System.out.print("Lựa chọn: ");
+
+            int choice;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); 
+            } catch (Exception e) {
+                System.out.println("Vui lòng nhập số!");
+                sc.nextLine();
+                continue;      
+            }
+
+            if(choice == 0) break;
+
+            switch(choice) {
+                case 1: System.out.print("Nhập tên phòng ban mới: ");
+                    pb.setTenPhongBan(sc.nextLine());
+                    System.out.println("Sửa thành công");break;
+                case 2: System.out.println("Nhập ngày nhận chức mới(dd/MM/yyyy): ");
+                    pb.setNgayNhanChuc(sc.nextLine());
+                    System.out.println("Sửa thành công");break;
+            }
         }
     }
 }

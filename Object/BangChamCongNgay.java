@@ -4,40 +4,42 @@ import java.util.Scanner;
 public class BangChamCongNgay {
     private String machamcong;
     private String manhansu;
-    private String ngaylamviec;
+    private int ngay;
+    private int thang;
+    private int nam;
     private String status;
     Scanner sc = new Scanner(System.in);
 
 
     // Constructor
-    public BangChamCongNgay(String machamcong, String manhansu, String ngaylamviec, String status) {
+    public BangChamCongNgay(String machamcong, String manhansu, int ngay, int thang, int nam, String status) {
         this.machamcong = machamcong;
         this.manhansu = manhansu;
-        this.ngaylamviec = ngaylamviec;
+        this.ngay = ngay;
+        this.thang = thang;
+        this.nam = nam;
         this.status = status;
     }
     public BangChamCongNgay() {}
     public BangChamCongNgay(BangChamCongNgay copy){
         this.machamcong = copy.machamcong;
         this.manhansu = copy.manhansu;
-        this.ngaylamviec = copy.ngaylamviec;
+        this.ngay = copy.ngay;
+        this.thang = copy.thang;
+        this.nam = copy.nam;
         this.status = copy.status;
     }
 
     public void in() {
-        // System.out.println("\n=============================================================================================================================");
-        // System.out.printf("|%-15s|%-20s|%-15s|%-15s|%-15s|\n","Mã NV", "Tổng ngày công", "Nghỉ P", "Nghỉ Ốm", "Nghỉ KP");
-        // System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("|%-15s|%-15s|%-18s|%-10s\n",
+        System.out.printf("|%-15s|%-15s|%-10s|%-10s|%-10s|%-16s|\n",
         machamcong == "" ? "Trống" : machamcong,
         manhansu == "" ? "Trống" : manhansu,
-        ngaylamviec == "" ? "Trống" : ngaylamviec,
+        ngay, thang, nam,
         status == "" ? "Trống" : status);
-        // System.out.println("==============================================================================================================================");
     }
 
     public void nhap() {
-        System.out.print("Nhập mã bảng chấm công ngày (VD: BCC001): ");
+        System.out.print("Nhập mã bảng chấm công ngày (VD:CC001): ");
         this.machamcong = sc.nextLine().toUpperCase();
     }
     public void bangTrangThai() {
@@ -88,11 +90,23 @@ public class BangChamCongNgay {
     public void setMaNhanSu(String manhansu) {
         this.manhansu = manhansu;
     }
-    public String getNgayLamViec() {
-        return ngaylamviec;
+    public int getNgay() {
+        return this.ngay;
     }
-    public void setNgayLamViec(String ngaylamviec) {
-        this.ngaylamviec = ngaylamviec;
+    public void setNgay(int ngay) {
+        this.ngay = ngay;
+    }
+    public int getThang() {
+        return this.thang;
+    }
+    public void setThang(int thang) {
+        this.thang = thang;
+    }
+    public int getNam() {
+        return this.nam;
+    }
+    public void setNam(int nam) {
+        this.nam = nam;
     }
     public String getStatus() {
         return status;

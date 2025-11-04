@@ -1,0 +1,4 @@
+Số lượng nhân sự dưới 18 tuổi: 0
+Số lượng nhân sự từ 19 đến 30 tuổi: 2
+Số lượng nhân sự từ 31 đến 65 tuổi: 3
+Số lượng nhân sự trên 66 tuổi: 0

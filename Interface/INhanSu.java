@@ -57,4 +57,7 @@ public interface INhanSu {
     void inChiTietNhanSuThucTap();
     // xuat file danh sach nhan su
     void xuatFileDanhSachNhanSu();
+    // doc file
+    //void docFileDanhSachNhanSu();
+    void docFileDanhSachNhanSu();
 }
