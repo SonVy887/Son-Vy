@@ -38,16 +38,12 @@ public class NhanSuThucTap extends NhanSu {
         System.out.printf("|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-8s tháng|%-5s|%,18.2f VNĐ|\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu == "" ? "Trống" : machucvu, maphongban =="" ? "Trống" : maphongban, ngayvaolam,
+        ngaysinh, machucvu == null ? "Trống" : machucvu, maphongban == null ? "Trống" : maphongban, ngayvaolam,
         thoigianthuctap, gpa, luongcoban);
     }
     @Override
     public void inThongTin() {
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
-        manhansu, ho, ten,
-        diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu == "" ? "Trống" : machucvu,
-        maphongban=="" ? "Trống" : maphongban, ngayvaolam, loai(), luongcoban);
+        super.inThongTin();
     }
 
     @Override

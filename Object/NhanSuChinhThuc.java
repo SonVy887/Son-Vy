@@ -21,16 +21,12 @@ public class NhanSuChinhThuc extends NhanSu {
         System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu =="" ? "Trống" : machucvu,
-        maphongban=="" ? "Trống" : maphongban, ngayvaolam, sonamkinhnghiem, luongcoban);
+        ngaysinh, machucvu == null ? "Trống" : machucvu,
+        maphongban== null ? "Trống" : maphongban, ngayvaolam, sonamkinhnghiem, luongcoban);
     }
     @Override
     public void inThongTin() {
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
-        manhansu, ho, ten,
-        diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu == "" ? "Trống" : machucvu,
-        maphongban=="" ? "Trống" : maphongban, ngayvaolam, loai(), luongcoban);
+        super.inThongTin();
     }
     @Override 
     public String loai(){

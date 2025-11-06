@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
@@ -513,15 +513,15 @@ public class DanhSachNhanSu implements INhanSu {
                     write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%-,18.2fVNĐ|\n",
                     nsct.loai(), nsct.getMaNhanSu(), nsct.getHoNhanSu(), nsct.getTenNhanSu(),
                     nsct.getDiaChi(), nsct.getSoDienThoai(), nsct.getGioiTinh(), 
-                    nsct.getNgaySinh(), nsct.getMaChucVu() == "" ? "Trống" : nsct.getMaChucVu(),
-                    nsct.getPhongBan() == "" ? "Trống" : nsct.getPhongBan(), nsct.getNgayVaoLam(), nsct.getSoNamKinhNghiem(), nsct.getLuongCoBan());
+                    nsct.getNgaySinh(), nsct.getMaChucVu() == null ? "Trống" : nsct.getMaChucVu(),
+                    nsct.getPhongBan() == null ? "Trống" : nsct.getPhongBan(), nsct.getNgayVaoLam(), nsct.getSoNamKinhNghiem(), nsct.getLuongCoBan());
                 }
                 else {
                     NhanSuThucTap nstt = (NhanSuThucTap) ns;
                     write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-8s|%-5s|%-,18.2fVNĐ|\n",
                     nstt.loai(), nstt.getMaNhanSu(), nstt.getHoNhanSu(), nstt.getTenNhanSu(),
                     nstt.getDiaChi(), nstt.getSoDienThoai(), nstt.getGioiTinh(), 
-                    nstt.getNgaySinh(), nstt.getMaChucVu() == "" ? "Trống" : nstt.getMaChucVu(), nstt.getPhongBan() == "" ? "Trống" : nstt.getPhongBan(), nstt.getNgayVaoLam(),
+                    nstt.getNgaySinh(), nstt.getMaChucVu() == null ? "Trống" : nstt.getMaChucVu(), nstt.getPhongBan() == null ? "Trống" : nstt.getPhongBan(), nstt.getNgayVaoLam(),
                     nstt.getThoiGianThucTap(), nstt.getGpa(), nstt.getLuongCoBan());
                 }
             }

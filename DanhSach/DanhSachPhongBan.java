@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import java.util.*;
 import Object.*;
 import Interface.*;
@@ -12,13 +12,11 @@ import java.io.FileReader;
 public class DanhSachPhongBan {
     private PhongBan[] dspb;
     private int n;
-    private DanhSachNhanSu cnns;
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachPhongBan(DanhSachNhanSu cnns) {
+    public DanhSachPhongBan() {
         dspb = new PhongBan[0];
         n = 0;
-        this.cnns = cnns;
         docFilePhongBan();
     }
 
@@ -162,27 +160,6 @@ public class DanhSachPhongBan {
         return kq;
         
     }
-    public void setTruongPhong() {
-        System.out.print("Nhập mã phòng ban cần có trưởng phòng: ");
-        String maphongban = sc.nextLine().toUpperCase();
-        PhongBan pb = timKiem(maphongban);// day
-        if(pb == null){
-            System.out.println("Không tìm thấy phòng ban");
-            return;
-        }
-        System.out.print("Nhập mã nhân sự làm trưởng phòng: ");
-        String manhansu = sc.nextLine().toUpperCase();
-        NhanSu ns = cnns.timKiem(manhansu);//day
-        if(ns == null){
-            System.out.println("Không tìm thấy nhân sự");
-            return;
-        }
-        pb.setTruongPhong(ns.getMaNhanSu());
-        System.out.print("Nhập ngày nhận chức(dd/MM/yyyy): ");
-        pb.setNgayNhanChuc(sc.nextLine());
-        ns.setMaChucVu("CV001");
-    }
-
     // in
     public void inThongTin(){
         System.out.println("\n======================================================================");

@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import Object.*;
 
 import java.util.Arrays;
@@ -13,17 +13,14 @@ import java.io.FileReader;
 public class DanhSachPhanCong {
     private PhanCong[] dspc;
     private int n;
-    private DanhSachNhanSu cnns; // chuc nang nhan su
-    private DanhSachDuAn cnda; // chuc nang do an
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachPhanCong(DanhSachNhanSu cnns, DanhSachDuAn cnda){
+    public DanhSachPhanCong(){
         dspc = new PhanCong[0];
         this.n = 0;
-        this.cnns = cnns;
-        this.cnda = cnda;
         docFilePhanCong();
     }
+
     // kiem tra duy nhat
     public boolean kiemTra(String maphancong){
         for (int i = 0; i < n; i++) {
@@ -58,6 +55,7 @@ public class DanhSachPhanCong {
         sc.nextLine();
 
         dspc = new PhanCong[n];
+
         for (int i = 0; i < n; i++) {
             dspc[i] = new PhanCong();
             dspc[i].nhapPhanCong();
@@ -114,38 +112,6 @@ public class DanhSachPhanCong {
         }
         System.out.println("Sửa thất bại");
     }
-    // phan cong nhan su lam do an
-    public void phanCongDoAn(){
-        System.out.print("Nhập mã phân công: ");
-        String maphancong = sc.nextLine().toUpperCase();
-        PhanCong pc = timKiem(maphancong);
-        if(pc == null){
-            System.out.println("Phân công chưa tồn tại");
-            return;
-        }
-
-        System.out.print("Nhập mã nhân sự: ");
-        String manhansu = sc.nextLine().toUpperCase();
-
-        NhanSu ns = cnns.timKiem(manhansu);
-        if(ns == null){
-            System.out.println("Nhân sự chưa tồn tại");
-            return;
-        }
-
-        System.out.print("Nhập mã đồ án: ");
-        String maduan = sc.nextLine().toUpperCase();
-
-        DuAn da = cnda.timDuAn(maduan);
-        if(da == null){
-            System.out.println("Đồ án chưa tồn tại");
-            return;
-        }
-
-        pc.setDuAn(da.getMaDuAn());
-        pc.setNhanSu(ns.getMaNhanSu());
-    }
-
     // tim kiem ma phan cong
     public void timKiem(){
         System.out.print("Nhập mã phân công: ");
@@ -204,6 +170,7 @@ public class DanhSachPhanCong {
         }
         return 0.0;
     }
+    
     // xuat file phan cong
     public void xuatFilePhanCong() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
@@ -244,6 +211,19 @@ public class DanhSachPhanCong {
         }catch(Exception e) {
             System.out.println("Không có dữ liệu từ file" + e.getMessage());
         } 
+    }
+    // thống kê thưởng dự án trên 
+    public int[] thongKeThuongDuAn() {
+        int thuong_duoi1tr = 0;
+        int thuong_tu1tr_den2tr = 0;
+        int thuong_tren2tr = 0;
+
+        for(int i = 0;i < n;i++) {
+            if(dspc[i].getThuong() < 1000000) thuong_duoi1tr++;
+            else if(dspc[i].getThuong() <= 2000000) thuong_tu1tr_den2tr++;
+            else thuong_tren2tr++;
+        }
+        return new int[] {thuong_duoi1tr, thuong_tu1tr_den2tr, thuong_tren2tr};
     }
     // sua phu
     public void sua(PhanCong pc) {

@@ -74,7 +74,13 @@ public abstract class NhanSu {
 
     }
     //============================================================>
-    public abstract void inThongTin();
+    public void inThongTin() {
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
+        manhansu, ho, ten,
+        diachi, sodienthoai, gioitinh, 
+        ngaysinh, machucvu == null ? "Trống" : machucvu,
+        maphongban== null ? "Trống" : maphongban, ngayvaolam, loai(), luongcoban);
+    }
     //============================================================>
     public abstract String loai();
     //============================================================>
@@ -106,7 +112,7 @@ public abstract class NhanSu {
 
 
     public LocalDate convert(){
-        String[] type = {"dd-MM-yyyy", "yyyy-MM-dd"};
+        String[] type = {"dd/MM/yyyy", "yyyy/MM/dd"};
         for(String f : type){
             try{
                 DateTimeFormatter transType = DateTimeFormatter.ofPattern(f);
@@ -117,7 +123,7 @@ public abstract class NhanSu {
     }
 
     public int tinhThamNien() {
-        String[] type = {"dd-MM-yyyy", "yyyy-MM-dd"};
+        String[] type = {"dd/MM/yyyy", "yyyy/MM/dd"};
         LocalDate ngaythangnam = null;
 
         for(String f : type){

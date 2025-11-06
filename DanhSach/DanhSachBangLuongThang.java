@@ -1,7 +1,9 @@
-package Manage;
-import Manage.*;
+package DanhSach;
 import Object.*;
 import java.util.Scanner;
+
+import DanhSach.*;
+
 import java.util.Arrays;
 import java.io.PrintWriter;
 import java.io.FileWriter;
@@ -10,23 +12,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class DanhSachBangLuongThang {
-    private DanhSachBangChamCongThang dscct;
-    private DanhSachPhanCong dspc;
-    private DanhSachNhanSu dsns;
-    private DanhSachPhuCapThamNien dspctn;
-    private DanhSachQuyDinhThuongLe dsqdtl;
-    private DanhSachChucVu dscv;
     private BangLuongThang[] dsblt;
     private int n;
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachBangLuongThang(DanhSachBangChamCongThang dscct,  DanhSachPhanCong dspc, DanhSachNhanSu dsns, DanhSachPhuCapThamNien dspctn, DanhSachQuyDinhThuongLe dsqdtl, DanhSachChucVu dscv) {
-        this.dscct = dscct;
-        this.dspc = dspc;
-        this.dsns = dsns;
-        this.dspctn = dspctn;
-        this.dsqdtl = dsqdtl;
-        this.dscv = dscv;
+    public DanhSachBangLuongThang() {
         dsblt = new BangLuongThang[0];
         this.n = 0;
         docFileBangLuongThang();
@@ -145,64 +135,6 @@ public class DanhSachBangLuongThang {
         }
         System.out.println("Tìm kiếm thất bại");
         return null;
-    }
-    // tinh luong thang cho nhan su 
-    public void tinhLuongThang() {
-        System.out.print("Nhập mã nhân sự: ");
-        String manhansu = sc.nextLine().toUpperCase();
-
-        NhanSu ns = dsns.timKiem(manhansu);
-        if(ns == null) {
-            System.out.println("Nhân sự chưa được khởi tạo");
-            return;
-        }
-
-        System.out.print("Nhập mã bảng lương tháng: ");
-        String mabangluong = sc.nextLine().toUpperCase();
-
-        BangLuongThang blt = timKiem(mabangluong);
-        if(blt == null) {
-            System.out.println("Mã bảng lương chưa tồn tại");
-            return;
-        }
-        blt.setMaNhanSu(manhansu);
-
-        System.out.print("Nhập mã lương thưởng lễ: ");
-        Double tienthuongle = dsqdtl.timKiemTheoMa(sc.nextLine().toUpperCase()).getSoTienThuongLe();
-        
-        Double tienduan = dspc.tienThuong(manhansu);
-        Double luongcoban = ns.getLuongCoBan();
-        Double tienphucapcv = tinhPhuCapChucVu(manhansu);
-        Double tienphucaptn = tinhPhuCapThamNien(manhansu);
-        Double tienluongtru = tinhTruLuong(manhansu);
-
-        Double tongluong = tienthuongle + tienphucaptn + tienduan + tienphucapcv + luongcoban;
-
-        blt.setLuongCoBan(luongcoban);
-        blt.setPhuCapThamNien(tienphucaptn);
-        blt.setThuongDuAn(tienduan);
-        blt.setThuongLe(tienthuongle);
-        blt.setPhuCapChucVu(tienphucapcv);
-        blt.setTruLuong(tienluongtru);
-        blt.setTongLuong(tongluong - tienluongtru);
-
-    }
-    // tinh phu cap tham nien
-    private double tinhPhuCapThamNien(String manhansu) {
-        int namtn = dsns.timKiem(manhansu).tinhThamNien();
-        if(dspctn.timKiemTheoNam(namtn)== null) {
-            return 500_000;
-        }
-        return dspctn.timKiemTheoNam(namtn).getSoTienPhuCap();
-    }
-    // tinh phu cap chuc vu
-    private double tinhPhuCapChucVu(String manhansu) {
-        return dscv.tienPhuCapChucVu(dsns.timKiem(manhansu).getMaChucVu());
-    }
-    // tinh trừ lương
-    private double tinhTruLuong(String manhansu) {
-        int songaynghi = dscct.timKiemNhanSuBCCT(manhansu).getSoNgayNghi();
-        return 500_000 * songaynghi;
     }
     // in 
     public void inBangLuongThang() {

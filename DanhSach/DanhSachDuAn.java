@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import Object.*;
 import java.util.*;
 import Interface.*;
@@ -12,13 +12,11 @@ import java.io.FileReader;
 public class DanhSachDuAn {
     private DuAn[] dsda;
     private int n;
-    DanhSachPhongBan cnpb;// chuc nang phong ban
     Scanner sc = new Scanner(System.in);
 
-    public DanhSachDuAn(DanhSachPhongBan cnpb){
+    public DanhSachDuAn(){
         dsda = new DuAn[0];
         this.n = 0;
-        this.cnpb = cnpb;
         docFileDanhSachDuAn();
     }
     // kiem tra duy nhat
@@ -156,25 +154,6 @@ public class DanhSachDuAn {
             }
         }
         return kq;
-    }
-    public void ganPhongBanDa(){
-        System.out.print("Nhập mã dự án: ");
-        String maduan = sc.nextLine().toUpperCase();
-        DuAn da = timDuAn(maduan);
-        if(da == null){
-            System.out.println("Dự án không tồn tại");
-            return;
-        }
-
-        System.out.print("Nhập mã phòng ban: ");
-        String maphongban = sc.nextLine().toUpperCase();
-        PhongBan pb = cnpb.timKiem(maphongban);
-
-        if(pb == null){
-            System.out.println("Phòng ban không tồn tại");
-            return;
-        }
-        da.setPhongBan(pb.getMaPhongBan());
     }
     // tim du an chua co pb
     public void timDuAnChuaPb(){

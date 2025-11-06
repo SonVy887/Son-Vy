@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import java.util.Scanner;
 import Object.*;
 import java.util.Arrays;
@@ -18,6 +18,7 @@ public class DanhSachQuyDinhThuongLe {
         dsqdtl = new QuyDinhThuongLe[0];
         this.n = 0;
         docFileDanhSachThuongLe();
+        xuat();
     }
 
     // kiem tra
@@ -190,6 +191,7 @@ public class DanhSachQuyDinhThuongLe {
         for(int i = 0; i < n;i++) {
             dsqdtl[i].in();
         }
+        System.out.println("\n");
     }
     // xuat file quy dinh thuong le
     public void xuatFileThuongLe() {
@@ -228,13 +230,13 @@ public class DanhSachQuyDinhThuongLe {
         }
     }
 
-    // thong ke ten le co so tien lon hon 1tr
+    // thong ke tên lễ co so tien lon hon 1tr
     public String[] thongKeTienTL() {
         String[] kq = new String[0];
         int j = 0;
 
         for(int i = 0; i < n;i++) {
-            if(dsqdtl[i].getSoTienThuongLe() >= 1) {
+            if(dsqdtl[i].getSoTienThuongLe() >= 1000000) {
                 kq = Arrays.copyOf(kq, j + 1);
                 kq[j++] = dsqdtl[i].getTenThuongLe();
             }
@@ -246,7 +248,7 @@ public class DanhSachQuyDinhThuongLe {
         try(PrintWriter wr = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongketientl.txt"))) {
             String[] kq = thongKeTienTL();
             for(String s : kq) {
-                wr.println(s);
+                wr.println("Tên lễ: "+ s);
             }
         }catch(IOException e) {
             System.out.println("lỗi" + e.getMessage());

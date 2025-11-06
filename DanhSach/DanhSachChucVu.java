@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import Object.*;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -12,14 +12,12 @@ import java.io.FileReader;
 public class DanhSachChucVu {
     private ChucVu[] dscv;
     private int n;
-    private DanhSachNhanSu cnns;
     Scanner sc = new Scanner(System.in);
 
 
-    public DanhSachChucVu(DanhSachNhanSu cnns){
+    public DanhSachChucVu(){
         dscv = new ChucVu[0];
         this.n = 0;
-        this.cnns = cnns;
         docFileBangChucVu();
     }
 
@@ -150,24 +148,6 @@ public class DanhSachChucVu {
         return null;
 
     }
-    // trao chuc vu cho nhan su
-    public void traoChucVuNhanSu() {
-        System.out.print("Nhập mã chức vụ: ");
-        ChucVu cv = timKiem(sc.nextLine().toUpperCase());
-        if(cv == null) {
-            System.out.println("Chức vụ không tồn tại");
-            return;
-        }
-
-        System.out.print("Nhập mã nhân sự: ");
-        NhanSu ns = cnns.timKiem(sc.nextLine().toUpperCase());
-        if(ns == null) {
-            System.out.println("Nhân sự chưa tồn tại");
-            return;
-        }
-        
-        ns.setMaChucVu(cv.getMaChucVu());
-    } 
     // in bang chuc vu
     public void inThongTinChucVu() {
         System.out.println("\n======================================================");

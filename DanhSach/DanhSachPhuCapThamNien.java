@@ -1,4 +1,4 @@
-package Manage;
+package DanhSach;
 import Object.*;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -17,6 +17,7 @@ public class DanhSachPhuCapThamNien {
         dsqdpc = new QuyDinhPhuCapThamNien[0];
         this.n = 0;
         docFilePhuCapThamNien();
+        xuat();
     }
 
     // kiem tra
@@ -223,10 +224,30 @@ public class DanhSachPhuCapThamNien {
             System.out.println("Lỗi đọc dữ liệu từ file" + e.getMessage());
         }
     }
-    // thong ke so tien phu cap tham nien 
-    // public int[] thongKeTienPCTN() {
+    // thong kê số năm có số tiền thưởng thâm niên nên 1tr
+    public int[] thongKeTienPCTN() {
+        int[] kq = new int[0];
+        int j = 0;
 
-    // }
+        for(int i = 0; i < n;i++) {
+            if(dsqdpc[i].getSoTienPhuCap() > 1000000) {
+                kq = Arrays.copyOf(kq, j + 1);
+                kq[j++] = dsqdpc[i].getSoNam();
+            }
+        }
+        return kq;
+    }
+    // xuat file thong ke trên
+    public void xuat() {
+        try(PrintWriter wr = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongkepctn.txt"))) {
+           
+            for(int i = 0; i < thongKeTienPCTN().length;i++) {
+                wr.println("Số năm là: " + thongKeTienPCTN()[i]);
+            }
+        }catch(Exception e) {
+            System.out.println("Lỗi" + e.getMessage());
+        }
+    }
     
     // sua phu
     public void sua(QuyDinhPhuCapThamNien a) {

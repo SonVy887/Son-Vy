@@ -1,10 +1,11 @@
-package Manage;
-
+package DanhSach;
 import Object.*;
-import Manage.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
+
+import DanhSach.*;
+
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -14,14 +15,12 @@ import java.io.FileReader;
 public class DanhSachBangChamCongNgay {
     private BangChamCongNgay[] bccn;
     private int n; 
-    private DanhSachNhanSu cnns;
     Scanner sc = new Scanner(System.in);
 
 
-    public DanhSachBangChamCongNgay(DanhSachNhanSu cnns) {
+    public DanhSachBangChamCongNgay() {
         bccn = new BangChamCongNgay[0];
         this.n = 0;
-        this.cnns = cnns;
         docFileBangChamCongNgay();
     }
     // kiem tra
@@ -132,37 +131,27 @@ public class DanhSachBangChamCongNgay {
         }
         return null;
     }
-    public void chamCongNhanSu() {
-        System.out.print("Nhập mã bảng chấm công ngày: ");
-        String machamcong = sc.nextLine().toUpperCase();
-
-        BangChamCongNgay bccn = timKiem(machamcong);
-        if(bccn == null) {
-            System.out.println("Bảng chấm công chưa tồn tại");
-            return;
+    // tim kiem theo ma nhan su trong bang cham cong ngay
+    public BangChamCongNgay timKiemNSCCN(String manhansu) {
+        for(int i = 0; i < n;i++) {
+            if(bccn[i].getMaNhanSu().equals(manhansu)) {
+                return bccn[i];
+            }
         }
-
-        System.out.print("Nhập mã nhân sự: ");
-        String manhansu = sc.nextLine().toUpperCase();
-
-        NhanSu ns = cnns.timKiem(manhansu);
-        if(ns == null) {
-            System.out.println("Nhân sự chưa được tạo");
-            return;
-        }
-
-        
-        System.out.print("Nhập ngày: ");
-        bccn.setNgay(sc.nextInt());sc.nextLine();
-        System.out.println("Nhập tháng: ");
-        bccn.setThang(sc.nextInt());sc.nextLine();
-        System.out.println("Nhập năm: ");
-        bccn.setNam(sc.nextInt());sc.nextLine();
-
-        bccn.bangTrangThai();
-        bccn.setMaNhanSu(ns.getMaNhanSu());
-        System.out.println("Chấm công thành công");
+        return null;
     }
+    // tinh ngày làm và nghỉ
+    public int[] tinhNgay(String manhansu) {
+        int tongngaylam = 0;
+
+        for(int i = 0; i < n;i++) {
+            if(bccn[i].getMaNhanSu().equals(manhansu) && bccn[i].getStatus().equalsIgnoreCase("Đi làm")) {
+                tongngaylam++;
+            }
+        }
+        return new int[] { tongngaylam, 20 - tongngaylam};
+    }
+
     // xuat file bang cham cong
     public void xuatFileBangChamCongNgay() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCongNgay.txt"))) {
@@ -215,25 +204,12 @@ public class DanhSachBangChamCongNgay {
             bccn[i].in();
         }
     }
-    // lấy ngày công
-    public int tongNgayCong(String manhansu, int thang) {
-        int tongngaydilam = 0;
-        
-        for(int i = 0; i < n;i++){
-            if(bccn[i].getMaNhanSu().equals(manhansu) && bccn[i].getThang() == thang && bccn[i].getStatus().equals("Đi làm")){
-                tongngaydilam++;
-            }
-        }
-        return tongngaydilam;
-    }
-    
     // hàm phụ
     public void sua(BangChamCongNgay bccn) {
         while(true){
             System.out.println("1. Sửa ngày");
             System.out.println("2. Sửa tháng");
             System.out.println("3. Sửa năm");
-            System.out.println("4. Sửa status");
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
 
@@ -265,13 +241,9 @@ public class DanhSachBangChamCongNgay {
                     bccn.setNam(sc.nextInt());sc.nextLine();
                     System.out.println("Sửa thành công");
                     break;
-                case 4:
-                    System.out.print("Chọn trạng thới mới để sửa: ");
-                    bccn.bangTrangThai();
-                    System.out.println("Sửa thành công");
-                    break;
                 default:
                     System.out.println("Lựa chọn không hợp lệ!");
+                    sua(bccn);break;
             }
         }
     }

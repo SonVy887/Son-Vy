@@ -42,41 +42,6 @@ public class BangChamCongNgay {
         System.out.print("Nhập mã bảng chấm công ngày (VD:CC001): ");
         this.machamcong = sc.nextLine().toUpperCase();
     }
-    public void bangTrangThai() {
-        while(true) {
-            System.out.println("Chọn trạng thái làm việc:");
-            System.out.println("1. Đi làm");
-            System.out.println("2. Nghỉ phép");
-            System.out.println("3. Nghỉ ốm");
-            System.out.println("4. Nghỉ không phép");
-            System.out.println("0. Để thoát");
-            System.out.print("Lựa chọn của bạn (1-4): ");
-            int choice = sc.nextInt();
-            sc.nextLine();
-
-            if (choice == 0) break;
-
-            switch (choice) {
-                case 1:
-                    this.status = "Đi làm";
-                    break;
-                case 2:
-                    this.status = "Nghỉ phép";
-                    break;
-                case 3:
-                    this.status = "Nghỉ ốm";
-                    break;
-                case 4:
-                    this.status = "Nghỉ không phép";
-                    break;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ.Vui lòng thử lại.");
-                    break;
-            }
-        }
-    }
-
-
     // Getters and Setters
     public String getMaChamCong() {
         return machamcong;

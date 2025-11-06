@@ -55,7 +55,7 @@ public class BangLuongThang {
         sc.nextLine();
     }
     public void in() {
-        System.out.printf("|%-10s|%-10s|%-10s|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|\n",mabangluongthang, thang +"/"+nam, manhansu, luongcoban, thuongle, thuongduan, phucapchucvu, phucapthamnien, truluong, tongluong);
+        System.out.printf("|%-10s|%-10s|%-10s|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|\n",mabangluongthang, thang +"/"+nam, manhansu == null ? "Trống" : manhansu, luongcoban, thuongle, thuongduan, phucapchucvu, phucapthamnien, truluong, tongluong);
     }
 
     public String getMaBangLuongThang() {
