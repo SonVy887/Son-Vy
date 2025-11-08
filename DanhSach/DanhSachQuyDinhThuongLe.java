@@ -17,8 +17,6 @@ public class DanhSachQuyDinhThuongLe {
     public DanhSachQuyDinhThuongLe() {
         dsqdtl = new QuyDinhThuongLe[0];
         this.n = 0;
-        docFileDanhSachThuongLe();
-        xuat();
     }
 
     // kiem tra

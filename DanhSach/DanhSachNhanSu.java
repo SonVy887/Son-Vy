@@ -20,7 +20,6 @@ public class DanhSachNhanSu implements INhanSu {
     public DanhSachNhanSu() {
         dsns = new NhanSu[0];
         n = 0;
-        docFileDanhSachNhanSu();
     }
     
     // them nhan su

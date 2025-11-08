@@ -2,6 +2,8 @@ package HeThong;
 import QuanLy.*;
 import java.util.Scanner;
 
+import DanhSach.DanhSachNhanSu;
+
 public class HeThong {
     QuanLy[] qlns;
     Scanner sc = new Scanner(System.in);
@@ -9,6 +11,7 @@ public class HeThong {
     public HeThong() {
         qlns = new QuanLy[10];
 
+        QuanLy.docFile();
         qlns[0] = new QuanLyNhanSu();
         qlns[1] = new QuanLyPhongBan();
         qlns[2] = new QuanLyDuAn();
@@ -47,7 +50,9 @@ public class HeThong {
                 continue;
             }
 
-            if(choice == 0) break;
+            if(choice == 0) {
+                QuanLy.xuatFile();
+            }
 
             // lua chon
             switch(choice){

@@ -18,7 +18,6 @@ public class DanhSachPhanCong {
     public DanhSachPhanCong(){
         dspc = new PhanCong[0];
         this.n = 0;
-        docFilePhanCong();
     }
 
     // kiem tra duy nhat

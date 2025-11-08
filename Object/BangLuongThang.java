@@ -46,13 +46,6 @@ public class BangLuongThang {
     public void nhapBangLuong() {
         System.out.print("Nhập mã bảng lương tháng (VD: BLT001): ");
         this.mabangluongthang = sc.nextLine().toUpperCase();
-
-        System.out.print("Nhập tháng: ");
-        this.thang = sc.nextInt();
-
-        System.out.print("Nhập năm: ");
-        this.nam = sc.nextInt();
-        sc.nextLine();
     }
     public void in() {
         System.out.printf("|%-10s|%-10s|%-10s|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|\n",mabangluongthang, thang +"/"+nam, manhansu == null ? "Trống" : manhansu, luongcoban, thuongle, thuongduan, phucapchucvu, phucapthamnien, truluong, tongluong);

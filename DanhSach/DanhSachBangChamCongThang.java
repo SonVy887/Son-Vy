@@ -17,7 +17,6 @@ public class DanhSachBangChamCongThang {
     public DanhSachBangChamCongThang() {
         bcct = new BangChamCongThang[0];
         this.n = 0; 
-        docFileBangChamCongThang();
     }
 
     // kiem tra

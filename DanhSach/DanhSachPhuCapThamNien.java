@@ -16,8 +16,6 @@ public class DanhSachPhuCapThamNien {
     public DanhSachPhuCapThamNien() {
         dsqdpc = new QuyDinhPhuCapThamNien[0];
         this.n = 0;
-        docFilePhuCapThamNien();
-        xuat();
     }
 
     // kiem tra
@@ -179,6 +177,13 @@ public class DanhSachPhuCapThamNien {
             }
         }
         return null;
+    }
+
+    public double tinhThuongThamNien(int nam) {
+        if(timKiemTheoNam(nam) == null) {
+            return 500_000;
+        }
+        return timKiemTheoNam(nam).getSoTienPhuCap();
     }
     // in
     public void inPhucCapThamNien() {

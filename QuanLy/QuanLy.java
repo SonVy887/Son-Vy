@@ -4,29 +4,43 @@ import java.util.Scanner;
 import DanhSach.*;
 
 public abstract class QuanLy {
-    protected static DanhSachNhanSu danhsachnhansu;
-    protected static DanhSachPhongBan danhsachphongban;
-    protected static DanhSachDuAn danhsachduan;
-    protected static DanhSachPhanCong danhsachphancong;
-    protected static DanhSachBangChamCongNgay danhsachbangchamcongngay;
-    protected static DanhSachBangChamCongThang danhsachbangchamcongthang;
-    protected static DanhSachQuyDinhThuongLe danhsachquydinhthuongle;
-    protected static DanhSachPhuCapThamNien danhsachphucapthamnien;
-    protected static DanhSachBangLuongThang danhsachbangluongthang;
-    protected static DanhSachChucVu danhsachchucvu;
+    protected static DanhSachNhanSu danhsachnhansu = new DanhSachNhanSu();
+    protected static DanhSachPhongBan danhsachphongban = new DanhSachPhongBan();
+    protected static DanhSachDuAn danhsachduan = new DanhSachDuAn();
+    protected static DanhSachPhanCong danhsachphancong = new DanhSachPhanCong();
+    protected static DanhSachBangChamCongNgay danhsachbangchamcongngay = new DanhSachBangChamCongNgay();
+    protected static DanhSachBangChamCongThang danhsachbangchamcongthang = new DanhSachBangChamCongThang();
+    protected static DanhSachQuyDinhThuongLe danhsachquydinhthuongle = new DanhSachQuyDinhThuongLe();
+    protected static DanhSachPhuCapThamNien danhsachphucapthamnien = new DanhSachPhuCapThamNien();
+    protected static DanhSachBangLuongThang danhsachbangluongthang = new DanhSachBangLuongThang();
+    protected static DanhSachChucVu danhsachchucvu = new DanhSachChucVu();
     Scanner sc = new Scanner(System.in);
 
-    public QuanLy() {
-        danhsachnhansu = new DanhSachNhanSu();
-        danhsachphongban = new DanhSachPhongBan();
-        danhsachchucvu = new DanhSachChucVu();
-        danhsachduan = new DanhSachDuAn();
-        danhsachphancong = new DanhSachPhanCong();
-        danhsachbangchamcongngay = new DanhSachBangChamCongNgay();
-        danhsachbangchamcongthang = new DanhSachBangChamCongThang();
-        danhsachquydinhthuongle = new DanhSachQuyDinhThuongLe();
-        danhsachphucapthamnien = new DanhSachPhuCapThamNien();
-        danhsachbangluongthang = new DanhSachBangLuongThang();
+    public static void docFile() {
+        // đọc file
+        danhsachnhansu.docFileDanhSachNhanSu();
+        danhsachphongban.docFilePhongBan();
+        danhsachduan.docFileDanhSachDuAn();
+        danhsachphancong.docFilePhanCong();
+        danhsachbangchamcongngay.docFileBangChamCongNgay();
+        danhsachbangchamcongthang.docFileBangChamCongThang();
+        danhsachquydinhthuongle.docFileDanhSachThuongLe();
+        danhsachphucapthamnien.docFilePhuCapThamNien();
+        danhsachbangluongthang.docFileBangLuongThang();
+        danhsachchucvu.docFileBangChucVu();
+    }
+
+    public static void xuatFile() {
+        danhsachnhansu.xuatFileDanhSachNhanSu();
+        danhsachphongban.xuatFilePhongBan();
+        danhsachduan.xuatFileDanhSachDuAn();
+        danhsachphancong.xuatFilePhanCong();
+        danhsachbangchamcongngay.xuatFileBangChamCongNgay();
+        danhsachbangchamcongthang.xuatFileBangChamCongThang();
+        danhsachquydinhthuongle.xuatFileThuongLe();
+        danhsachphucapthamnien.xuatFilePhuCapThamNien();
+        danhsachbangluongthang.xuatFileBangLuongThang();
+        danhsachchucvu.xuatFileBangChucVu();
     }
 
     public abstract void menuChinh();

@@ -87,7 +87,7 @@ public class QuanLyBLT extends QuanLy{
 
         // set tiền thưởng phụ cấp thâm niên
         int nam = danhsachnhansu.timKiem(bcct.getMaNhanSu()).tinhThamNien();
-        double tienpctn = danhsachphucapthamnien.timKiemTheoNam(nam).getSoTienPhuCap();
+        double tienpctn = danhsachphucapthamnien.tinhThuongThamNien(nam);
         blt.setPhuCapThamNien(tienpctn);
         
         // set trừ lương

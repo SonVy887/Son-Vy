@@ -17,7 +17,6 @@ public class DanhSachPhongBan {
     public DanhSachPhongBan() {
         dspb = new PhongBan[0];
         n = 0;
-        docFilePhongBan();
     }
 
     //them n phong ban dau tien

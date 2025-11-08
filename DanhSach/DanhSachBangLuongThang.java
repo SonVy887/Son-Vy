@@ -19,7 +19,6 @@ public class DanhSachBangLuongThang {
     public DanhSachBangLuongThang() {
         dsblt = new BangLuongThang[0];
         this.n = 0;
-        docFileBangLuongThang();
     }
     // kiem tra
     private boolean kiemTra(String mabangluong) {
@@ -67,7 +66,7 @@ public class DanhSachBangLuongThang {
     //xoa bang luong
     public void xoaBangLuongThang() {
         System.out.print("Nhập mã bảng lương cần xóa: ");
-        String mabangluong = sc.nextLine();
+        String mabangluong = sc.nextLine().toUpperCase();
         
         for(int i = 0; i < n;i++) {
             if(dsblt[i].getMaBangLuongThang().equals(mabangluong)) {

@@ -18,7 +18,6 @@ public class DanhSachChucVu {
     public DanhSachChucVu(){
         dscv = new ChucVu[0];
         this.n = 0;
-        docFileBangChucVu();
     }
 
 

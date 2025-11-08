@@ -21,7 +21,6 @@ public class DanhSachBangChamCongNgay {
     public DanhSachBangChamCongNgay() {
         bccn = new BangChamCongNgay[0];
         this.n = 0;
-        docFileBangChamCongNgay();
     }
     // kiem tra
     public boolean kiemTra(String machamcong){
@@ -149,7 +148,7 @@ public class DanhSachBangChamCongNgay {
                 tongngaylam++;
             }
         }
-        return new int[] { tongngaylam, 20 - tongngaylam};
+        return new int[] { tongngaylam, 26 - tongngaylam};
     }
 
     // xuat file bang cham cong

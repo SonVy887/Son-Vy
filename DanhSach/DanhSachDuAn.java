@@ -17,7 +17,6 @@ public class DanhSachDuAn {
     public DanhSachDuAn(){
         dsda = new DuAn[0];
         this.n = 0;
-        docFileDanhSachDuAn();
     }
     // kiem tra duy nhat
     public boolean kiemTra(String maduan) {

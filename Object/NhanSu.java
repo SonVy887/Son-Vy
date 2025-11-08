@@ -129,7 +129,7 @@ public abstract class NhanSu {
         for(String f : type){
             try {
                 DateTimeFormatter transType = DateTimeFormatter.ofPattern(f);
-                ngaythangnam = LocalDate.parse(ngayvaolam,transType);
+                ngaythangnam = LocalDate.parse(ngayvaolam, transType);
             } catch (Exception e) {}
         }
         return Period.between(ngaythangnam, LocalDate.now()).getYears();
