@@ -17,7 +17,8 @@ public class QuanLyPhongBan extends QuanLy{
             System.out.println("5. Tìm phòng ban bằng tên");
             System.out.println("6. Sửa phòng ban");
             System.out.println("7. Thống kê phòng ban chưa có trưởng phòng");
-            System.out.println("8. In danh sách phòng ban");
+            System.out.println("8. Thống kê phòng ban quản lý x dự án");
+            System.out.println("9. In danh sách phòng ban");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -42,8 +43,9 @@ public class QuanLyPhongBan extends QuanLy{
                 case 4:  danhsachphongban.timKiem(); break;
                 case 5:  danhsachphongban.timKiemTheoTen(); break;
                 case 6:  danhsachphongban.suaPhongBan(); break;
-                case 7: danhsachphongban.thongKePhongBan();
-                case 8:  danhsachphongban.inThongTin(); break;
+                case 7: danhsachphongban.thongKePhongBan(); break;
+                case 8: danhsachduan.thongKeDuAnPb();break;
+                case 9:  danhsachphongban.inThongTin(); break;
                 default: System.out.println("Vui lòng nhập đúng số trong menu!");menuChinh();break;
             }
         }

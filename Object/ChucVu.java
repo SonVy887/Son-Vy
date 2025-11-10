@@ -26,7 +26,7 @@ public class ChucVu {
         bangTenChucVu();
     }
     public void inChucVu() {
-        System.out.printf("|%-15s|%-15s|%,18.2fVNĐ|\n", machucvu, tenchucvu, phucapchucvu);
+        System.out.printf("|%-15s|%-15s|%,18.0fVNĐ|\n", machucvu, tenchucvu, phucapchucvu);
     }
     public void bangTenChucVu() {
         System.out.println("\n=========== BẢNG CHỨC VỤ ==========");

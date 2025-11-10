@@ -63,7 +63,7 @@ public class DanhSachBangChamCongNgay {
 
     // xoa
     public void xoaBangChamCongNgay() {
-        System.out.print("Nhập mã chấm công ngày: ");
+        System.out.print("Nhập mã chấm công ngày (VD: CC001): ");
         String machamcong = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -90,7 +90,7 @@ public class DanhSachBangChamCongNgay {
         System.out.println("Xóa thất bại");
     }
     public void suaBangChamCongNgay() {
-        System.out.print("Nhập mã chấm công ngày: ");
+        System.out.print("Nhập mã chấm công ngày (VD: CC001): ");
         String machamcong = sc.nextLine().toUpperCase();
 
         for (int i = 0; i < n; i++) {
@@ -111,7 +111,7 @@ public class DanhSachBangChamCongNgay {
         System.out.println("Sửa thất bại");
     }
     public void timKiem() {
-        System.out.print("Nhập mã chấm công ngày: ");
+        System.out.print("Nhập mã chấm công ngày (VD: CC001): ");
         String machamcong = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n; i++) {

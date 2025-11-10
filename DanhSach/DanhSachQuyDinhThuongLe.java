@@ -61,7 +61,7 @@ public class DanhSachQuyDinhThuongLe {
     }
     // xoa 
     public void xoaQuyDinhThuongLe() {
-        System.out.print("Nhập mã quy định thưởng lễ bạn muốn xóa: ");
+        System.out.print("Nhập mã quy định thưởng lễ bạn muốn xóa (VD: TL001): ");
         String mathuongle = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -93,7 +93,7 @@ public class DanhSachQuyDinhThuongLe {
 
     // sua
     public void suaQuyDinhThuongLe() {
-        System.out.print("Nhập mã quy định thưởng lễ muốn sửa: ");
+        System.out.print("Nhập mã quy định thưởng lễ muốn sửa (VD: TL001): ");
         String mathuongle = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -117,7 +117,7 @@ public class DanhSachQuyDinhThuongLe {
 
     // tim kiem theo ma
     public void timKiemTheoMa() {
-        System.out.print("Nhập mã thưởng lễ muốn tìm kiếm: ");
+        System.out.print("Nhập mã thưởng lễ muốn tìm kiếm (VD: TL001): ");
         String mathuongle = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n ;i++) {
@@ -199,7 +199,7 @@ public class DanhSachQuyDinhThuongLe {
         write.println("---------------------------------------------------------------------------");
 
         for(QuyDinhThuongLe d : dsqdtl) {
-            write.printf("|%-15s|%-20s|%-15s|%,17.2fVNĐ|\n",d.getMaThuongLe(),d.getTenThuongLe(),d.getNgayThangLe(),d.getSoTienThuongLe());
+            write.printf("|%-15s|%-20s|%-15s|%,17.0fVNĐ|\n",d.getMaThuongLe(),d.getTenThuongLe(),d.getNgayThangLe(),d.getSoTienThuongLe());
         }
         }catch(Exception e) {
             System.out.println("Lỗi không thể ghi xuống file" + e.getMessage());

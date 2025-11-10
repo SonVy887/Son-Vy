@@ -16,7 +16,8 @@ public class QuanLyChucVu extends QuanLy {
             System.out.println("5. Tìm kiếm chức vụ");
             System.out.println("6. Tìm kiếm theo tên chức vụ");
             System.out.println("7. Trao chức vụ cho nhân sự");
-            System.out.println("8. In danh sách chức vụ");
+            System.out.println("8. Thống kê tiền thưởng chức vụ");
+            System.out.println("9. In danh sách chức vụ");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -40,7 +41,8 @@ public class QuanLyChucVu extends QuanLy {
                 case 5: danhsachchucvu.timKiem();break;
                 case 6: danhsachchucvu.timKiemTheoTen();break;
                 case 7: traoChucVu();break;
-                case 8: danhsachchucvu.inThongTinChucVu();break;
+                case 8: danhsachchucvu.thongKeChucVu();break;
+                case 9: danhsachchucvu.inThongTinChucVu();break;
             }
         }
     }

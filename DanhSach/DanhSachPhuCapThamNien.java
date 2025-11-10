@@ -62,7 +62,7 @@ public class DanhSachPhuCapThamNien {
 
     // xoa
     public void xoaQuyDinhPCTN() {
-        System.out.print("Nhập mã phụ cấp thâm niên để xóa: ");
+        System.out.print("Nhập mã phụ cấp thâm niên để xóa (VD: PCTN01): ");
         String mapcthamnien = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -93,7 +93,7 @@ public class DanhSachPhuCapThamNien {
 
     // sua
     public void suaQuyDinhPCTN() {
-        System.out.print("Nhập mã quy định phụ cấp thâm niên muốn sửa: ");
+        System.out.print("Nhập mã quy định phụ cấp thâm niên muốn sửa (VD: PCTN01): ");
         String mapcthamnien = sc.nextLine().toUpperCase();
 
         for(int i  = 0; i < n;i++) {
@@ -115,7 +115,7 @@ public class DanhSachPhuCapThamNien {
     }
     // tim kiem theo ma
     public void tiemKiemTheoMa() {
-        System.out.print("Nhập mã phụ cấp thâm niên muốn tìm kiếm: ");
+        System.out.print("Nhập mã phụ cấp thâm niên muốn tìm kiếm (VD: PCTN01): ");
         String mapcthamnien = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -136,7 +136,7 @@ public class DanhSachPhuCapThamNien {
     }
     // tim kiem theo số tiền thưởng phụ cấp
     public void timKiemTheoSoTien() {
-        System.out.print("Nhập số tiền phụ cấp thâm niên muốn tìm kiếm: ");
+        System.out.print("Nhập số tiền phụ cấp thâm niên muốn tìm kiếm (VD: PCTN01): ");
         double sotien = sc.nextDouble();
         sc.nextLine();
 
@@ -201,7 +201,7 @@ public class DanhSachPhuCapThamNien {
             write.printf("|%-15s|%-17s|%23s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
             write.println("-----------------------------------------------------------");
             for(QuyDinhPhuCapThamNien p : dsqdpc) {
-                write.printf("|%-15s|%-17d|%,17.2f/tháng|\n",
+                write.printf("|%-15s|%-17d|%,17.0f/tháng|\n",
                 p.getMaPCThamNien(), p.getSoNam(), p.getSoTienPhuCap());
             }
         }catch(IOException e) {
@@ -243,7 +243,7 @@ public class DanhSachPhuCapThamNien {
     public void thongKePhuCapThamNien(){
         double tongphucap = 0;
         double maxphucap = 0;
-        double minphucap = 0;
+        double minphucap = dsqdpc[0].getSoTienPhuCap();
 
         for( int i=0; i<n; i++){
             tongphucap += dsqdpc[i].getSoTienPhuCap();

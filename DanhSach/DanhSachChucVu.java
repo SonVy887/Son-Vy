@@ -61,7 +61,7 @@ public class DanhSachChucVu {
     }
     // xoa 
     public void xoaBangChucVu() {
-        System.out.print("Vui nhập mã chức vụ để xóa: ");
+        System.out.print("Vui nhập mã chức vụ để xóa (VD: CV001): ");
         String machucvu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -89,7 +89,7 @@ public class DanhSachChucVu {
     }
     // sua
     public void suaBangChucVu() {
-        System.out.print("Vui lòng nhập mã chức vụ để sửa: ");
+        System.out.print("Vui lòng nhập mã chức vụ để sửa (VD: CV001): ");
         String machucvu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -110,14 +110,16 @@ public class DanhSachChucVu {
     }
     // tim kiem
     public void timKiem() {
-        System.out.print("Vui lòng nhập mã chức vụ để tìm kiếm: ");
+        System.out.print("Vui lòng nhập mã chức vụ để tìm kiếm (VD: CV001): ");
         String machucvu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
                 dscv[i].inChucVu();
+                return;
             }
         }
+        System.out.println("Không tìm thấy");
     }
     public ChucVu timKiem(String machucvu) {
         for(int i = 0; i < n;i++) {
@@ -164,7 +166,7 @@ public class DanhSachChucVu {
             write.printf("|%-15s|%-15s|%21s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
             write.println("-------------------------------------------------------");
             for(ChucVu cv : dscv) {
-                write.printf("|%-15s|%-15s|%,18.2fVNĐ|\n",cv.getMaChucVu(),cv.getTenChucVu(),cv.getPhuCapChucVu());
+                write.printf("|%-15s|%-15s|%,18.0fVNĐ|\n",cv.getMaChucVu(),cv.getTenChucVu(),cv.getPhuCapChucVu());
             }
         }catch(IOException e) {
             System.out.println("Không thể ghi xuống file: "+ e.getMessage());
@@ -202,28 +204,31 @@ public class DanhSachChucVu {
     }
     // thong ke chuc vu
     public void thongKeChucVu(){
-        if(n==0){
-            System.out.println("Chua co chuc vu nao trong danh sach"); return;
-        }
-
         double tong=0;
         double maxphucap=0;
+        double min = dscv[0].getPhuCapChucVu();
+
         for( int i=0; i<n; i++){
             tong+=dscv[i].getPhuCapChucVu();
             
             if(dscv[i].getPhuCapChucVu()>maxphucap)
                 maxphucap=dscv[i].getPhuCapChucVu();
+            else if(dscv[i].getPhuCapChucVu() < min) 
+                min = dscv[i].getPhuCapChucVu();
         }
         double phucaptrungbinh=tong/n;
 
-        System.out.println("=====THONG KE CHUC VU====");
-        System.out.println("Tong phu cap chuc vu: "+tong);
-        System.out.println("Trung Binh Phu Cap Chuc Vu: "+phucaptrungbinh);
-        System.out.println("Phu Cap Nhieu Nhat: "+maxphucap);
+        System.out.println("\n========== THỐNG KÊ CHỨC VỤ ==========");
+        System.out.printf("Tổng phụ cấp chức vụ: %,.0f VNĐ%n", tong);
+        System.out.printf("Phụ cấp chức vụ trung bình là: %,.0f VNĐ%n", phucaptrungbinh);
+        System.out.printf("Phụ cấp nhiều nhất là: %,.0f VNĐ%n", maxphucap);
+        System.out.printf("Phụ cấp thấp nhất là: %,.0f VNĐ%n", min);
 
         for(int i=0; i<n; i++){
             if(dscv[i]!= null && dscv[i].getPhuCapChucVu()==maxphucap){
-                System.out.println("Ten Chuc Vu: "+dscv[i].getTenChucVu());
+                System.out.println("Tên chức vụ phụ cấp nhiều tiền nhất: " + dscv[i].getTenChucVu());
+            } else if(dscv[i].getPhuCapChucVu() == min) {
+                System.out.println("Tên chức vụ phụ cấp ít tiền nhất: " + dscv[i].getTenChucVu());
             }
         }
     }

@@ -99,7 +99,7 @@ public class DanhSachNhanSu implements INhanSu {
     }
     @Override
     public void suaNhanSu(){
-        System.out.println("Nhập mã nhân sự cần sửa: ");
+        System.out.println("Nhập mã nhân sự cần sửa (VD: NS001): ");
         String manhansu = sc.nextLine().toUpperCase();
         
         for(int i = 0; i < n;i++){
@@ -126,7 +126,7 @@ public class DanhSachNhanSu implements INhanSu {
     }
     @Override
     public void xoaNhanSu(){// da test
-        System.out.print("Nhập mã nhân sự cần xóa: ");
+        System.out.print("Nhập mã nhân sự cần xóa (VD: NS001): ");
         String manhansu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -143,7 +143,7 @@ public class DanhSachNhanSu implements INhanSu {
     //tim kiem nhan su
     @Override
     public void timKiem(){// da test
-        System.out.print("Nhập mã nhân sự cần tìm: ");
+        System.out.print("Nhập mã nhân sự cần tìm (VD: NS001): ");
         String manhansu = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -354,7 +354,7 @@ public class DanhSachNhanSu implements INhanSu {
     @Override
     public void inChiTietNhanSuThucTap() {
         System.out.println("\n==============================================================================================================================================================================");
-        System.out.printf("|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-14s|%-5s|%22s|\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-14s|%5s|%22s|\n",
         "Mã NS","Họ", "Tên",
         "Địa Chỉ", "Số Điện Thoại", "Giới Tính",
         "Ngày Sinh", "Chức Vụ", "Phòng Ban", "Ngày Vào Làm", "Thời Gian T/T", "GPA", "Lương Cơ Bản");
@@ -382,7 +382,7 @@ public class DanhSachNhanSu implements INhanSu {
             for(NhanSu ns : dsns) {
                 if(ns instanceof NhanSuChinhThuc) {
                     NhanSuChinhThuc nsct = (NhanSuChinhThuc) ns;
-                    write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%-,18.2fVNĐ|\n",
+                    write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%-,18.0fVNĐ|\n",
                     nsct.loai(), nsct.getMaNhanSu(), nsct.getHoNhanSu(), nsct.getTenNhanSu(),
                     nsct.getDiaChi(), nsct.getSoDienThoai(), nsct.getGioiTinh(), 
                     nsct.getNgaySinh(), nsct.getMaChucVu() == null ? "Trống" : nsct.getMaChucVu(),
@@ -390,7 +390,7 @@ public class DanhSachNhanSu implements INhanSu {
                 }
                 else {
                     NhanSuThucTap nstt = (NhanSuThucTap) ns;
-                    write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-8s|%-5s|%-,18.2fVNĐ|\n",
+                    write.printf("|%-9s|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-8s|%-5s|%-,18.0fVNĐ|\n",
                     nstt.loai(), nstt.getMaNhanSu(), nstt.getHoNhanSu(), nstt.getTenNhanSu(),
                     nstt.getDiaChi(), nstt.getSoDienThoai(), nstt.getGioiTinh(), 
                     nstt.getNgaySinh(), nstt.getMaChucVu() == null ? "Trống" : nstt.getMaChucVu(), nstt.getPhongBan() == null ? "Trống" : nstt.getPhongBan(), nstt.getNgayVaoLam(),

@@ -18,7 +18,7 @@ public class NhanSuChinhThuc extends NhanSu {
         this.sonamkinhnghiem = copy.sonamkinhnghiem;
     }
     public void inChiTietCT() {
-        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.2f VNĐ|\n",
+        System.out.printf("|%-8s|%-9s|%-10s|%-16s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%-10s|%,18.0f VNĐ|\n",
         manhansu, ho, ten,
         diachi, sodienthoai, gioitinh, 
         ngaysinh, machucvu == null ? "Trống" : machucvu,

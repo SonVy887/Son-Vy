@@ -16,7 +16,9 @@ public class QuanLyPhanCong extends QuanLy {
             System.out.println("4. Sửa phân công");
             System.out.println("5. Tìm kiếm phân công");
             System.out.println("6. Phân công nhân sự");
-            System.out.println("7. In thông tin");
+            System.out.println("7. Thống kê phân công theo thời gian");
+            System.out.println("8. Thống kê phân công theo tiền thưởng");
+            System.out.println("9. In thông tin");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -40,7 +42,9 @@ public class QuanLyPhanCong extends QuanLy {
                 case 4: danhsachphancong.suaPhanCong();break;
                 case 5: danhsachphancong.timKiem();break;
                 case 6: phanCongDuAn();break;
-                case 7: danhsachphancong.in();break;
+                case 7: danhsachphancong.thongKePhanCongTG();break;
+                case 8: danhsachphancong.thongKeSoTien();break;
+                case 9: danhsachphancong.in();break;
                 default: System.out.println("Vui lòng chọn đúng số trong menu");menuChinh();break;
             }
         }
@@ -128,5 +132,4 @@ public class QuanLyPhanCong extends QuanLy {
             }
         }
     }
-
 }

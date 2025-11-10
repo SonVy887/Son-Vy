@@ -61,7 +61,7 @@ public class DanhSachBangChamCongThang {
 
     // sua
     public void suaBangChamCongThang() {
-        System.out.print("Vui lòng nhập mã bảng chấm công tháng để sửa: ");
+        System.out.print("Vui lòng nhập mã bảng chấm công tháng để sửa (VD: BCCT001): ");
         String machamcongthang = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++) {
@@ -82,7 +82,7 @@ public class DanhSachBangChamCongThang {
     }
     // xoa 
     public void xoaBangChamCongThang() {
-        System.out.print("Vui lòng nhập mã chấm công tháng để xóa: ");
+        System.out.print("Vui lòng nhập mã chấm công tháng để xóa (VD: BCCT001): ");
         String machamcongthang = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n; i++) {
@@ -113,7 +113,7 @@ public class DanhSachBangChamCongThang {
     }
     // tim kiem
     public void timKiem() {
-        System.out.print("Nhập mã bảng chấm công tháng để tìm kiếm: ");
+        System.out.print("Nhập mã bảng chấm công tháng để tìm kiếm (VD: BCCT001): ");
         String machamcongthang = sc.nextLine();
 
         for(int i = 0; i < n;i++) {

@@ -38,7 +38,7 @@ public class QuyDinhThuongLe {
         sc.nextLine();
     }
     public void in() {
-        System.out.printf("|%-15s|%-20s|%-15s|%,20.2fVNĐ|\n",mathuongle,tenthuongle,ngaythangle,sotienthuongle);
+        System.out.printf("|%-15s|%-20s|%-15s|%,20.0fVNĐ|\n",mathuongle,tenthuongle,ngaythangle,sotienthuongle);
     }
 
     public String getMaThuongLe() {

@@ -62,7 +62,7 @@ public class DanhSachPhanCong {
     }
     // xoa bang phan cong
     public void xoaPhanCong(){
-        System.out.print("Nhập mã phân công muốn xóa: ");
+        System.out.print("Nhập mã phân công muốn xóa (VD: PC001): ");
         String maphancong = sc.nextLine().toUpperCase();
 
         for (int i = 0; i < n; i++) {
@@ -90,7 +90,7 @@ public class DanhSachPhanCong {
     }
     // sua phan cong 
     public void suaPhanCong(){
-        System.out.print("Nhập mã phân công: ");
+        System.out.print("Nhập mã phân công (VD: PC001): ");
         String maphancong = sc.nextLine().toUpperCase();
 
         for (int i = 0; i < n; i++) {
@@ -113,16 +113,16 @@ public class DanhSachPhanCong {
     }
     // tim kiem ma phan cong
     public void timKiem(){
-        System.out.print("Nhập mã phân công: ");
+        System.out.print("Nhập mã phân công (VD: PC001): ");
         String maphancong = sc.nextLine().toUpperCase();
 
         for(int i = 0;i < n;i++){
             if(dspc[i].getMaPhanCong().equals(maphancong)){
                 dspc[i].inThongTinPhanCong();
+                return;
             }
         }
         System.out.println("Không tìm thấy");
-        return;
     }
     public PhanCong timKiem(String maphancong){
         for (int i = 0; i < n; i++) {
@@ -169,7 +169,65 @@ public class DanhSachPhanCong {
         }
         return 0.0;
     }
-    
+    // thống kê thời gian lamf dự án
+    public void thongKePhanCongTG() {
+        int max = 0;
+        int tong = 0;
+        int min = dspc[0].getThoiGian();
+
+        for(int i = 0; i < n;i++) {
+            tong += dspc[i].getThoiGian();
+
+            if(dspc[i].getThoiGian() > max ) {
+                max= dspc[i].getThoiGian();
+            }else if(dspc[i].getThoiGian() < min ) {
+                min = dspc[i].getThoiGian();
+            }
+        }
+        System.out.println("\n========== THỐNG KÊ PHÂN CÔNG ==========");
+        System.out.println("Tổng thời gian là: " + tong + " tháng");
+        System.out.println("Thời gian lâu nhất của 1 dự án là: " + max + " tháng");
+        System.out.println("Thời gian trung bình của 1 dự án là: " + tong/n + " tháng");
+        System.out.println("Thời gian nhanh nhất của 1 dự án là: " + min + " tháng");
+
+        for(int i = 0; i < n;i++) {
+            if(dspc[i].getThoiGian() == max) {
+                System.out.println("Dự án " + dspc[i].getDuAn() + " có thời gian lâu nhất");
+            } else if(dspc[i].getThoiGian() == min) {
+                System.out.println("Dự án " + dspc[i].getDuAn() + " có thời gian làm nhanh nhất");
+            }
+        }
+    }
+    // thống kê số tiền
+    public void thongKeSoTien() {
+        double max = 0;
+        double tong = 0;
+        double min = dspc[0].getThuong();
+
+        for (int i = 0; i < n; i++) {
+            tong += dspc[i].getThuong();
+
+            if(dspc[i].getThuong() > max) {
+                max = dspc[i].getThuong();
+            }else if(dspc[i].getThuong() < min) {
+                min = dspc[i].getThuong();
+            }
+        }
+
+        System.out.println("\n========== THỐNG KÊ PHÂN CÔNG ==========");
+        System.out.printf("Tổng số tiền thưởng là: %,.0f VNĐ%n", tong);
+        System.out.printf("Thưởng dự án cao nhất là: %,.0f VNĐ%n", max);
+        System.out.printf("Thưởng trung bình là: %,.0f VNĐ%n", tong/n);
+        System.out.printf("Thưởng dự án thấp nhất là: %,.0f VNĐ%n", min);
+
+        for (int i = 0; i < n; i++) {
+            if(dspc[i].getThuong() == max) {
+                System.out.println("Dự án " + dspc[i].getDuAn() + " có mức thưởng cao nhất");
+            }else if(dspc[i].getThuong() == min) {
+                System.out.println("Dự án " + dspc[i].getDuAn() + " có mức thưởng thấp nhất");
+            }
+        }
+    }
     // xuat file phan cong
     public void xuatFilePhanCong() {
         try(PrintWriter write = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachPhanCong.txt"))) {
@@ -177,7 +235,7 @@ public class DanhSachPhanCong {
             write.printf("|%-10s|%-10s|%-10s|%-15s|%-13s|%20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
             write.println("-------------------------------------------------------------------------------------");
             for(PhanCong p : dspc) {
-                write.printf("|%-10s|%-10s|%-10s|%-9s tháng|%-13s|%,17.2fVNĐ|\n",p.getMaPhanCong(),
+                write.printf("|%-10s|%-10s|%-10s|%-9s tháng|%-13s|%,17.0fVNĐ|\n",p.getMaPhanCong(),
                 p.getNhanSu() == "" ? "Trống" : p.getNhanSu(),
                 p.getDuAn() == "" ? "Trống" : p.getDuAn(),p.getThoiGian(),p.getDoKho(), p.getThuong());
             }
@@ -210,19 +268,6 @@ public class DanhSachPhanCong {
         }catch(Exception e) {
             System.out.println("Không có dữ liệu từ file" + e.getMessage());
         } 
-    }
-    // thống kê thưởng dự án trên 
-    public int[] thongKeThuongDuAn() {
-        int thuong_duoi1tr = 0;
-        int thuong_tu1tr_den2tr = 0;
-        int thuong_tren2tr = 0;
-
-        for(int i = 0;i < n;i++) {
-            if(dspc[i].getThuong() < 1000000) thuong_duoi1tr++;
-            else if(dspc[i].getThuong() <= 2000000) thuong_tu1tr_den2tr++;
-            else thuong_tren2tr++;
-        }
-        return new int[] {thuong_duoi1tr, thuong_tu1tr_den2tr, thuong_tren2tr};
     }
     // sua phu
     public void sua(PhanCong pc) {

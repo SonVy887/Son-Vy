@@ -59,7 +59,7 @@ public class DanhSachDuAn {
     }
     // sua du an
     public void suaDuAn(){
-        System.out.print("Nhập mã dự án cần sửa: ");
+        System.out.print("Nhập mã dự án cần sửa (VD: DA001): ");
         String maduan = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -90,7 +90,7 @@ public class DanhSachDuAn {
     }
     // tim du an
     public void timDuAn(){
-        System.out.print("nhập mã dự án cần tìm: ");
+        System.out.print("nhập mã dự án cần tìm (VD: DA001): ");
         String maduan = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -103,7 +103,7 @@ public class DanhSachDuAn {
     }
     // xoa du an
     public void xoaDuAn(){
-        System.out.print("Nhập mã dự án muốn xóa: ");
+        System.out.print("Nhập mã dự án muốn xóa (VD: DA001): ");
         String maduan = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){

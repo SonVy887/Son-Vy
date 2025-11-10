@@ -33,7 +33,7 @@ public class QuyDinhPhuCapThamNien {
     }
     // in
     public void in() {
-        System.out.printf("|%-15s|%-17d|%,18.2f/tháng|\n",mapcthamnien,sonam,sotienphucap);
+        System.out.printf("|%-15s|%-17d|%,18.0f/tháng|\n",mapcthamnien,sonam,sotienphucap);
     }
     public String getMaPCThamNien() {
         return mapcthamnien;

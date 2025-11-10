@@ -60,7 +60,7 @@ public class DanhSachPhongBan {
         System.out.println("Không tìm thấy phòng ban");
     }
     public void suaPhongBan(){
-        System.out.print("Nhập mã phòng ban cần sửa: ");
+        System.out.print("Nhập mã phòng ban cần sửa (VD: PB001): ");
         String maphongban = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -85,7 +85,7 @@ public class DanhSachPhongBan {
        System.out.println("Không tìm thấy phòng ban");
     }
     public void xoaPhongBan(){// chua test
-        System.out.print("Nhập mã phòng ban muốn xóa: ");
+        System.out.print("Nhập mã phòng ban muốn xóa (VD: PB001): ");
         String maphongban = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -102,7 +102,7 @@ public class DanhSachPhongBan {
     }
     // tim phong ban
     public void timKiem(){
-        System.out.print("Nhập mã phòng ban muốn tìm: ");
+        System.out.print("Nhập mã phòng ban muốn tìm (VD: PB001): ");
         String maphongban = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n;i++){
@@ -194,6 +194,7 @@ public class DanhSachPhongBan {
         System.out.println("\n======================================================================");
         System.out.printf("|%-17s|%-18s|%-14s|%-16s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức");
         System.out.printf("----------------------------------------------------------------------\n");
+        
         for(int i = 0; i < n;i++) {
             if(dspb[i].getTruongPhong().equals("Trống")) {
                 dspb[i].inThongTinPhongBan();

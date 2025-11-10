@@ -33,12 +33,6 @@ public class DanhSachBangLuongThang {
         System.out.print("Nhập n bảng lương đầu tiên: ");
         this.n = sc.nextInt();
         sc.nextLine();
-        
-        System.out.print("Vui lòng nhập mã bảng lương để kiểm tra (VD: BLT001): ");
-        if(kiemTra(sc.nextLine().toUpperCase())) {
-            System.out.println("Bảng lương đã tồn tại ");
-           return;
-        }
 
         dsblt = new BangLuongThang[n];
         for(int i = 0; i < n;i++){
@@ -47,16 +41,18 @@ public class DanhSachBangLuongThang {
         }
     }
     public void themBangLuongThang() {
-        System.out.print("Vui lòng nhập mã bảng lương để kiểm tra: ");
-        while(kiemTra(sc.nextLine())) {
+        System.out.print("Vui lòng nhập mã bảng lương để kiểm tra (VD: BLT001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Bảng lương đã tồn tại ");
-            System.out.print("Vui lòng nhập lại mã bảng lương: ");
+            return;
         }
+
         dsblt = Arrays.copyOf(dsblt, n + 1);
         dsblt[n] = new BangLuongThang();
         dsblt[n].nhapBangLuong();
         this.n++;
     }
+
     public void themBangLuongThang(BangLuongThang blt) {
         dsblt = Arrays.copyOf(dsblt, n + 1);
         dsblt[n] = blt;
@@ -65,7 +61,7 @@ public class DanhSachBangLuongThang {
 
     //xoa bang luong
     public void xoaBangLuongThang() {
-        System.out.print("Nhập mã bảng lương cần xóa: ");
+        System.out.print("Nhập mã bảng lương cần xóa (VD: BLT001): ");
         String mabangluong = sc.nextLine().toUpperCase();
         
         for(int i = 0; i < n;i++) {
@@ -95,7 +91,7 @@ public class DanhSachBangLuongThang {
     }
     // sua
     public void suaBangLuongThang() {
-        System.out.print("Nhập mã bảng lương tháng cần sửa: ");
+        System.out.print("Nhập mã bảng lương tháng cần sửa (VD: BLT001): ");
         String mabangluongthang = sc.nextLine();
 
         for(int i = 0; i < n;i++) {
@@ -117,14 +113,16 @@ public class DanhSachBangLuongThang {
     }
     // tim kiem bang luong theo ma
     public void timKiem() {
-        System.out.print("Nhập mã bảng lương tháng cần tìm: ");
+        System.out.print("Nhập mã bảng lương tháng cần tìm (VD: BLT001): ");
         String mabangluongthang = sc.nextLine();
 
         for(int i = 0; i < n;i++) {
             if(dsblt[i].getMaBangLuongThang().equals(mabangluongthang)) {
                 dsblt[i].in();
+                return;
             }
         }
+        System.out.println("Không tìm thấy");
     }
     public BangLuongThang timKiem(String mabangluongthang) {
         for(int i = 0; i < n;i++) {
@@ -152,7 +150,7 @@ public class DanhSachBangLuongThang {
             write.printf("|%-10s|%-10s|%-10s|%18s|%18s|%18s|%18s|%18s|%18s|%18s|\n","Mã BLT", "Tháng/năm", "Mã NS", "Lương Cơ Bản", "Thưởng lễ", "Thưởng dự án", "Thưởng PCCV", "Thưởng PCTN", "Trừ Lương", "Tổng lương");
             write.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             for(int i = 0; i < n;i++) {
-                write.printf("|%-10s|%-10s|%-10s|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|%,15.2fVNĐ|\n",
+                write.printf("|%-10s|%-10s|%-10s|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|\n",
                 dsblt[i].getMaBangLuongThang(), dsblt[i].getThang()+"/"+dsblt[i].getNam(), dsblt[i].getMaNhanSu(), dsblt[i].getLuongCoBan(), dsblt[i].getThuongLe(), dsblt[i].getThuongDuAn(), dsblt[i].getPhuCapChucVu(), dsblt[i].getPhuCapThamNien(), dsblt[i].getTruLuong(), dsblt[i].getTongLuong());
             }
         }catch(IOException e) {

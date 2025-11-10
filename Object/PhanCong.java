@@ -30,7 +30,7 @@ public class PhanCong {
     
     // in 
     public void inThongTinPhanCong(){
-        System.out.printf("|%-10s|%-10s|%-10s|%9s tháng|%13s|%,17.2fVNĐ|\n",maphancong,manhansu =="" ? "Trống" : manhansu,
+        System.out.printf("|%-10s|%-10s|%-10s|%9s tháng|%13s|%,17.0fVNĐ|\n",maphancong,manhansu =="" ? "Trống" : manhansu,
         maduan == "" ? "Trống" : maduan,thoigian,dokho == "" ? "Trống" : dokho, thuong);
     }
     //nhap

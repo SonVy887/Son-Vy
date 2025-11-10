@@ -44,6 +44,7 @@ public class QuanLyQDPCTN extends QuanLy{
                 case 7: danhsachphucapthamnien.timKiemTheoSoTien();break;
                 case 8: danhsachphucapthamnien.thongKeTienPCTN();break;
                 case 9: danhsachphucapthamnien.thongKePhuCapThamNien();break;
+                case 10: danhsachphucapthamnien.inPhucCapThamNien();break;
                 default: System.out.println("Vui lòng nhập đúng số trong menu"); menuChinh(); break;
             }
         }
