@@ -17,7 +17,6 @@ public class QuanLyBCCN extends QuanLy {
             System.out.println("4. Sửa bảng chấm công");
             System.out.println("5. Tìm kiếm bảng chấm công");
             System.out.println("6. In bảng chấm công");
-            System.out.println("7. Xuất file bảng chấm công");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -40,14 +39,17 @@ public class QuanLyBCCN extends QuanLy {
                 case 4: danhsachbangchamcongngay.suaBangChamCongNgay();break;
                 case 5: danhsachbangchamcongngay.timKiem();break;
                 case 6: danhsachbangchamcongngay.inBangChamCongNgay();break;
-                case 7: danhsachbangchamcongngay.xuatFileBangChamCongNgay();break;
             }
         }
     }
     // them bang cham cong ngay
     public void themBangChamCongNgay() {
-        System.out.print("Nhập mã bảng chấm công ngày (VD:CC001): ");
+        System.out.print("Nhập mã chấm công ngày để kiểm tra(VD:CC001): ");
         String machamcong = sc.nextLine().toUpperCase();
+        if(danhsachbangchamcongngay.kiemTra(machamcong)) {
+            System.out.print("Mã đã tồn tại.Vui lòng nhập lại: ");
+            return;
+        } 
 
         System.out.println("Nhập mã nhân sự (VD:NS001): ");
         NhanSu ns = danhsachnhansu.timKiem(sc.nextLine().toUpperCase());

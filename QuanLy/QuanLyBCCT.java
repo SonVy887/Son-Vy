@@ -15,7 +15,6 @@ public class QuanLyBCCT extends QuanLy {
             System.out.println("5. Tìm kiếm bảng chấm công tháng");
             System.out.println("6. Chấm công tháng cho nhân sự");
             System.out.println("7. In bảng chấm công tháng");
-            System.out.println("8. Xuất file bảng chấm công tháng");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -40,14 +39,13 @@ public class QuanLyBCCT extends QuanLy {
                 case 5: danhsachbangchamcongthang.timKiem();break;
                 case 6: chamCongThang();break;
                 case 7: danhsachbangchamcongthang.inBangChamCongThang();break;
-                case 8: danhsachbangchamcongthang.xuatFileBangChamCongThang();break;
                 default:System.out.println("Vui lòng nhập đúng số trong menu!"); menuChinh(); break;
             }
         }
     }
     // cham cong thang cho nhan su
     public void chamCongThang() {
-        System.out.print("Nhập mã bảng lương tháng (VD:BLT001): ");
+        System.out.print("Nhập mã bảng lương tháng (VD:BCCT001): ");
         BangChamCongThang bcct = danhsachbangchamcongthang.timKiem(sc.nextLine().toUpperCase());
 
         if(bcct == null) {
@@ -63,7 +61,7 @@ public class QuanLyBCCT extends QuanLy {
             return;
         }
 
-        int[] chamcongngay = danhsachbangchamcongngay.tinhNgay(bccn.getMaNhanSu());
+        int[] chamcongngay = danhsachbangchamcongngay.tinhNgay(bccn.getMaNhanSu(), bccn.getThang(), bccn.getNam());
 
         bcct.setSoNgayLamViec(chamcongngay[0]);
         bcct.setSoNgayNghi(chamcongngay[1]);

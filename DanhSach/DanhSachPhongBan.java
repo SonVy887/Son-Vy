@@ -33,10 +33,10 @@ public class DanhSachPhongBan {
     } 
     public void addPhongBan(){// da test
 
-        System.out.print("Vui lòng nhập mã phòng ban để kiểm tra: ");
-        while(kiemTraPb(sc.nextLine())){
+        System.out.print("Vui lòng nhập mã phòng ban để kiểm tra (VD: PB001): ");
+        if(kiemTraPb(sc.nextLine().toUpperCase())){
             System.out.println("Mã phòng ban đã tồn tại");
-            System.out.print("Vui lòng nhập lại mã phòng ban: ");
+            return;
         }
 
         dspb = Arrays.copyOf(dspb, n + 1);
@@ -53,11 +53,7 @@ public class DanhSachPhongBan {
     public void suaPhongBan(String maphongban){// chua
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
-                System.out.print("Vui lòng nhập tên mới: ");
-                dspb[i].setTenPhongBan(sc.nextLine());
-                System.out.print("Vui lòng nhập ngày nhận chức mới: ");
-                dspb[i].setNgayNhanChuc(sc.nextLine());
-                System.out.println("Sửa thành công");
+                sua(dspb[i]);
                 return;
             }
         }
@@ -69,11 +65,7 @@ public class DanhSachPhongBan {
 
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
-                System.out.print("Vui lòng nhập tên mới: ");
-                dspb[i].setTenPhongBan(sc.nextLine());
-                System.out.print("Vui lòng nhập ngày nhận chức mới: ");
-                dspb[i].setNgayNhanChuc(sc.nextLine());
-                System.out.println("Sửa thành công");
+               sua(dspb[i]);
                 return;
             }
         }
@@ -157,7 +149,25 @@ public class DanhSachPhongBan {
             }
         }
         return kq;
-        
+    }
+    // tim kiem truong phong
+    public void tiemKiemTruongPhong() {
+        System.out.println("Nhập mã trưởng phòng (VD:NS001): ");
+        String matrp = sc.nextLine().toUpperCase();
+
+        for(int i = 0; i < n;i++) {
+            if(dspb[i].getTruongPhong().equals(matrp)) {
+                dspb[i].inThongTinPhongBan();
+            }
+        }
+    }
+    public PhongBan tiemKiemTRP(String matrp) {
+        for(int i = 0; i < n;i++) {
+            if(dspb[i].getTruongPhong().equals(matrp)) {
+                return dspb[i];
+            }
+        }
+        return null;
     }
     // in
     public void inThongTin(){
@@ -177,6 +187,18 @@ public class DanhSachPhongBan {
             }
         }
         return false;
+    }
+    // thong ke pb chua co trp 
+    public void thongKePhongBan() {
+        System.out.println("\n========== THỐNG KÊ PHÒNG BAN ===========");
+        System.out.println("\n======================================================================");
+        System.out.printf("|%-17s|%-18s|%-14s|%-16s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức");
+        System.out.printf("----------------------------------------------------------------------\n");
+        for(int i = 0; i < n;i++) {
+            if(dspb[i].getTruongPhong().equals("Trống")) {
+                dspb[i].inThongTinPhongBan();
+            }
+        }
     }
     // xuat file phong ban
     public void xuatFilePhongBan() {

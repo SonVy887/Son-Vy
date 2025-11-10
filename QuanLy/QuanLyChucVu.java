@@ -17,7 +17,6 @@ public class QuanLyChucVu extends QuanLy {
             System.out.println("6. Tìm kiếm theo tên chức vụ");
             System.out.println("7. Trao chức vụ cho nhân sự");
             System.out.println("8. In danh sách chức vụ");
-            System.out.println("9. Xuất file chức vụ");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -42,12 +41,14 @@ public class QuanLyChucVu extends QuanLy {
                 case 6: danhsachchucvu.timKiemTheoTen();break;
                 case 7: traoChucVu();break;
                 case 8: danhsachchucvu.inThongTinChucVu();break;
-                case 9: danhsachchucvu.xuatFileBangChucVu();break;
             }
         }
     }
     // trao chuc vu
     public void traoChucVu() {
+        danhsachchucvu.inThongTinChucVu();
+        System.out.println();
+
         System.out.print("Nhập mã chức vụ (VD:CV001): ");
         ChucVu cv = danhsachchucvu.timKiem(sc.nextLine().toUpperCase());
 
@@ -64,6 +65,23 @@ public class QuanLyChucVu extends QuanLy {
             return;
         }
 
+        if(cv.getMaChucVu().equals("CV001")) {
+            danhsachphongban.inThongTin();
+            System.out.println();
+
+            System.out.print("Nhập mã phòng ban: ");
+            PhongBan pb = danhsachphongban.timKiem(sc.nextLine().toUpperCase());
+
+            if(pb == null) {
+                System.out.println("Phòng ban chưa được tạo!");
+                return;
+            }
+            pb.setTruongPhong(ns.getMaNhanSu());
+
+            System.out.println("Nhập ngày nhận chức (VD:dd/MM/yyyy): ");
+            pb.setNgayNhanChuc(sc.nextLine());
+        }
         ns.setMaChucVu(cv.getMaChucVu());
+
     }
 }

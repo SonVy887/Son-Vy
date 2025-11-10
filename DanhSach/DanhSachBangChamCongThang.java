@@ -31,10 +31,12 @@ public class DanhSachBangChamCongThang {
 
     // them bang cham cong thang
     public void themBangChamCongThang() {
-        System.out.print("Vui lòng nhâp mã bảng chấm công tháng để kiểm tra: ");
-        while(kiemTra(sc.nextLine())) {
-            System.out.print("Mã bảng châm công tháng đã tồn tại. Vui lòng nhập mã mới: ");
+        System.out.print("Vui lòng nhâp mã bảng chấm công tháng để kiểm tra (VD: BCCT001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())) {
+            System.out.print("Mã bảng châm công tháng đã tồn tại");
+            return;
         }
+
         bcct = Arrays.copyOf(bcct, n + 1);
         bcct[n] = new BangChamCongThang();
         bcct[n].nhap();
@@ -81,7 +83,7 @@ public class DanhSachBangChamCongThang {
     // xoa 
     public void xoaBangChamCongThang() {
         System.out.print("Vui lòng nhập mã chấm công tháng để xóa: ");
-        String machamcongthang = sc.nextLine();
+        String machamcongthang = sc.nextLine().toUpperCase();
 
         for(int i = 0; i < n; i++) {
             if(bcct[i].getMaChamCongThang().equals(machamcongthang)) {

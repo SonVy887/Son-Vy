@@ -17,7 +17,6 @@ public class QuanLyPhanCong extends QuanLy {
             System.out.println("5. Tìm kiếm phân công");
             System.out.println("6. Phân công nhân sự");
             System.out.println("7. In thông tin");
-            System.out.println("8. Xuất file phân công");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -42,15 +41,18 @@ public class QuanLyPhanCong extends QuanLy {
                 case 5: danhsachphancong.timKiem();break;
                 case 6: phanCongDuAn();break;
                 case 7: danhsachphancong.in();break;
-                case 8: danhsachphancong.xuatFilePhanCong(); break;
                 default: System.out.println("Vui lòng chọn đúng số trong menu");menuChinh();break;
             }
         }
     }
     // nhap 
     public void themPhanCong() {
-        System.out.print("Nhập mã phân công (VD: PC001): ");
+        System.out.print("Nhập mã phân công để kiểm tra (VD: PC001): ");
         String maphancong = sc.nextLine().toUpperCase();
+        if(danhsachphancong.kiemTra(maphancong)) {
+            System.out.print("Mã đã tồn tại.Vui lòng nhập lại: ");
+            return;
+        }
 
         System.out.print("Nhập mã dự án (VD:DA001): ");
         DuAn da = danhsachduan.timDuAn(sc.nextLine().toUpperCase());
@@ -60,11 +62,8 @@ public class QuanLyPhanCong extends QuanLy {
             return;
         }
 
-        System.out.print("Nhập thời gian: ");
-        int thoigian = sc.nextInt();sc.nextLine();
-
         System.out.print("Nhập độ khó: ");
-        PhanCong pc = new PhanCong(maphancong, "", da.getMaDuAn(), thoigian, 0, "");
+        PhanCong pc = new PhanCong(maphancong, "", da.getMaDuAn(), da.tinhThang(), 0, "");
         bangDoKho(pc);
         
         danhsachphancong.addPhancong(pc);
@@ -84,7 +83,7 @@ public class QuanLyPhanCong extends QuanLy {
         PhanCong pc = danhsachphancong.timKiem(sc.nextLine().toUpperCase());
 
         if(pc == null) {
-            System.out.println("Phân công chưa tạo");
+            System.out.println("Phân công chưa được tạo");
             return;
         }
 
@@ -119,6 +118,7 @@ public class QuanLyPhanCong extends QuanLy {
                 sc.nextLine();
                 continue;
             }
+            if(choice == 0) break;
 
             switch(choice) {
                 case 1:pc.setDoKho("Khó");pc.setThuong(2_000_000);break;

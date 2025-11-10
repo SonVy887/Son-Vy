@@ -52,6 +52,8 @@ public class QuanLyBLT extends QuanLy{
             return;
         }
         
+        danhsachbangchamcongthang.inBangChamCongThang();
+
         System.out.print("Nhập mã nhân sự (VD:NS001): ");
         BangChamCongThang bcct = danhsachbangchamcongthang.timKiemNhanSuBCCT(sc.nextLine().toUpperCase());
 
@@ -84,6 +86,7 @@ public class QuanLyBLT extends QuanLy{
         //set thưởng chức Vụ
         String machucvu = danhsachnhansu.timKiem(bcct.getMaNhanSu()).getMaChucVu();
         double tienchucvu = danhsachchucvu.tienPhuCapChucVu(machucvu);
+        blt.setPhuCapChucVu(tienchucvu);
 
         // set tiền thưởng phụ cấp thâm niên
         int nam = danhsachnhansu.timKiem(bcct.getMaNhanSu()).tinhThamNien();

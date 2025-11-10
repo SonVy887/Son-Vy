@@ -1,4 +1,7 @@
 package Object;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.Period;
 import java.util.Scanner;
 
 public class DuAn {
@@ -91,5 +94,14 @@ public class DuAn {
     }
     public void setNgayKetThuc(String ngayketthuc){
         this.ngayketthuc = ngayketthuc;
+    }
+
+    public int tinhThang() {
+        DateTimeFormatter type = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        LocalDate ngaybatdau = LocalDate.parse(this.ngaybatdau, type);
+        LocalDate ngayketthuc = LocalDate.parse(this.ngayketthuc, type);
+
+        return Period.between(ngaybatdau, ngayketthuc).getMonths();
     }
 }

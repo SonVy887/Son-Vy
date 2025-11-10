@@ -31,23 +31,15 @@ public interface INhanSu {
 
     //thong ke theo gioi tinh
     void thongKeGioiTinh();
-    int[] summarizeGender();
-    void xuatFileThongKeGioiTinh();
 
     //thong ke theo tuoi
     void thongKeTuoi();
-    int[] summarizeAge();
-    void xuatFileThongKeTuoi();
 
     //thong ke theo nam kinh nghiem
     void thongKeNamKinhNghiem();
-    int[] summarizeAgeExperience();
-    void xuatFileThongKeNamKinhNghiem();
 
     // thong ke gpa
     void thongKeGPA();
-    int[] summarizeGPA();
-    void xuatFileThongKeGPA();
 
     // in danh sach nhan su
     void in();

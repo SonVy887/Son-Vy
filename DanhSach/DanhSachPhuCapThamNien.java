@@ -30,10 +30,10 @@ public class DanhSachPhuCapThamNien {
 
     // thêm
     public void themQuyDinhPCTN() {
-        System.out.print("Vui lòng nhập mã thâm niên để kiểm tra: ");
-        while(kiemTra(sc.nextLine().toUpperCase())) {
+        System.out.print("Vui lòng nhập mã thâm niên để kiểm tra (VD: PCTN01): ");
+        if(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Mã này đã tồn tại!");
-            System.out.print("Vui lòng nhập lại: ");
+            return;
         }
 
         dsqdpc = Arrays.copyOf(dsqdpc, n + 1);
@@ -229,28 +229,43 @@ public class DanhSachPhuCapThamNien {
             System.out.println("Lỗi đọc dữ liệu từ file" + e.getMessage());
         }
     }
-    // thong kê số năm có số tiền thưởng thâm niên nên 1tr
-    public int[] thongKeTienPCTN() {
-        int[] kq = new int[0];
-        int j = 0;
 
+    // thong kê số năm có số tiền thưởng thâm niên từ 1tr
+    public void thongKeTienPCTN() {
+        System.out.println("\n========= THỐNG KÊ THƯỞNG PHỤ CẤP TRÊN 1TR =========");
         for(int i = 0; i < n;i++) {
-            if(dsqdpc[i].getSoTienPhuCap() > 1000000) {
-                kq = Arrays.copyOf(kq, j + 1);
-                kq[j++] = dsqdpc[i].getSoNam();
+            if(dsqdpc[i].getSoTienPhuCap() >= 1000000) {
+                System.out.println("Số năm phụ cấp là: " + dsqdpc[i].getSoNam());
             }
         }
-        return kq;
     }
-    // xuat file thong ke trên
-    public void xuat() {
-        try(PrintWriter wr = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongkepctn.txt"))) {
-           
-            for(int i = 0; i < thongKeTienPCTN().length;i++) {
-                wr.println("Số năm là: " + thongKeTienPCTN()[i]);
+    // thong ke 
+    public void thongKePhuCapThamNien(){
+        double tongphucap = 0;
+        double maxphucap = 0;
+        double minphucap = 0;
+
+        for( int i=0; i<n; i++){
+            tongphucap += dsqdpc[i].getSoTienPhuCap();
+
+            if(dsqdpc[i].getSoTienPhuCap() > maxphucap)
+                maxphucap = dsqdpc[i].getSoTienPhuCap();
+            else if(dsqdpc[i].getSoTienPhuCap() < minphucap)
+                minphucap = dsqdpc[i].getSoTienPhuCap();
+            
+            
+        }
+
+        System.out.println("\n========== THỐNG KÊ PHỤ CẤP THÂM NIÊN ==========");
+        System.out.printf("Tổng số tiền phụ cấp thâm niên là: %,.0f VNĐ%n", tongphucap);
+        System.out.printf("Trung bình phụ cấp thâm niên là: %,.0f VNĐ%n", tongphucap/n);
+        System.out.printf("Phụ cấp cao nhất là: %,.0f VNĐ%n", maxphucap);
+        System.out.printf("Phụ cấp thấp nhất là: %,.0f VNĐ%n", minphucap);
+
+        for(int i=0; i<n; i++){
+            if(dsqdpc[i]!=null && dsqdpc[i].getSoTienPhuCap()==maxphucap){
+                System.out.println("Số năm được phụ cấp nhiều nhất là: "+dsqdpc[i].getSoNam());
             }
-        }catch(Exception e) {
-            System.out.println("Lỗi" + e.getMessage());
         }
     }
     

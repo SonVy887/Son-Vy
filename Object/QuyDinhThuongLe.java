@@ -24,7 +24,7 @@ public class QuyDinhThuongLe {
     }
 
     public void nhapQuyDinhThuongLe() {
-        System.out.print("Nhập mã thưởng lễ (VD:T001): ");
+        System.out.print("Nhập mã thưởng lễ (VD:TL001): ");
         this.mathuongle = sc.nextLine().toUpperCase();
 
         System.out.print("Nhập tên thưởng lễ: ");

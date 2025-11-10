@@ -16,8 +16,8 @@ public class QuanLyDuAn extends QuanLy {
             System.out.println("6. Tìm kiếm dự án theo tên");
             System.out.println("7. In danh sách dự án");
             System.out.println("8. Chọn phòng ban quản lý dự án");
-            System.out.println("9. Tìm dự án chưa có phòng ban");
-            System.out.println("10. Xuất file dự án");
+            System.out.println("9. Thống kê dự án chưa có phòng ban");
+            System.out.println("10. Thống kê phòng ban quản lý x dự án");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -43,8 +43,8 @@ public class QuanLyDuAn extends QuanLy {
                 case 6:  danhsachduan.timKiemTheoTen(); break;
                 case 7:  danhsachduan.inThongTinDuAn(); break;
                 case 8:  chonPhongBan();break;
-                case 9:  danhsachduan.timDuAnChuaPb(); break;
-                case 10: danhsachduan.xuatFileDanhSachDuAn(); break;
+                case 9:  danhsachduan.thongKeDuAnChuaPb(); break;
+                case 10: danhsachduan.thongKeDuAnPb(); break;
 
                 default:System.out.println("Vui lòng chọn đúng số trong menu!"); menuChinh(); break;
             }

@@ -52,6 +52,7 @@ public class HeThong {
 
             if(choice == 0) {
                 QuanLy.xuatFile();
+                break;
             }
 
             // lua chon

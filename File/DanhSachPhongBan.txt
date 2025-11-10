@@ -2,7 +2,7 @@
 |Mã Phòng Ban     |Tên Phòng Ban     |Trưởnng Phòng |Ngày Nhận Chức  |
 ----------------------------------------------------------------------
 |PB001            |Phòng CNTT        |NS002         |24/04/2025      |
-|PB002            |Phòng Marketing   |Trống         |Trống           |
+|PB002            |Phòng Marketing   |NS005         |10/07/2025      |
 |PB003            |Phòng Nhân Sự     |Trống         |Trống           |
 |PB004            |Phòng CSKH        |Trống         |Trống           |
 |PB005            |Phòng Kinh Doanh  |Trống         |Trống           |

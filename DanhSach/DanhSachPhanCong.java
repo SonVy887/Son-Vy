@@ -31,10 +31,10 @@ public class DanhSachPhanCong {
     }
     // them bang phan cong
     public void addPhanCong(){
-        System.out.print("Vui lòng nhập mã phân công để kiểm tra: ");
-        while(kiemTra(sc.nextLine().toUpperCase())){
+        System.out.print("Vui lòng nhập mã phân công để kiểm tra (VD: PC001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())){
             System.out.println("Mã phân công đã tồn tại");
-            System.out.print("Vui lòng nhập lại: ");
+            return;
         }
         
         dspc = Arrays.copyOf(dspc, n + 1);
@@ -135,7 +135,7 @@ public class DanhSachPhanCong {
     // in
     public void in(){
         System.out.println("=====================================================================================");
-        System.out.printf("|%-10s|%-10s|%-10s|%-15s|%-13s|%20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
+        System.out.printf("|%-10s|%-10s|%-10s|%15s|%13s|%20s|\n","Mã PC","Mã NS","Mã DA","Thời Gian","Độ Khó","Thưởng");
         System.out.println("-------------------------------------------------------------------------------------");
 
         for (int i = 0; i < n; i++) {

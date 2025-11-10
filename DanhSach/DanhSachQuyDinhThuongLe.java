@@ -20,7 +20,7 @@ public class DanhSachQuyDinhThuongLe {
     }
 
     // kiem tra
-    private boolean kiemTra(String mathuongle) {
+    public boolean kiemTra(String mathuongle) {
         for(int i = 0; i < n;i++) {
             if(dsqdtl[i].getMaThuongLe().equals(mathuongle)) {
                 return true;
@@ -30,10 +30,10 @@ public class DanhSachQuyDinhThuongLe {
     }
     // them 
     public void themQuyDinhThuongLe() {
-        System.out.print("Vui lòng nhập mã thưởng lễ để kiểm tra: ");
-        while(kiemTra(sc.nextLine().toUpperCase())) {
+        System.out.print("Vui lòng nhập mã thưởng lễ để kiểm tra (VD: TL001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Mã thưởng lễ đã tồn tại!");
-            System.out.print("Vui lòng nhập lại: ");
+            return;
         }
 
         dsqdtl = Arrays.copyOf(dsqdtl, n + 1);
@@ -241,15 +241,46 @@ public class DanhSachQuyDinhThuongLe {
         }
         return kq;
     }
-    // xuat 
-    public void xuat() {
-        try(PrintWriter wr = new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongketientl.txt"))) {
-            String[] kq = thongKeTienTL();
-            for(String s : kq) {
-                wr.println("Tên lễ: "+ s);
+    // thống kê tiền tl từ 1tr
+    public void thongKeTienThuongLe() {
+        System.out.println("\n========== DANH SÁCH TIỀN THƯỞNG LỄ TRÊN 1TR ==========");
+
+        for(int i = 0; i < n;i++) {
+            if(dsqdtl[i].getSoTienThuongLe() >= 1000000) {
+                System.out.println("Tên thưởng lễ là: " + dsqdtl[i].getTenThuongLe());
             }
-        }catch(IOException e) {
-            System.out.println("lỗi" + e.getMessage());
+        }
+    }
+    // thống kê tổng
+    public void thongKeQuyDinhThuong(){
+        double tongthuong=0;
+        double maxthuong=0;
+        double minthuong=dsqdtl[0].getSoTienThuongLe();
+
+        for( int i=0; i<n; i++){
+            tongthuong+=dsqdtl[i].getSoTienThuongLe();
+
+            if(dsqdtl[i].getSoTienThuongLe()>maxthuong){
+                maxthuong=dsqdtl[i].getSoTienThuongLe();
+            }else if(dsqdtl[i].getSoTienThuongLe()<minthuong){
+                minthuong=dsqdtl[i].getSoTienThuongLe();
+            }
+            
+        }
+
+        System.out.println("\n========== THỐNG KÊ QUY ĐỊNH THƯỞNG LỄ ==========");
+        System.out.printf("Tổng tiền thưởng lễ là: %,.0f VNĐ%n", tongthuong);
+        System.out.printf("Thưởng lễ trung bình là: %,.0f VNĐ%n", tongthuong/n);
+        System.out.printf("Thưởng lễ cao nhất là: %,.0f VNĐ%n", maxthuong);
+        System.out.printf("Thưởng lễ thấp nhất là: %,.0f VNĐ%n", minthuong);
+
+        for( int i=0; i<n; i++){
+            if(dsqdtl[i]!=null && dsqdtl[i].getSoTienThuongLe()==maxthuong){
+                System.out.println("Tên lễ có thưởng cao nhất là: "+dsqdtl[i].getTenThuongLe());
+            }else if(dsqdtl[i]!=null && dsqdtl[i].getSoTienThuongLe()==minthuong){
+                System.out.println("Tên lễ có thưởng thấp nhất là: "+dsqdtl[i].getTenThuongLe());
+
+            }
         }
     }
     // sua phu

@@ -29,10 +29,10 @@ public class DanhSachDuAn {
     }
     // them do an
     public void themDuAn(){
-        System.out.print("Vui lòng nhập mã dự án để kiểm tra: ");
-        while(kiemTra(sc.nextLine())){
+        System.out.print("Vui lòng nhập mã dự án để kiểm tra (VD: DA001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())){
             System.out.println("Mã dự án đã tồn tại");
-            System.out.print("Vui lòng nhập lại: ");
+            return;
         }
         
         dsda = Arrays.copyOf(dsda, n + 1);
@@ -155,15 +155,15 @@ public class DanhSachDuAn {
         return kq;
     }
     // tim du an chua co pb
-    public void timDuAnChuaPb(){
+    public void thongKeDuAnChuaPb(){
+        System.out.println("========== THỐNG KÊ DỰ ÁN CHƯA PHÒNG BAN =========");
         for(int i = 0; i < n;i++){
             if(dsda[i].getPhongBan() == null){
-                dsda[i].inDuAn();
-                return;
+                System.out.println("Dự án "+ dsda[i].getTenDuAn());
             }
         }
-        System.out.println("Không tìm thấy");
     }
+    // thong kê dự án chưa pb
     public DuAn[] searchDuAnChuaPb(){
         DuAn[] kq = new DuAn[0];
         int j = 0;
@@ -175,6 +175,29 @@ public class DanhSachDuAn {
             }
         }
         return kq;
+    }
+
+    // thống kê dự án theo phòng bang
+    public void thongKeDuAnPb() {
+
+        System.out.println("=========== THỐNG KÊ PHÒNG BAN QUẢN LÝ DỰ ÁN ==========");
+        boolean[] dathongke =new boolean[n];
+
+        for(int i=0; i<n; i++){
+            if(dathongke[i]) continue;
+
+            String maphongban=dsda[i].getPhongBan();
+            int dem=1;
+            for( int j=i+1; j<n; j++){
+                if(dsda[j].getPhongBan().equals(maphongban)){
+                    dem++;
+                    dathongke[j]=true;
+                }
+            }
+            if(maphongban==null || maphongban.isEmpty()){ maphongban=" Chua Phan Cong ";}
+            System.out.println("Phòng ban "+maphongban+ " có "+dem+" dự án");
+        }
+        
     } 
     public void inThongTinDuAn(){
         System.out.println("\n==========================================================================================================================");

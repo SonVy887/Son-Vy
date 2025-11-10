@@ -21,14 +21,9 @@ public class QuanLyNhanSu extends QuanLy{
             System.out.println("9. Thống kê nhân sự theo tuổi");
             System.out.println("10. Thống kê nhân sự theo năm kinh nghiệm");
             System.out.println("11. Thống kê nhân sự thực tập theo GPA");
-            System.out.println("12. Xuất file thống kê giới tính");
-            System.out.println("13. Xuất file thống kê tuổi");
-            System.out.println("14. Xuất file thống kê năm kinh nghiệm");
-            System.out.println("15. Xuất file thống kê GPA");
-            System.out.println("16. Xuất file danh sách nhân sự");
-            System.out.println("17. In chi tiết nhân sự chính thức");
-            System.out.println("18. In chi tiết nhân sự thực tập");
-            System.out.println("19. In danh sách nhân sự");
+            System.out.println("12. In chi tiết nhân sự chính thức");
+            System.out.println("13. In chi tiết nhân sự thực tập");
+            System.out.println("14. In danh sách nhân sự");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -57,14 +52,9 @@ public class QuanLyNhanSu extends QuanLy{
                 case 9: danhsachnhansu.thongKeTuoi(); break;
                 case 10: danhsachnhansu.thongKeNamKinhNghiem(); break;
                 case 11: danhsachnhansu.thongKeGPA(); break;
-                case 12: danhsachnhansu.xuatFileThongKeGioiTinh(); break;
-                case 13: danhsachnhansu.xuatFileThongKeTuoi(); break;
-                case 14: danhsachnhansu.xuatFileThongKeNamKinhNghiem(); break;
-                case 15: danhsachnhansu.xuatFileThongKeGPA(); break;
-                case 16: danhsachnhansu.xuatFileDanhSachNhanSu(); break;
-                case 17: danhsachnhansu.inChiTietNhanSuChinhThuc(); break;
-                case 18: danhsachnhansu.inChiTietNhanSuThucTap(); break;
-                case 19: danhsachnhansu.in(); break;
+                case 12: danhsachnhansu.inChiTietNhanSuChinhThuc(); break;
+                case 13: danhsachnhansu.inChiTietNhanSuThucTap(); break;
+                case 14: danhsachnhansu.in(); break;
                 default: System.out.println("Vui lòng nhập đúng số trong menu"); menuChinh(); break;
             }
         }

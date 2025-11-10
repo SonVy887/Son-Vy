@@ -68,10 +68,10 @@ public class DanhSachNhanSu implements INhanSu {
         int choice = sc.nextInt();
         sc.nextLine();
 
-        System.out.print("Nhập mã nhân sự để kiểm tra: ");
-        while(kiemTraDuyNhat(sc.nextLine().toUpperCase())) {
+        System.out.print("Nhập mã nhân sự để kiểm tra (VD: NS001): ");
+        if(kiemTraDuyNhat(sc.nextLine().toUpperCase())) {
             System.out.println("Nhân sự này đã tồn tại");
-            System.out.print("Mời bạn nhập lại: ");
+            return;
         }
 
         NhanSu ns = null;
@@ -241,33 +241,9 @@ public class DanhSachNhanSu implements INhanSu {
                 countboy++;
             else countgirl++;
         }
+        System.out.println("\n========== THỐNG KÊ GIỚI TÍNH ==========");
         System.out.println("Số lượng nam giới là: " + countboy);
         System.out.println("Số lượng nữ giới là: "+ countgirl);
-    }
-    @Override
-    public int[] summarizeGender(){
-        int countgirl = 0;
-        int countboy = 0;
-
-        for(int i = 0; i < n; i++){
-            if(dsns[i].getGioiTinh().equalsIgnoreCase("Nam"))
-                countboy++;
-            else countgirl++;
-        }
-
-        return new int[] { countboy, countgirl };
-    }
-    // xuất file giới tính
-    @Override
-    public void xuatFileThongKeGioiTinh() {
-        try (FileWriter write = new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongKeGioiTinh.txt")) {
-            int[] thongKe = summarizeGender();
-            write.write("Số lượng nam giới: " + thongKe[0] + "\n");
-            write.write("Số lượng nữ giới: " + thongKe[1] + "\n");
-            write.close();
-        } catch (IOException e) {
-            System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage()); // getMessage() lấy ra tên lỗi
-        }
     }
     // thong ke theo tuoi
     @Override
@@ -288,45 +264,11 @@ public class DanhSachNhanSu implements INhanSu {
                 else tren66++;
             }
         }
+        System.out.println("\n=========== THỐNG KÊ THEO ĐỘ TUỔI ==========");
         System.out.println("Số lượng nhân sự dưới 18 tuổi: " + duoi18);
         System.out.println("Số lượng nhân sự từ 19 đến 30 tuổi: " + tu19den30);
         System.out.println("Số lượng nhân sự từ 31 đến 65 tuổi: " + tu31den65);
         System.out.println("Số lượng nhân sự trên 66 tuổi: " + tren66);
-    }
-    @Override
-    public int[] summarizeAge(){
-        int duoi18 = 0;
-        int tu19den30 = 0;
-        int tu31den65 = 0;
-        int tren66 = 0;
-        
-        for(int i = 0; i < n;i++){
-            LocalDate birthDate = dsns[i].convert();
-            if(birthDate != null){
-                int age = Period.between(birthDate, LocalDate.now()).getYears();
-
-                if (age <= 18) duoi18++;
-                else if (age <= 30) tu19den30++;
-                else if (age <= 65) tu31den65++;
-                else tren66++;
-            }
-        }
-        return new int[] { duoi18, tu19den30, tu31den65, tren66 };
-    }
-    // xuat file thong ke tuoi
-    @Override
-    public void xuatFileThongKeTuoi() {
-        try{
-            FileWriter write = new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongKeTuoi.txt");
-            int[] thongKe = summarizeAge();
-            write.write("Số lượng nhân sự dưới 18 tuổi: " + thongKe[0] + "\n");
-            write.write("Số lượng nhân sự từ 19 đến 30 tuổi: " + thongKe[1] + "\n");
-            write.write("Số lượng nhân sự từ 31 đến 65 tuổi: " + thongKe[2] + "\n");
-            write.write("Số lượng nhân sự trên 66 tuổi: " + thongKe[3] + "\n");
-            write.close();
-        } catch (IOException e) {
-            System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
-        }
     }
     @Override
     public void thongKeNamKinhNghiem() {
@@ -345,44 +287,11 @@ public class DanhSachNhanSu implements INhanSu {
                 else tren7nam++;
             }
         }
+        System.out.println("\n============ THỐNG KÊ THEO SỐ NĂM KINH NGHIỆM ==========");
         System.out.println("Số lượng nhân sự có kinh nghiệm dưới 1 năm: " + duoi1nam);
         System.out.println("Số lượng nhân sự có kinh nghiệm từ 1 đến 3 năm: " + tu2den3nam);
         System.out.println("Số lượng nhân sự có kinh nghiệm từ 4 đến 7 năm: " + tu4den7nam);
         System.out.println("Số lượng nhân sự có kinh nghiệm trên 7 năm: " + tren7nam);
-    }
-    @Override
-    public int[] summarizeAgeExperience() {
-        int duoi1nam = 0;
-        int tu2den3nam = 0;
-        int tu4den7nam = 0;
-        int tren7nam = 0;
-
-        for(int i = 0; i < n;i++){
-            if(dsns[i] instanceof NhanSuChinhThuc){
-                NhanSuChinhThuc nsct = (NhanSuChinhThuc) dsns[i];
-                int namkn = nsct.getSoNamKinhNghiem();
-                if(namkn <= 1) duoi1nam++;
-                else if(namkn <= 3) tu2den3nam++;
-                else if(namkn <= 7) tu4den7nam++;
-                else tren7nam++;
-            }
-        }
-        return new int[] { duoi1nam, tu2den3nam, tu4den7nam, tren7nam };
-    }
-    // xuat file thong ke nam kinh nghiem
-    @Override
-    public void xuatFileThongKeNamKinhNghiem() {
-        try{
-            FileWriter write = new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongKeNamKinhNghiem.txt");
-            int[] thongKe = summarizeAgeExperience();
-            write.write("Số lượng nhân sự có kinh nghiệm dưới 1 năm: " + thongKe[0] + "\n");
-            write.write("Số lượng nhân sự có kinh nghiệm từ 1 đến 3 năm: " + thongKe[1] + "\n");
-            write.write("Số lượng nhân sự có kinh nghiệm từ 4 đến 7 năm: " + thongKe[2] + "\n");
-            write.write("Số lượng nhân sự có kinh nghiệm trên 7 năm: " + thongKe[3] + "\n");
-            write.close();
-        } catch (IOException e) {
-            System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
-        }
     }
     // thong ke gpa
     @Override
@@ -400,52 +309,16 @@ public class DanhSachNhanSu implements INhanSu {
                 if(gpa < 2.0) duoi2_0++; // yếu
                 else if(gpa < 2.5) tu2_0den2_5++; // trung bình
                 else if(gpa < 3.2) tu2_5den3_2++; // khá
-                else if(gpa < 3.6) tu3_2den3_6++; // giỏi
+                else if(gpa <= 3.6) tu3_2den3_6++; // giỏi
                 else tren3_6++; // xuất sắc
             }
         }
+        System.out.println("\n=========== THỐNG KÊ THEO GPA ==========");
         System.out.println("Số lượng nhân sự có GPA dưới 2.0: " + duoi2_0);
         System.out.println("Số lượng nhân sự có GPA từ 2.0 đến 2.5: " + tu2_0den2_5);
         System.out.println("Số lượng nhân sự có GPA từ 2.5 đến 3.2: " + tu2_5den3_2);
         System.out.println("Số lượng nhân sự có GPA từ 3.2 đến 3.6: " + tu3_2den3_6);
         System.out.println("Số lượng nhân sự có GPA trên 3.6: " + tren3_6);
-    }
-    @Override
-    public int[] summarizeGPA() {
-        int duoi2_0 = 0;
-        int tu2_0den2_5 = 0;
-        int tu2_5den3_2 = 0;
-        int tu3_2den3_6 = 0;
-        int tren3_6 = 0;
-
-        for(int i = 0; i < n;i++){
-            if(dsns[i] instanceof NhanSuThucTap){
-                NhanSuThucTap nstt = (NhanSuThucTap) dsns[i];
-                double gpa = nstt.getGpa();
-                if(gpa < 2.0) duoi2_0++; // yếu
-                else if(gpa < 2.5) tu2_0den2_5++; // trung bình
-                else if(gpa < 3.2) tu2_5den3_2++; // khá
-                else if(gpa < 3.6) tu3_2den3_6++; // giỏi
-                else tren3_6++; // xuất sắc
-            }
-        }
-        return new int[] { duoi2_0, tu2_0den2_5, tu2_5den3_2, tu3_2den3_6, tren3_6 };
-    }
-    // xuat file thong ke gpa
-    @Override
-    public void xuatFileThongKeGPA() {
-        try{
-            FileWriter write = new FileWriter("C:\\training\\QuanLyNhanSu\\File\\thongKeGPA.txt");
-            int[] thongKe = summarizeGPA();
-            write.write("Số lượng nhân sự có GPA dưới 2.0: " + thongKe[0] + "\n");
-            write.write("Số lượng nhân sự có GPA từ 2.0 đến 2.5: " + thongKe[1] + "\n");
-            write.write("Số lượng nhân sự có GPA từ 2.5 đến 3.2: " + thongKe[2] + "\n");
-            write.write("Số lượng nhân sự có GPA từ 3.2 đến 3.6: " + thongKe[3] + "\n");
-            write.write("Số lượng nhân sự có GPA trên 3.6: " + thongKe[4] + "\n");
-            write.close();
-        } catch (IOException e) {
-            System.out.println("Đã xảy ra lỗi khi xuất file: " + e.getMessage());
-        }
     }
     // hien thi danh sach
     @Override

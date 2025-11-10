@@ -33,10 +33,10 @@ public class DanhSachBangChamCongNgay {
     }
     // them 
     public void themBangChamCongNgay() {
-        System.out.print("Vui lòng nhập mã chấm công ngày: ");
-        while(kiemTra(sc.nextLine())){
+        System.out.print("Vui lòng nhập mã chấm công ngày (VD: CC001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())){
             System.out.println("Mã chấm công ngày đã tồn tại");
-            System.out.print("Vui lòng nhập lại: ");
+            return;
         }
 
         bccn = Arrays.copyOf(bccn, n + 1);
@@ -140,11 +140,13 @@ public class DanhSachBangChamCongNgay {
         return null;
     }
     // tinh ngày làm và nghỉ
-    public int[] tinhNgay(String manhansu) {
+    public int[] tinhNgay(String manhansu, int thang, int nam) {
         int tongngaylam = 0;
 
         for(int i = 0; i < n;i++) {
-            if(bccn[i].getMaNhanSu().equals(manhansu) && bccn[i].getStatus().equalsIgnoreCase("Đi làm")) {
+            if(bccn[i].getMaNhanSu().equals(manhansu) 
+            && bccn[i].getThang() == thang && bccn[i].getNam() == nam
+            && bccn[i].getStatus().equalsIgnoreCase("Đi làm")) {
                 tongngaylam++;
             }
         }

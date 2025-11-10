@@ -34,10 +34,10 @@ public class DanhSachBangLuongThang {
         this.n = sc.nextInt();
         sc.nextLine();
         
-        System.out.print("Vui lòng nhập mã bảng lương để kiểm tra: ");
-        while(kiemTra(sc.nextLine())) {
+        System.out.print("Vui lòng nhập mã bảng lương để kiểm tra (VD: BLT001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Bảng lương đã tồn tại ");
-            System.out.print("Vui lòng nhập lại mã bảng lương: ");
+           return;
         }
 
         dsblt = new BangLuongThang[n];

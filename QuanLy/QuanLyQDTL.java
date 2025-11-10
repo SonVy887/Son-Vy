@@ -16,8 +16,9 @@ public class QuanLyQDTL extends QuanLy {
             System.out.println("4. Xóa quy định thưởng lễ");
             System.out.println("5. Tìm kiếm quy định thưởng lễ");
             System.out.println("6. Tìm kiếm tên quy định thưởng lễ");
-            System.out.println("7. In danh sách quy định thưởng lễ");
-            System.out.println("8. Xuất file danh sách quy định thưởng lễ");
+            System.out.println("7. Thống kê tiền thưởng lễ trên 1tr");
+            System.out.println("8. Thống kê tổng quy định thưởng lễ");
+            System.out.println("9. In danh sách quy định thưởng lễ");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -40,9 +41,9 @@ public class QuanLyQDTL extends QuanLy {
                 case 4: danhsachquydinhthuongle.xoaQuyDinhThuongLe();break;
                 case 5: danhsachquydinhthuongle.timKiemTheoMa();break;
                 case 6: danhsachquydinhthuongle.timKiemTheoTen();break;
-                case 7: danhsachquydinhthuongle.inDanhSachQuyDinhThuongLe();break;
-                case 8: danhsachquydinhthuongle.xuatFileThuongLe();break;
-                case 9: danhsachquydinhthuongle.xuat();break;
+                case 7: danhsachquydinhthuongle.thongKeTienThuongLe();break;
+                case 8: danhsachquydinhthuongle.thongKeQuyDinhThuong();break;
+                case 9: danhsachquydinhthuongle.inDanhSachQuyDinhThuongLe();break;
                 default: System.out.println("Vui lòng nhập đúng số trong menu!");menuChinh();break;
             }
         }

@@ -31,10 +31,10 @@ public class DanhSachChucVu {
     }
     // them
     public void themBangChucVu() {
-        System.out.print("Vui lòng nhập mã để kiểm tra: ");
-        while(kiemTra(sc.nextLine().toUpperCase())) {
+        System.out.print("Vui lòng nhập mã để kiểm tra (VD: CV001): ");
+        if(kiemTra(sc.nextLine().toUpperCase())) {
             System.out.println("Mã chức vụ đã tồn tại!");
-            System.out.print("Vui lòng nhập lại: ");
+            return;
         }
 
         dscv = Arrays.copyOf(dscv, n + 1);
@@ -47,6 +47,7 @@ public class DanhSachChucVu {
         dscv[n] = cv;
         this.n++;
     }
+
     public void them() {
         System.out.print("Vui lòng nhập n chức vụ đầu tiên: ");
         this.n = sc.nextInt();
@@ -198,6 +199,33 @@ public class DanhSachChucVu {
             }
         }
         return 0.0;
+    }
+    // thong ke chuc vu
+    public void thongKeChucVu(){
+        if(n==0){
+            System.out.println("Chua co chuc vu nao trong danh sach"); return;
+        }
+
+        double tong=0;
+        double maxphucap=0;
+        for( int i=0; i<n; i++){
+            tong+=dscv[i].getPhuCapChucVu();
+            
+            if(dscv[i].getPhuCapChucVu()>maxphucap)
+                maxphucap=dscv[i].getPhuCapChucVu();
+        }
+        double phucaptrungbinh=tong/n;
+
+        System.out.println("=====THONG KE CHUC VU====");
+        System.out.println("Tong phu cap chuc vu: "+tong);
+        System.out.println("Trung Binh Phu Cap Chuc Vu: "+phucaptrungbinh);
+        System.out.println("Phu Cap Nhieu Nhat: "+maxphucap);
+
+        for(int i=0; i<n; i++){
+            if(dscv[i]!= null && dscv[i].getPhuCapChucVu()==maxphucap){
+                System.out.println("Ten Chuc Vu: "+dscv[i].getTenChucVu());
+            }
+        }
     }
     // sua phu
     public void sua(ChucVu cv) {

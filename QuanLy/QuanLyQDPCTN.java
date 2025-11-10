@@ -8,15 +8,17 @@ public class QuanLyQDPCTN extends QuanLy{
     @Override
     public void menuChinh() {
         while(true) {
-            System.out.println("\n========== QUẢN LÝ QUY ĐỊNH THƯỞNG LỄ =========");
-            System.out.println("1. Thêm quy định thưởng lễ");
-            System.out.println("2. Thêm n quy định thưởng lễ đầu tiên");
-            System.out.println("3. Sửa quy định thưởng lễ");
-            System.out.println("4. Xóa quy định thưởng lễ");
-            System.out.println("5. Tìm kiếm quy định thưởng lễ");
-            System.out.println("6. Tìm kiếm tên quy định thưởng lễ");
-            System.out.println("7. In danh sách quy định thưởng lễ");
-            System.out.println("8. Xuất file danh sách quy định thưởng lễ");
+            System.out.println("\n========== QUẢN LÝ QUY ĐỊNH THÂM NIÊN =========");
+            System.out.println("1. Thêm quy định phụ cấp thâm niên");
+            System.out.println("2. Thêm n quy định phụ cấp thâm niên đầu tiên");
+            System.out.println("3. Sửa quy định phụ cấp thâm niên");
+            System.out.println("4. Xóa quy định phụ cấp thâm niên");
+            System.out.println("5. Tìm kiếm quy định phụ cấp thâm niên");
+            System.out.println("6. Tìm kiếm số năm hưởng quy định phụ cấp thâm niên");
+            System.out.println("7. Tìm kiếm theo số tiền quy định phụ cấp thâm niên");
+            System.out.println("8. Thống kê năm phụ cấp có tiền thưởng trên 1tr");
+            System.out.println("9. Thống kê tổng phụ cấp thâm niên");
+            System.out.println("10. In danh sách phụ cấp thâm niên");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -33,15 +35,15 @@ public class QuanLyQDPCTN extends QuanLy{
             if(choice == 0) break;
 
             switch(choice) {
-                case 1: danhsachquydinhthuongle.themQuyDinhThuongLe();break;
-                case 2: danhsachquydinhthuongle.them();break;
-                case 3: danhsachquydinhthuongle.suaQuyDinhThuongLe();break;
-                case 4: danhsachquydinhthuongle.xoaQuyDinhThuongLe();break;
-                case 5: danhsachquydinhthuongle.timKiemTheoMa();break;
-                case 6: danhsachquydinhthuongle.timKiemTheoTen();break;
-                case 7: danhsachquydinhthuongle.inDanhSachQuyDinhThuongLe();break;
-                case 8: danhsachquydinhthuongle.xuatFileThuongLe();break;
-                case 9: danhsachquydinhthuongle.xuat();break;
+                case 1: danhsachphucapthamnien.themQuyDinhPCTN();break;
+                case 2: danhsachphucapthamnien.them();break;
+                case 3: danhsachphucapthamnien.suaQuyDinhPCTN();break;
+                case 4: danhsachphucapthamnien.xoaQuyDinhPCTN();break;
+                case 5: danhsachphucapthamnien.tiemKiemTheoMa();break;
+                case 6: danhsachphucapthamnien.timKiemTheoNam();break;
+                case 7: danhsachphucapthamnien.timKiemTheoSoTien();break;
+                case 8: danhsachphucapthamnien.thongKeTienPCTN();break;
+                case 9: danhsachphucapthamnien.thongKePhuCapThamNien();break;
                 default: System.out.println("Vui lòng nhập đúng số trong menu"); menuChinh(); break;
             }
         }
