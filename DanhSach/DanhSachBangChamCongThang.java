@@ -145,13 +145,35 @@ public class DanhSachBangChamCongThang {
         }
         System.out.println("Không tìm thấy nhân sự");
     }
-    public BangChamCongThang timKiemNhanSuBCCT(String manhansu) {
+    public BangChamCongThang timKiemNhanSuBCCT(String manhansu, int thang, int nam) {
         for(int i = 0; i < n;i++) {
-            if(bcct[i].getMaNhanSu().equals(manhansu)) {
+            if(bcct[i].getMaNhanSu().equals(manhansu) 
+            && bcct[i].getThang() == thang && bcct[i].getNam() == nam) {
                 return bcct[i];
             }
         }
         return null;
+    }
+    // thong ke
+    public void thongKeBanChamCongThang() {
+        int max = 0;
+        int min = bcct[0].getSoNgayNghi();
+
+        for(int i = 0; i < n;i++) {
+            if(bcct[i].getSoNgayNghi() > max) max = bcct[i].getSoNgayNghi();
+            else if(bcct[i].getSoNgayNghi() < min) min = bcct[i].getSoNgayNghi();
+        }
+        System.out.println("\n========== THỐNG KÊ BẢNG CHẤM CÔNG THÁNG ==========");
+        System.out.println("Số lần nghỉ nhiều nhất là: " + max);
+        System.out.println("Số lần nghỉ ít nhất là: " + min);
+
+        for(int i = 0; i < n;i++) {
+            if(bcct[i].getSoNgayNghi() == max) {
+                System.out.println("Nhân sự nghỉ nhiều nhất là: " + bcct[i].getMaNhanSu());
+            } else if(bcct[i].getSoNgayNghi() == min) {
+                System.out.println("Nhân sự nghỉ ít nhất là: " + bcct[i].getMaNhanSu());
+            }
+        }
     }
     // in bang cham cong thang
     public void inBangChamCongThang() {

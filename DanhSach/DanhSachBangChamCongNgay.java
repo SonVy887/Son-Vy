@@ -131,9 +131,10 @@ public class DanhSachBangChamCongNgay {
         return null;
     }
     // tim kiem theo ma nhan su trong bang cham cong ngay
-    public BangChamCongNgay timKiemNSCCN(String manhansu) {
+    public BangChamCongNgay timKiemNSCCN(String manhansu, int thang, int nam) {
         for(int i = 0; i < n;i++) {
-            if(bccn[i].getMaNhanSu().equals(manhansu)) {
+            if(bccn[i].getMaNhanSu().equals(manhansu)
+            && bccn[i].getThang() == thang && bccn[i].getNam() == nam) {
                 return bccn[i];
             }
         }
@@ -153,6 +154,26 @@ public class DanhSachBangChamCongNgay {
         return new int[] { tongngaylam, 26 - tongngaylam};
     }
 
+    // thhong ke theo nam
+    public void thongKeChamCongNgay() {
+        int dilam = 0;
+        int nghikhongphep = 0;
+        int nghiphep = 0;
+        int nghibenh = 0;
+
+        for(int i = 0; i < n;i++) {
+            if(bccn[i].getStatus().equals("Đi làm")) dilam++;
+            else if(bccn[i].getStatus().equals("Nghỉ bệnh")) nghibenh++;
+            else if(bccn[i].getStatus().equals("Nghỉ có phép")) nghiphep++;
+            else if(bccn[i].getStatus().equals("Nghỉ không phép")) nghikhongphep++;
+        }
+
+        System.out.println("\n========== THỐNG KÊ BẢNG CHẤM CÔNG NGÀY ==========");
+        System.out.println("Tổng số ngày đi làm trong 1 năm là: " + dilam);
+        System.out.println("Tổng số ngày nghỉ không phép trong 1 năm là: " + nghikhongphep);
+        System.out.println("Tổng số ngày nghỉ phép trong 1 năm là: " + nghiphep);
+        System.out.println("Tổng số ngày nghỉ bệnh trong 1 năm là: " + nghibenh);
+    }
     // xuat file bang cham cong
     public void xuatFileBangChamCongNgay() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCongNgay.txt"))) {

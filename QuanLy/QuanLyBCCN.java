@@ -16,7 +16,8 @@ public class QuanLyBCCN extends QuanLy {
             System.out.println("3. Xóa bảng chấm công");
             System.out.println("4. Sửa bảng chấm công");
             System.out.println("5. Tìm kiếm bảng chấm công");
-            System.out.println("6. In bảng chấm công");
+            System.out.println("6. Thống kê trạng thái trong 1 năm");
+            System.out.println("8. In bảng chấm công");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -38,7 +39,8 @@ public class QuanLyBCCN extends QuanLy {
                 case 3: danhsachbangchamcongngay.xoaBangChamCongNgay();break;
                 case 4: danhsachbangchamcongngay.suaBangChamCongNgay();break;
                 case 5: danhsachbangchamcongngay.timKiem();break;
-                case 6: danhsachbangchamcongngay.inBangChamCongNgay();break;
+                case 6: danhsachbangchamcongngay.thongKeChamCongNgay();break;
+                case 7: danhsachbangchamcongngay.inBangChamCongNgay();break;
             }
         }
     }

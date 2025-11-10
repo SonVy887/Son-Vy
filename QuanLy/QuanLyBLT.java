@@ -15,6 +15,7 @@ public class QuanLyBLT extends QuanLy{
             System.out.println("4. Sửa bảng lương");
             System.out.println("5. Tìm kiếm bảng lương");
             System.out.println("8. Tính bảng lương nhân sự");
+            System.out.println("9. Thống kê lương tháng");
             System.out.println("10. In thông tin bảng lương");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
@@ -37,7 +38,8 @@ public class QuanLyBLT extends QuanLy{
                 case 3: danhsachbangluongthang.xoaBangLuongThang();break;
                 case 4: danhsachbangluongthang.suaBangLuongThang();break;
                 case 5: danhsachbangluongthang.timKiem();break;
-                case 8: tinhLuongThang();;break;
+                case 8: tinhLuongThang();break;
+                case 9: danhsachbangluongthang.thongKeBangLuongThang();break;
                 case 10: danhsachbangluongthang.inBangLuongThang();break;
             }
         }
@@ -55,7 +57,13 @@ public class QuanLyBLT extends QuanLy{
         danhsachbangchamcongthang.inBangChamCongThang();
 
         System.out.print("Nhập mã nhân sự (VD:NS001): ");
-        BangChamCongThang bcct = danhsachbangchamcongthang.timKiemNhanSuBCCT(sc.nextLine().toUpperCase());
+        String manhansu = sc.nextLine().toUpperCase();
+        System.out.print("Nhập tháng: ");
+        int thang = sc.nextInt();sc.nextLine();
+        System.out.print("Nhập năm: ");
+        int nam = sc.nextInt();sc.nextLine();
+
+        BangChamCongThang bcct = danhsachbangchamcongthang.timKiemNhanSuBCCT(manhansu, thang, nam);
 
         if(bcct == null) {
             System.out.println("Nhân sự chưa được chấm công tháng");
@@ -89,8 +97,8 @@ public class QuanLyBLT extends QuanLy{
         blt.setPhuCapChucVu(tienchucvu);
 
         // set tiền thưởng phụ cấp thâm niên
-        int nam = danhsachnhansu.timKiem(bcct.getMaNhanSu()).tinhThamNien();
-        double tienpctn = danhsachphucapthamnien.tinhThuongThamNien(nam);
+        int namtn = danhsachnhansu.timKiem(bcct.getMaNhanSu()).tinhThamNien();
+        double tienpctn = danhsachphucapthamnien.tinhThuongThamNien(namtn);
         blt.setPhuCapThamNien(tienpctn);
         
         // set trừ lương

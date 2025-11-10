@@ -133,6 +133,34 @@ public class DanhSachBangLuongThang {
         System.out.println("Tìm kiếm thất bại");
         return null;
     }
+    // thong ke
+    public void thongKeBangLuongThang() {
+        double max = 0;
+        double min = dsblt[0].getTongLuong();
+        double tong = 0;
+
+        for(int i = 0; i < n;i++) {
+            tong += dsblt[i].getTongLuong();
+
+            if(dsblt[i].getTongLuong() > max) max = dsblt[i].getTongLuong();
+            else if(dsblt[i].getTongLuong() < min) min = dsblt[i].getTongLuong();
+        }
+
+        System.out.println("\n========== THỐNG KÊ BẢNG LƯƠNG THÁNG ==========");
+        System.out.printf("Tổng lương tháng là: %,.0f VNĐ%n", tong);
+        System.out.printf("Tổng lương trung bình tháng của 1 nhân sự là: %,.0f VNĐ%n", tong/n);
+        System.out.printf("Lương tháng cao nhất là: %,.0f VNĐ%n", max);
+        System.out.printf("Lương tháng thấp nhất là: %,.0f VNĐ%n", min);
+
+        for(int i = 0; i < n;i++) {
+            if(dsblt[i].getTongLuong() == max) 
+                System.out.println("Nhân sự có lương cao nhất là: " + dsblt[i].getMaNhanSu());
+            else if(dsblt[i].getTongLuong() == min )
+                System.out.println("Nhân sự có tổng lương thấp nhất là: " + dsblt[i].getMaNhanSu());
+        }
+
+
+    }
     // in 
     public void inBangLuongThang() {
         System.out.println("\n=======================================================================================================================================================================");
