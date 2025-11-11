@@ -147,7 +147,7 @@ public class DanhSachBangChamCongThang {
     }
     public BangChamCongThang timKiemNhanSuBCCT(String manhansu, int thang, int nam) {
         for(int i = 0; i < n;i++) {
-            if(bcct[i].getMaNhanSu().equals(manhansu) 
+            if(bcct[i].getMaNhanSu() != null && bcct[i].getMaNhanSu().equals(manhansu) 
             && bcct[i].getThang() == thang && bcct[i].getNam() == nam) {
                 return bcct[i];
             }
@@ -171,22 +171,19 @@ public class DanhSachBangChamCongThang {
             }
         }
         System.out.println("\n========== THỐNG KÊ BẢNG CHẤM CÔNG THÁNG ==========");
-        System.out.println("Tổng số ngày nghỉ trong tháng " + thang + "là: " + tong);
+        System.out.println("Tổng số ngày nghỉ trong tháng " + thang + " là: " + tong);
         System.out.println("Số lần nghỉ trung bình trong tháng "+ thang+ " là: " + tong/count);
         System.out.println("Số lần nghỉ nhiều nhất trong tháng "+ thang + " là: " + max);
-        System.out.println("Số lần nghỉ ít nhất trong tháng "+ thang + "là: " + min);
+        System.out.println("Số lần nghỉ ít nhất trong tháng "+ thang + " là: " + min);
 
-        String mans1 = "";
-        String mans2 = "";
-
+        
         for(int i = 0; i < n;i++) {
             if(bcct[i].getSoNgayNghi() == max && bcct[i].getThang() == thang && bcct[i].getNam() == nam) 
-                mans1 = bcct[i].getMaNhanSu();
+                System.out.println("Nhân sự nghỉ nhiều nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
             else if(bcct[i].getSoNgayNghi() == min && bcct[i].getThang() == thang && bcct[i].getNam() == nam) 
-                mans2 bcct[i].getMaNhanSu();
+                System.out.println("Nhân sự nghỉ ít nhất trong tháng "+ thang +" là: "+ bcct[i].getMaNhanSu());
         }
-        System.out.println("Nhân sự nghỉ nhiều nhất trong tháng "+ thang +" là: " + mans1);
-        System.out.println("Nhân sự nghỉ ít nhất trong tháng "+ thang +" là: " + mans2);
+        
     }
 
     public void thongKeTheoSoNgayDiLam(int thang, int nam) {

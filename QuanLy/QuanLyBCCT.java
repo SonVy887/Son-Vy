@@ -75,6 +75,15 @@ public class QuanLyBCCT extends QuanLy {
         int thang = sc.nextInt();sc.nextLine();
         System.out.print("Nhập năm: ");
         int nam = sc.nextInt();sc.nextLine();
+
+        BangChamCongThang check = danhsachbangchamcongthang.timKiemNhanSuBCCT(manhansu, thang, nam);
+
+         if (check != null && !check.getMaChamCongThang().equalsIgnoreCase(bcct.getMaChamCongThang())) {
+        System.out.println(" Nhân sự " + manhansu + " đã có bảng chấm công trong tháng " + thang + "/" + nam
+                + " (Mã: " + check.getMaChamCongThang() + ")");
+        return;
+        }
+
         BangChamCongNgay bccn = danhsachbangchamcongngay.timKiemNSCCN(manhansu, thang, nam);
         
         if(bccn == null) {

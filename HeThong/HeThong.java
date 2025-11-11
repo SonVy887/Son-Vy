@@ -27,17 +27,18 @@ public class HeThong {
     public void menuChinh() {
         while(true){
             System.out.println("\n========= CHỨC NĂNG QUẢN LÝ =========");
-            System.out.println("1.Quản Lý Nhân Sự");
-            System.out.println("2.Quản Lý Phòng Ban");
-            System.out.println("3.Quản Lý Dự Án");
-            System.out.println("4.Quản Lý Chức Vụ");
-            System.out.println("5.Quản Lý Phân Công");
-            System.out.println("6.Quản Lý Chấm Công Ngày");
-            System.out.println("7.Quản Lý Chấm Công Tháng");
-            System.out.println("8.Quản lý Quy Định Phụ Cấp Tham Niên");
-            System.out.println("9.Quản Lý Quy Định Thưởng Lễ");
-            System.out.println("10.Quản Lý Bảng Lương Tháng");
+            System.out.println("1. Quản Lý Nhân Sự");
+            System.out.println("2. Quản Lý Phòng Ban");
+            System.out.println("3. Quản Lý Dự Án");
+            System.out.println("4. Quản Lý Chức Vụ");
+            System.out.println("5. Quản Lý Phân Công");
+            System.out.println("6. Quản Lý Chấm Công Ngày");
+            System.out.println("7. Quản Lý Chấm Công Tháng");
+            System.out.println("8. Quản lý Quy Định Phụ Cấp Tham Niên");
+            System.out.println("9. Quản Lý Quy Định Thưởng Lễ");
+            System.out.println("10. Quản Lý Bảng Lương Tháng");
             System.out.println("11. Thống kê theo quý");
+            System.out.println("12. Thống kê nhân sự theo năm");
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
             int choice;
@@ -69,6 +70,7 @@ public class HeThong {
                 case 9: qlns[8].menuChinh();break;
                 case 10: qlns[9].menuChinh();break;
                 case 11: QuanLy.thongKeTheoQuy();break;
+                case 12: QuanLy.thongKeTheoNam();break;
                 default: System.out.println("Vui lòng chọn đúng (1-10)!");menuChinh();break;
             }
         }

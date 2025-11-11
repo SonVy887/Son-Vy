@@ -66,6 +66,13 @@ public class QuanLyBLT extends QuanLy{
         System.out.print("Nhập năm: ");
         int nam = sc.nextInt();sc.nextLine();
 
+        BangLuongThang check = danhsachbangluongthang.timKiemNhanSuThangNam(manhansu, thang, nam);
+
+           if (check != null) {
+              System.out.println(" Nhân sự " + manhansu + " đã có bảng lương trong tháng " + thang + "/" + nam + " (Mã: " + check.getMaBangLuongThang() + ")");
+             return;
+         }
+
         BangChamCongThang bcct = danhsachbangchamcongthang.timKiemNhanSuBCCT(manhansu, thang, nam);
 
         if(bcct == null) {

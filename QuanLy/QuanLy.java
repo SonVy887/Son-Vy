@@ -55,4 +55,10 @@ public abstract class QuanLy {
         danhsachbangluongthang.thongKeTheoQuy(quy, nam);
     }
 
+    public static void thongKeTheoNam() {
+        System.out.print("Vui lòng nhập năm (2023-2025): ");
+        int nam = sc.nextInt();sc.nextLine();
+        danhsachbangluongthang.thongKeTheoNam(nam);
+    }
+
 }
