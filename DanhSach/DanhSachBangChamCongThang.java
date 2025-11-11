@@ -155,23 +155,61 @@ public class DanhSachBangChamCongThang {
         return null;
     }
     // thong ke
-    public void thongKeBanChamCongThang() {
+    public void thongKeTheoSoNgayNghi(int thang, int nam) {
         int max = 0;
+        int tong = 0;
         int min = bcct[0].getSoNgayNghi();
+        int count = 0;
 
         for(int i = 0; i < n;i++) {
-            if(bcct[i].getSoNgayNghi() > max) max = bcct[i].getSoNgayNghi();
-            else if(bcct[i].getSoNgayNghi() < min) min = bcct[i].getSoNgayNghi();
+            if(bcct[i].getThang() == thang && bcct[i].getNam() == nam) {
+                count++;
+                tong += bcct[0].getSoNgayNghi();
+
+                if(bcct[i].getSoNgayNghi() > max) max = bcct[i].getSoNgayNghi();
+                else if(bcct[i].getSoNgayNghi() < min) min = bcct[i].getSoNgayNghi();
+            }
         }
         System.out.println("\n========== THỐNG KÊ BẢNG CHẤM CÔNG THÁNG ==========");
-        System.out.println("Số lần nghỉ nhiều nhất là: " + max);
-        System.out.println("Số lần nghỉ ít nhất là: " + min);
+        System.out.println("Tổng số ngày nghỉ trong tháng " + thang + "là: " + tong);
+        System.out.println("Số lần nghỉ trung bình trong tháng "+ thang+ " là: " + tong/count);
+        System.out.println("Số lần nghỉ nhiều nhất trong tháng "+ thang + " là: " + max);
+        System.out.println("Số lần nghỉ ít nhất trong tháng "+ thang + "là: " + min);
 
         for(int i = 0; i < n;i++) {
             if(bcct[i].getSoNgayNghi() == max) {
-                System.out.println("Nhân sự nghỉ nhiều nhất là: " + bcct[i].getMaNhanSu());
+                System.out.println("Nhân sự nghỉ nhiều nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
             } else if(bcct[i].getSoNgayNghi() == min) {
-                System.out.println("Nhân sự nghỉ ít nhất là: " + bcct[i].getMaNhanSu());
+                System.out.println("Nhân sự nghỉ ít nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
+            }
+        }
+    }
+    public void thongKeTheoSoNgayDiLam() {
+        int max = 0;
+        int tong = 0;
+        int min = bcct[0].getSoNgayLamViec();
+        int count = 0;
+
+        for(int i = 0; i < n;i++) {
+            if(bcct[i].getThang() == thang && bcct[i].getNam() == nam) {
+                count++;
+                tong += bcct[0].getSoNgayLamViec();
+
+                if(bcct[i].getSoNgayLamViec() > max) max = bcct[i].getSoNgayLamViec();
+                else if(bcct[i].getSoNgayLamViec() < min) min = bcct[i].getSoNgayLamViec();
+            }
+        }
+        System.out.println("\n========== THỐNG KÊ BẢNG CHẤM CÔNG THÁNG ==========");
+        System.out.println("Tổng số ngày làm việc trong tháng " + thang + "là: " + tong);
+        System.out.println("Số lần làm việc trung bình trong tháng "+ thang+ " là: " + tong/count);
+        System.out.println("Số lần làm việc nhiều nhất trong tháng "+ thang + " là: " + max);
+        System.out.println("Số lần làm việc ít nhất trong tháng "+ thang + "là: " + min);
+
+        for(int i = 0; i < n;i++) {
+            if(bcct[i].getSoNgayLamViec() == max) {
+                System.out.println("Nhân sự làm việc nhiều nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
+            } else if(bcct[i].getSoNgayLamViec() == min) {
+                System.out.println("Nhân sự làm việc ít nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
             }
         }
     }

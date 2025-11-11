@@ -48,7 +48,7 @@ public class BangLuongThang {
         this.mabangluongthang = sc.nextLine().toUpperCase();
     }
     public void in() {
-        System.out.printf("|%-10s|%-10s|%-10s|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|%,15.0fVNĐ|\n",mabangluongthang, thang +"/"+nam, manhansu == null ? "Trống" : manhansu, luongcoban, thuongle, thuongduan, phucapchucvu, phucapthamnien, truluong, tongluong);
+        System.out.printf("|%-10s|%-10s|%10s|%,15.0f VNĐ|%,15.0f VNĐ|%,15.0f VNĐ|%,15.0f VNĐ|%,15.0f VNĐ|%,15.0f VNĐ|%,15.0f VNĐ|\n",mabangluongthang, thang +"/"+nam, manhansu == null ? "Trống" : manhansu, luongcoban, thuongle, thuongduan, phucapchucvu, phucapthamnien, truluong, tongluong);
     }
 
     public String getMaBangLuongThang() {

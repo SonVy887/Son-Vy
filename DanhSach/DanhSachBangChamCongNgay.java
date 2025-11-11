@@ -174,6 +174,7 @@ public class DanhSachBangChamCongNgay {
         System.out.println("Tổng số ngày nghỉ phép trong 1 năm là: " + nghiphep);
         System.out.println("Tổng số ngày nghỉ bệnh trong 1 năm là: " + nghibenh);
     }
+    
     // xuat file bang cham cong
     public void xuatFileBangChamCongNgay() {
         try(PrintWriter write= new PrintWriter(new FileWriter("C:\\training\\QuanLyNhanSu\\File\\DanhSachBangChamCongNgay.txt"))) {

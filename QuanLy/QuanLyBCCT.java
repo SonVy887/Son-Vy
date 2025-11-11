@@ -14,8 +14,9 @@ public class QuanLyBCCT extends QuanLy {
             System.out.println("4. Sửa bảng chấm công tháng");
             System.out.println("5. Tìm kiếm bảng chấm công tháng");
             System.out.println("6. Chấm công tháng cho nhân sự");
-            System.out.println("7. Thống kê bảng chấm công tháng");
-            System.out.println("8. In bảng chấm công tháng");
+            System.out.println("7. Thống kê bảng chấm công tháng theo số ngày nghỉ");
+            System.out.println("8. Thống kê bảng chấm công tháng theo số ngày đi làm");
+            System.out.println("9. In bảng chấm công tháng");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -39,8 +40,21 @@ public class QuanLyBCCT extends QuanLy {
                 case 4: danhsachbangchamcongthang.suaBangChamCongThang();break;
                 case 5: danhsachbangchamcongthang.timKiem();break;
                 case 6: chamCongThang();break;
-                case 7: danhsachbangchamcongthang.thongKeBanChamCongThang();break;
-                case 8: danhsachbangchamcongthang.inBangChamCongThang();break;
+                case 7: 
+                    System.out.print("Nhập tháng mà bạn muốn thống kê: ");
+                    int thang = sc.nextInt();
+                    System.out.print("Nhập năm mà bạn muốn thống kê: ");
+                    int nam = sc.nextInt();sc.nextLine();
+                    danhsachbangchamcongthang.thongKeTheoSoNgayNghi(thang, nam);break;
+                    
+                case 8: 
+                    System.out.print("Nhập tháng mà bạn muốn thống kê: ");
+                    int thang = sc.nextInt();
+                    System.out.print("Nhập năm mà bạn muốn thống kê: ");
+                    int nam = sc.nextInt();sc.nextLine();
+                    danhsachbangchamcongthang.thongKeTheoSoNgayDiLam();break;
+
+                case 9: danhsachbangchamcongthang.inBangChamCongThang();break;
                 default:System.out.println("Vui lòng nhập đúng số trong menu!"); menuChinh(); break;
             }
         }
