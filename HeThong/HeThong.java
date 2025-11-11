@@ -37,6 +37,7 @@ public class HeThong {
             System.out.println("8.Quản lý Quy Định Phụ Cấp Tham Niên");
             System.out.println("9.Quản Lý Quy Định Thưởng Lễ");
             System.out.println("10.Quản Lý Bảng Lương Tháng");
+            System.out.println("11. Thống kê theo quý");
             System.out.println("0. Để thoát");
             System.out.print("Lựa chọn: ");
             int choice;
@@ -67,6 +68,7 @@ public class HeThong {
                 case 8: qlns[7].menuChinh();break;
                 case 9: qlns[8].menuChinh();break;
                 case 10: qlns[9].menuChinh();break;
+                case 11: QuanLy.thongKeTheoQuy();break;
                 default: System.out.println("Vui lòng chọn đúng (1-10)!");menuChinh();break;
             }
         }

@@ -14,7 +14,10 @@ public abstract class QuanLy {
     protected static DanhSachPhuCapThamNien danhsachphucapthamnien = new DanhSachPhuCapThamNien();
     protected static DanhSachBangLuongThang danhsachbangluongthang = new DanhSachBangLuongThang();
     protected static DanhSachChucVu danhsachchucvu = new DanhSachChucVu();
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
+
+
+    public abstract void menuChinh();
 
     public static void docFile() {
         // đọc file
@@ -30,6 +33,7 @@ public abstract class QuanLy {
         danhsachchucvu.docFileBangChucVu();
     }
 
+    // xuất file
     public static void xuatFile() {
         danhsachnhansu.xuatFileDanhSachNhanSu();
         danhsachphongban.xuatFilePhongBan();
@@ -43,5 +47,12 @@ public abstract class QuanLy {
         danhsachchucvu.xuatFileBangChucVu();
     }
 
-    public abstract void menuChinh();
+    public static void thongKeTheoQuy() {
+        System.out.print("Vui lòng nhập quý từ (1-4): ");
+        int quy = sc.nextInt();sc.nextLine();
+        System.out.print("Nhập năm: ");
+        int nam = sc.nextInt();sc.nextLine();
+        danhsachbangluongthang.thongKeTheoQuy(quy, nam);
+    }
+
 }

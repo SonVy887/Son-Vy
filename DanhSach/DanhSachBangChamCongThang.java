@@ -158,13 +158,13 @@ public class DanhSachBangChamCongThang {
     public void thongKeTheoSoNgayNghi(int thang, int nam) {
         int max = 0;
         int tong = 0;
-        int min = bcct[0].getSoNgayNghi();
+        int min = Integer.MAX_VALUE;
         int count = 0;
 
         for(int i = 0; i < n;i++) {
             if(bcct[i].getThang() == thang && bcct[i].getNam() == nam) {
                 count++;
-                tong += bcct[0].getSoNgayNghi();
+                tong += bcct[i].getSoNgayNghi();
 
                 if(bcct[i].getSoNgayNghi() > max) max = bcct[i].getSoNgayNghi();
                 else if(bcct[i].getSoNgayNghi() < min) min = bcct[i].getSoNgayNghi();
@@ -176,24 +176,29 @@ public class DanhSachBangChamCongThang {
         System.out.println("Số lần nghỉ nhiều nhất trong tháng "+ thang + " là: " + max);
         System.out.println("Số lần nghỉ ít nhất trong tháng "+ thang + "là: " + min);
 
+        String mans1 = "";
+        String mans2 = "";
+
         for(int i = 0; i < n;i++) {
-            if(bcct[i].getSoNgayNghi() == max) {
-                System.out.println("Nhân sự nghỉ nhiều nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
-            } else if(bcct[i].getSoNgayNghi() == min) {
-                System.out.println("Nhân sự nghỉ ít nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
-            }
+            if(bcct[i].getSoNgayNghi() == max && bcct[i].getThang() == thang && bcct[i].getNam() == nam) 
+                mans1 = bcct[i].getMaNhanSu();
+            else if(bcct[i].getSoNgayNghi() == min && bcct[i].getThang() == thang && bcct[i].getNam() == nam) 
+                mans2 bcct[i].getMaNhanSu();
         }
+        System.out.println("Nhân sự nghỉ nhiều nhất trong tháng "+ thang +" là: " + mans1);
+        System.out.println("Nhân sự nghỉ ít nhất trong tháng "+ thang +" là: " + mans2);
     }
-    public void thongKeTheoSoNgayDiLam() {
+
+    public void thongKeTheoSoNgayDiLam(int thang, int nam) {
         int max = 0;
         int tong = 0;
-        int min = bcct[0].getSoNgayLamViec();
+        int min = Integer.MAX_VALUE;
         int count = 0;
 
         for(int i = 0; i < n;i++) {
             if(bcct[i].getThang() == thang && bcct[i].getNam() == nam) {
                 count++;
-                tong += bcct[0].getSoNgayLamViec();
+                tong += bcct[i].getSoNgayLamViec();
 
                 if(bcct[i].getSoNgayLamViec() > max) max = bcct[i].getSoNgayLamViec();
                 else if(bcct[i].getSoNgayLamViec() < min) min = bcct[i].getSoNgayLamViec();
@@ -205,13 +210,18 @@ public class DanhSachBangChamCongThang {
         System.out.println("Số lần làm việc nhiều nhất trong tháng "+ thang + " là: " + max);
         System.out.println("Số lần làm việc ít nhất trong tháng "+ thang + "là: " + min);
 
+        String mans1 = "";
+        String mans2 = "";
+
         for(int i = 0; i < n;i++) {
-            if(bcct[i].getSoNgayLamViec() == max) {
-                System.out.println("Nhân sự làm việc nhiều nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
-            } else if(bcct[i].getSoNgayLamViec() == min) {
-                System.out.println("Nhân sự làm việc ít nhất trong tháng "+ thang +" là: " + bcct[i].getMaNhanSu());
-            }
+            if(bcct[i].getSoNgayLamViec() == max && bcct[i].getThang() == thang && bcct[i].getNam() == nam) 
+                mans1 = bcct[i].getMaNhanSu();
+             else if(bcct[i].getSoNgayLamViec() == min && bcct[i].getThang() == thang && bcct[i].getNam() == nam) 
+                mans2 = bcct[i].getMaNhanSu();
         }
+
+        System.out.println("Nhân sự làm việc nhiều nhất trong tháng "+ thang +" là: " + mans1);
+        System.out.println("Nhân sự làm việc ít nhất trong tháng "+ thang +" là: " + mans2);
     }
     // in bang cham cong thang
     public void inBangChamCongThang() {

@@ -136,14 +136,14 @@ public class DanhSachBangLuongThang {
     // thong ke
     public void thongKeBangLuongThang(int thang, int nam) {
         double max = 0;
-        double min = dsblt[0].getTongLuong();
+        double min = Double.MAX_VALUE;
         double tong = 0;
         int count = 0;
-        
+
         for(int i = 0; i < n;i++) {
             if(dsblt[i].getThang() == thang && dsblt[i].getNam() == nam){
                 count++;
-                tong = dsblt[i].getTongLuong();
+                tong += dsblt[i].getTongLuong();
                 if(dsblt[i].getTongLuong() > max) max = dsblt[i].getTongLuong();
                 else if(dsblt[i].getTongLuong() < min) min = dsblt[i].getTongLuong();
             }
@@ -163,14 +163,39 @@ public class DanhSachBangLuongThang {
         }
     }
     
-    // thống kê theo quý
-    // public void thongKeTheoQuy(int quy, int nam) {
-        
-    //     for(int i = 0; i < n;i++) {
+    //thống kê theo quý
+    public void thongKeTheoQuy(int quy, int nam) {
+        double tong = 0;
+        double max = 0;
+        double min = Double.MAX_VALUE;
+        int count = 0;
 
-    //     }
-    //     }
-    // }
+        for(int i = 0; i < n;i++) {
+            if(dsblt[i].getThang() <= 3){
+                tong += dsblt[i].getTongLuong();
+                count++;
+                if(dsblt[i].getTongLuong() > max) max = dsblt[i].getTongLuong();
+                else if(dsblt[i].getTongLuong() < min) min = dsblt[i].getTongLuong();
+            }
+        }
+        System.out.println("\n========== THỐNG KÊ THEO QUÝ "+ quy + " ==========");
+        System.out.printf("Tổng lương trong quý "+ quy + " là: %,.0f VNĐ%n", tong);
+        System.out.printf("Lương cao nhất trong quý "+ quy + " là: %,.0f VNĐ%n", max);
+        System.out.printf("Lương thấp nhất trong quý "+ quy + " là: %,.0f VNĐ%n", min);
+        System.out.printf("Lương trung bình trong quý "+ quy + " là: %,.0f VNĐ%n", tong/count);
+        System.out.println();
+
+        String mans1 ="";
+        String mans2 ="";
+
+        for(int i = 0; i < n;i++) {
+            if(dsblt[i].getTongLuong() == max && dsblt[i].getThang() <= 3) mans1 = dsblt[i].getMaNhanSu();
+            else if(dsblt[i].getTongLuong() == min && dsblt[i].getThang() <= 3) mans2 = dsblt[i].getMaNhanSu();
+        }
+
+        System.out.println("Nhân sự có lương cao nhất trong quý "+ quy + " là: " + mans1);
+        System.out.println("Nhân sự có lương thấp nhất trong quý "+ quy + " là: " + mans2);
+    }
     // in 
     public void inBangLuongThang() {
         System.out.println("\n==============================================================================================================================================================================");

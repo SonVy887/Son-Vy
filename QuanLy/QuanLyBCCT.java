@@ -46,13 +46,13 @@ public class QuanLyBCCT extends QuanLy {
                     System.out.print("Nhập năm mà bạn muốn thống kê: ");
                     int nam = sc.nextInt();sc.nextLine();
                     danhsachbangchamcongthang.thongKeTheoSoNgayNghi(thang, nam);break;
-                    
+
                 case 8: 
                     System.out.print("Nhập tháng mà bạn muốn thống kê: ");
-                    int thang = sc.nextInt();
+                    int thang1 = sc.nextInt();
                     System.out.print("Nhập năm mà bạn muốn thống kê: ");
-                    int nam = sc.nextInt();sc.nextLine();
-                    danhsachbangchamcongthang.thongKeTheoSoNgayDiLam();break;
+                    int nam1 = sc.nextInt();sc.nextLine();
+                    danhsachbangchamcongthang.thongKeTheoSoNgayDiLam(thang1, nam1);break;
 
                 case 9: danhsachbangchamcongthang.inBangChamCongThang();break;
                 default:System.out.println("Vui lòng nhập đúng số trong menu!"); menuChinh(); break;
