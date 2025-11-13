@@ -118,9 +118,14 @@ public class DanhSachPhuCapThamNien {
         System.out.print("Nhập mã phụ cấp thâm niên muốn tìm kiếm (VD: PCTN01): ");
         String mapcthamnien = sc.nextLine().toUpperCase();
 
+        System.out.println("\n===========================================================");
+        System.out.printf("|%-15s|%-17s|%24s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
+        System.out.println("-----------------------------------------------------------");
+
         for(int i = 0; i < n;i++) {
             if(dsqdpc[i].getMaPCThamNien().equals(mapcthamnien)) {
                 dsqdpc[i].in();
+                System.out.println("===========================================================");
                 return;
             }
         }
@@ -140,9 +145,14 @@ public class DanhSachPhuCapThamNien {
         double sotien = sc.nextDouble();
         sc.nextLine();
 
+        System.out.println("\n===========================================================");
+        System.out.printf("|%-15s|%-17s|%24s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
+        System.out.println("-----------------------------------------------------------");
+
         for(int i = 0; i < n;i++) {
             if(dsqdpc[i].getSoTienPhuCap() == sotien) {
                 dsqdpc[i].in();
+                System.out.println("===========================================================");
                 return;
             }
         }
@@ -162,9 +172,14 @@ public class DanhSachPhuCapThamNien {
         int nam = sc.nextInt();
         sc.nextLine();
 
+        System.out.println("\n===========================================================");
+        System.out.printf("|%-15s|%-17s|%24s|\n","Mã PCTN","Số Năm Thâm Niên","Số Tiền Phụ Cấp");
+        System.out.println("-----------------------------------------------------------");
+
         for(int i = 0; i < n;i++) {
             if(dsqdpc[i].getSoNam() == nam) {
                 dsqdpc[i].in();
+                System.out.println("===========================================================");
                 return;
             }
         }

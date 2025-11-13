@@ -114,11 +114,16 @@ public class DanhSachBangLuongThang {
     // tim kiem bang luong theo ma
     public void timKiem() {
         System.out.print("Nhập mã bảng lương tháng cần tìm (VD: BLT001): ");
-        String mabangluongthang = sc.nextLine();
+        String mabangluongthang = sc.nextLine().toUpperCase();
+
+        System.out.println("\n==============================================================================================================================================================================");
+        System.out.printf("|%-10s|%-10s|%10s|%19s|%19s|%19s|%19s|%19s|%19s|%19s|\n","Mã BLT", "Tháng/năm", "Mã NS", "Lương Cơ Bản", "Thưởng lễ", "Thưởng dự án", "Thưởng PCCV", "Thưởng PCTN", "Trừ Lương", "Tổng lương");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
         for(int i = 0; i < n;i++) {
             if(dsblt[i].getMaBangLuongThang().equals(mabangluongthang)) {
                 dsblt[i].in();
+                System.out.println("==============================================================================================================================================================================");
                 return;
             }
         }
@@ -143,6 +148,27 @@ public class DanhSachBangLuongThang {
             }
         }
         return null;
+    }
+    public void timKiemNhanSu() {
+        System.out.print("Nhâp mã nhân sự (VD: NS001): ");
+        String manhansu = sc.nextLine().toUpperCase();
+        System.out.print("Nhập tháng: ");
+        int thang = sc.nextInt();
+        System.out.print("Nhập năm: ");
+        int nam = sc.nextInt();sc.nextLine();
+
+        System.out.println("\n==============================================================================================================================================================================");
+        System.out.printf("|%-10s|%-10s|%10s|%19s|%19s|%19s|%19s|%19s|%19s|%19s|\n","Mã BLT", "Tháng/năm", "Mã NS", "Lương Cơ Bản", "Thưởng lễ", "Thưởng dự án", "Thưởng PCCV", "Thưởng PCTN", "Trừ Lương", "Tổng lương");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+        for(int i=0; i<n; i++){
+            if(dsblt[i].getMaNhanSu().equals(manhansu) && dsblt[i].getThang() == thang && dsblt[i].getNam() == nam){
+                dsblt[i].in();
+                System.out.println("==============================================================================================================================================================================");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy bảng lương");
     }
     // thong ke
     public void thongKeBangLuongThang(int thang, int nam) {
@@ -182,9 +208,10 @@ public class DanhSachBangLuongThang {
         int count = 0;
 
         for(int i = 0; i < n;i++) {
-            if(dsblt[i].getMaNhanSu() != null && dsblt[i].getThang() <= 3){
+            if(dsblt[i].getMaNhanSu() != null && dsblt[i].getThang() <= 3 && dsblt[i].getNam() == nam){
                 tong += dsblt[i].getTongLuong();
                 count++;
+
                 if(dsblt[i].getTongLuong() > max) max = dsblt[i].getTongLuong();
                 else if(dsblt[i].getTongLuong() < min) min = dsblt[i].getTongLuong();
             }
@@ -200,8 +227,10 @@ public class DanhSachBangLuongThang {
         String mans2 ="";
 
         for(int i = 0; i < n;i++) {
-            if(dsblt[i].getTongLuong() == max && dsblt[i].getThang() <= 3) mans1 = dsblt[i].getMaNhanSu();
-            else if(dsblt[i].getTongLuong() == min && dsblt[i].getThang() <= 3) mans2 = dsblt[i].getMaNhanSu();
+            if(dsblt[i].getTongLuong() == max && dsblt[i].getThang() <= 3 && dsblt[i].getNam() == nam) 
+                mans1 = dsblt[i].getMaNhanSu();
+            else if(dsblt[i].getTongLuong() == min && dsblt[i].getThang() <= 3 && dsblt[i].getNam() == nam) 
+                mans2 = dsblt[i].getMaNhanSu();
         }
 
         System.out.println("Nhân sự có lương cao nhất trong quý "+ quy + " là: " + mans1);

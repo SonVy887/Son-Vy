@@ -16,7 +16,8 @@ public class QuanLyBLT extends QuanLy{
             System.out.println("5. Tìm kiếm bảng lương");
             System.out.println("6. Tính bảng lương nhân sự");
             System.out.println("7. Thống kê lương tháng");
-            System.out.println("8. In thông tin bảng lương");
+            System.out.println("8. Tìm kiếm nhân sự trong bảng lương");
+            System.out.println("9. In thông tin bảng lương");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -45,7 +46,9 @@ public class QuanLyBLT extends QuanLy{
                     System.out.print("Nhập năm mà bạn muốn thống kê: ");
                     int nam = sc.nextInt();sc.nextLine();
                     danhsachbangluongthang.thongKeBangLuongThang(thang, nam);break;
-                case 8: danhsachbangluongthang.inBangLuongThang();break;
+                case 8: 
+                    danhsachbangluongthang.timKiemNhanSu();break;
+                case 9: danhsachbangluongthang.inBangLuongThang();break;
             }
         }
     }

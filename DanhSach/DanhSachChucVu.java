@@ -113,9 +113,14 @@ public class DanhSachChucVu {
         System.out.print("Vui lòng nhập mã chức vụ để tìm kiếm (VD: CV001): ");
         String machucvu = sc.nextLine().toUpperCase();
 
+        System.out.println("\n======================================================");
+        System.out.printf("|%-15s|%-15s|%21s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
+        System.out.println("------------------------------------------------------");
+
         for(int i = 0; i < n;i++) {
             if(dscv[i].getMaChucVu().equals(machucvu)) {
                 dscv[i].inChucVu();
+                System.out.println("======================================================");
                 return;
             }
         }
@@ -133,9 +138,14 @@ public class DanhSachChucVu {
     public void timKiemTheoTen() {
         String tenchucvu = sc.nextLine();
 
+        System.out.println("\n======================================================");
+        System.out.printf("|%-15s|%-15s|%21s|\n","Mã Chức Vụ", "Tên Chức Vụ", "Phụ Cấp Thưởng");
+        System.out.println("------------------------------------------------------");
+
         for(int i = 0; i < n;i++) {
             if(dscv[i].getTenChucVu().equalsIgnoreCase(tenchucvu)) {
                 dscv[i].inChucVu();
+                System.out.println("======================================================");
                 return;
             }
         }

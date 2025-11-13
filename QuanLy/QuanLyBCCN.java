@@ -17,7 +17,7 @@ public class QuanLyBCCN extends QuanLy {
             System.out.println("4. Sửa bảng chấm công");
             System.out.println("5. Tìm kiếm bảng chấm công");
             System.out.println("6. Thống kê trạng thái trong 1 năm");
-            System.out.println("8. In bảng chấm công");
+            System.out.println("7. In bảng chấm công");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -105,8 +105,6 @@ public class QuanLyBCCN extends QuanLy {
                 sc.nextLine();
                 continue;
             }
-
-
             if (choice == 0) break;
 
             switch (choice) {

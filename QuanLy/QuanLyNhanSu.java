@@ -23,7 +23,6 @@ public class QuanLyNhanSu extends QuanLy{
             System.out.println("11. Thống kê nhân sự thực tập theo GPA");
             System.out.println("12. In chi tiết nhân sự chính thức");
             System.out.println("13. In chi tiết nhân sự thực tập");
-            System.out.println("14. In danh sách nhân sự");
             System.out.println("0. Để quay lại");
             System.out.print("Lựa chọn: ");
 
@@ -54,7 +53,6 @@ public class QuanLyNhanSu extends QuanLy{
                 case 11: danhsachnhansu.thongKeGPA(); break;
                 case 12: danhsachnhansu.inChiTietNhanSuChinhThuc(); break;
                 case 13: danhsachnhansu.inChiTietNhanSuThucTap(); break;
-                case 14: danhsachnhansu.in(); break;
                 default: System.out.println("Vui lòng nhập đúng số trong menu"); menuChinh(); break;
             }
         }

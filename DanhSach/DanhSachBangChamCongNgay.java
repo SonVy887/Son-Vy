@@ -114,9 +114,14 @@ public class DanhSachBangChamCongNgay {
         System.out.print("Nhập mã chấm công ngày (VD: CC001): ");
         String machamcong = sc.nextLine().toUpperCase();
 
+        System.out.println("\n===================================================================================");
+        System.out.printf("|%-15s|%-15s|%-10s|%-10s|%-10s|%-16s|\n","Mã Chấm Công","Mã Nhân Sự","Ngày", "Tháng", "Năm", "Trạng Thái");
+        System.out.println("-----------------------------------------------------------------------------------");
+
         for(int i = 0; i < n; i++) {
             if(bccn[i].getMaChamCong().equals(machamcong)){
                 bccn[i].in();
+                System.out.println("===================================================================================");
                 return;
             }
         }

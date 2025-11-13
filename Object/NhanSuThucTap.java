@@ -34,16 +34,10 @@ public class NhanSuThucTap extends NhanSu {
         this.gpa = gpa;
     }
     //
-    public void inChiTietTT() {
-        System.out.printf("|%-8s|%-9s|%-10s|%-14s|%-15s|%-12s|%-13s|%-11s|%-11s|%-16s|%8s tháng|%5s|%,18.0f VNĐ|\n",
-        manhansu, ho, ten,
-        diachi, sodienthoai, gioitinh, 
-        ngaysinh, machucvu == null ? "Trống" : machucvu, maphongban == null ? "Trống" : maphongban, ngayvaolam,
-        thoigianthuctap, gpa, luongcoban);
-    }
     @Override
     public void inThongTin() {
         super.inThongTin();
+        System.err.printf("%8s tháng|%7s|\n",thoigianthuctap, gpa);
     }
 
     @Override

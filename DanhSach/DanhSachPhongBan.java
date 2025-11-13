@@ -105,9 +105,14 @@ public class DanhSachPhongBan {
         System.out.print("Nhập mã phòng ban muốn tìm (VD: PB001): ");
         String maphongban = sc.nextLine().toUpperCase();
 
+        System.out.println("\n======================================================================");
+        System.out.printf("|%-17s|%-18s|%-14s|%-16s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức");
+        System.out.printf("----------------------------------------------------------------------\n");
+
         for(int i = 0; i < n;i++){
             if(dspb[i].getMaPhongBan().equals(maphongban)){
                 dspb[i].inThongTinPhongBan();
+                System.out.println("======================================================================");
                 return;
             }
         }
@@ -124,9 +129,13 @@ public class DanhSachPhongBan {
     }
     // tim theo ten
     public void timKiemTheoTen(){
-        System.out.println("Nhập tên phòng ban: ");
+        System.out.print("Nhập tên phòng ban: ");
         String tenphongban = sc.nextLine();
         boolean found = false;
+
+        System.out.println("\n======================================================================");
+        System.out.printf("|%-17s|%-18s|%-14s|%-16s|\n","Mã Phòng Ban", "Tên Phòng Ban", "Trưởng Phòng", "Ngày Nhận Chức");
+        System.out.printf("----------------------------------------------------------------------\n");
 
         for(int i = 0; i < n;i++){
             if(dspb[i].getTenPhongBan().contains(tenphongban)){
@@ -134,6 +143,7 @@ public class DanhSachPhongBan {
                 found = true;
             }
         }
+        System.out.println("======================================================================");
         if(!found) {
             System.out.println("Không tìm thấy tên");
         }
@@ -178,6 +188,7 @@ public class DanhSachPhongBan {
         for (int i = 0; i < n; i++) {
             dspb[i].inThongTinPhongBan();
         }
+        System.out.println("======================================================================");
     }
     // kiem tra phong ban ton tai
     public boolean kiemTraPb(String maphongban){

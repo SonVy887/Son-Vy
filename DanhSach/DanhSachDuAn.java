@@ -93,9 +93,14 @@ public class DanhSachDuAn {
         System.out.print("nhập mã dự án cần tìm (VD: DA001): ");
         String maduan = sc.nextLine().toUpperCase();
 
+        System.out.println("\n==========================================================================================================================");
+        System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n","Mã Dự Án","Tên Dự Án","Phòng Ban","Địa Điểm","Ngày Bắt Đầu","Ngày Kết Thúc");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+
         for(int i = 0; i < n;i++){
             if(dsda[i].getMaDuAn().equals(maduan)){
                 dsda[i].inDuAn();
+                System.out.println("==========================================================================================================================");
                 return;
             }
         }
@@ -134,9 +139,15 @@ public class DanhSachDuAn {
         System.out.print("Nhập tên dự án cần tìm: ");
         String tenduan = sc.nextLine();
 
+        System.out.println("\n==========================================================================================================================");
+        System.out.printf("|%-15s|%-30s|%-15s|%-15s|%-20s|%-20s|\n","Mã Dự Án","Tên Dự Án","Phòng Ban","Địa Điểm","Ngày Bắt Đầu","Ngày Kết Thúc");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------");
+
+
         for(int i = 0; i < n;i++){
             if(dsda[i].getTenDuAn().contains(tenduan)){
                 dsda[i].inDuAn();
+                System.out.println("==========================================================================================================================");
                 return;
             }
         }

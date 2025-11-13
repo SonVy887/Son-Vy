@@ -41,8 +41,6 @@ public interface INhanSu {
     // thong ke gpa
     void thongKeGPA();
 
-    // in danh sach nhan su
-    void in();
     // in chi tiet nhan su chinh thuc
     void inChiTietNhanSuChinhThuc();
     // in chi tiet nhan su thuc tap

@@ -120,9 +120,15 @@ public class DanhSachQuyDinhThuongLe {
         System.out.print("Nhập mã thưởng lễ muốn tìm kiếm (VD: TL001): ");
         String mathuongle = sc.nextLine().toUpperCase();
 
+        System.out.println("\n=============================================================================");
+        System.out.printf("|%-15s|%-20s|%-15s|%23s|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
+        System.out.println("-----------------------------------------------------------------------------");
+
+
         for(int i = 0; i < n ;i++) {
             if(dsqdtl[i].getMaThuongLe().equals(mathuongle)) {
                 dsqdtl[i].in();
+                System.out.println("=============================================================================");
                 return;
             }
         }
@@ -141,9 +147,14 @@ public class DanhSachQuyDinhThuongLe {
         System.out.print("Nhập tên lễ muốn tìm kiếm: ");
         String tenthuongle = sc.nextLine();
 
+        System.out.println("\n=============================================================================");
+        System.out.printf("|%-15s|%-20s|%-15s|%23s|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
+        System.out.println("-----------------------------------------------------------------------------");
+        
         for(int i = 0; i < n;i++) {
             if(dsqdtl[i].getTenThuongLe().equals(tenthuongle)) {
                 dsqdtl[i].in();
+                System.out.println("=============================================================================");
                 return;
             }
         }
@@ -164,9 +175,14 @@ public class DanhSachQuyDinhThuongLe {
         double sotienthuongle = sc.nextDouble();
         sc.nextLine();
 
+        System.out.println("\n=============================================================================");
+        System.out.printf("|%-15s|%-20s|%-15s|%23s|\n","Mã Thưởng Lễ","Tên Thưởng Lễ","Ngày","Số Tiền Thưởng");
+        System.out.println("-----------------------------------------------------------------------------");
+
         for(int i = 0; i < n;i++) {
             if(dsqdtl[i].getSoTienThuongLe() == sotienthuongle) {
                 dsqdtl[i].in();
+                System.out.println("=============================================================================");
                 return;
             }
         }
